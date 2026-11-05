@@ -1,0 +1,209 @@
+/* Credit Decision Simulator — flagship. Semua angka ILUSTRATIF/FIKTIF. */
+var BORROWERS = {
+  A: {
+    name: "PT Maju Jaya Abadi", sector: "Manufaktur makanan",
+    nums: [
+      ["Pendapatan", 850, "Rp miliar"], ["EBITDA", 170, "Rp miliar"],
+      ["Total utang", 200, "Rp miliar"], ["Ekuitas", 600, "Rp miliar"],
+      ["Beban bunga", 16, "Rp miliar"], ["Debt service (pokok+bunga)", 56, "Rp miliar"],
+      ["CFO", 140, "Rp miliar"], ["Aset lancar", 320, "Rp miliar"],
+      ["Liabilitas lancar", 180, "Rp miliar"], ["Nilai agunan (appraisal)", 400, "Rp miliar"]
+    ],
+    qual: ["15 tahun operasi, tidak pernah gagal bayar.",
+      "Industri defensif (makanan pokok) — permintaan stabil.",
+      "Manajemen: pendiri masih aktif, suksesi jelas."],
+    calc: { dscr: 3.04, der: 1.18, ic: 10.63 },
+    key: { decision: "approve", why: "DSCR 3,04x, Debt/EBITDA 1,18x, CFO kuat 140 vs debt service 56. Kapasitas utang masih besar." },
+    term: { plafonMax: 310, pricingMin: 1.0, covNeed: ["dscr"] },
+    comm: [
+      { q: "Berapa DSCR (basis EBITDA)? (x)", ans: 3.04, tol: 0.1, why: "170 ÷ 56 = 3,04x (basis EBITDA, konvensi covenant). Basis CFO: 140 ÷ 56 = 2,50x — tetap kuat." },
+      { q: "Berapa Debt/EBITDA? (x)", ans: 1.18, tol: 0.1, why: "200 ÷ 170 = 1,18x." },
+      { q: "Plafon maksimum agar Debt/EBITDA tetap ≤ 3,0x? (Rp miliar)", ans: 310, tol: 10, why: "3,0 × 170 − 200 = 310." }
+    ]
+  },
+  B: {
+    name: "PT Sinar Terang", sector: "Ritel elektronik",
+    nums: [
+      ["Pendapatan", 1200, "Rp miliar"], ["EBITDA", 96, "Rp miliar"],
+      ["Total utang", 280, "Rp miliar"], ["Ekuitas", 320, "Rp miliar"],
+      ["Beban bunga", 28, "Rp miliar"], ["Debt service (pokok+bunga)", 84, "Rp miliar"],
+      ["CFO", 60, "Rp miliar"], ["Aset lancar", 400, "Rp miliar"],
+      ["Liabilitas lancar", 330, "Rp miliar"], ["Nilai agunan (appraisal)", 250, "Rp miliar"]
+    ],
+    qual: ["8 tahun operasi; 1x restrukturisasi ringan tahun 2022 (lunas).",
+      "Industri siklikal — margin tertekan promo e-commerce.",
+      "CFO melemah karena modal kerja memburuk (persediaan menumpuk)."],
+    calc: { dscr: 1.14, der: 2.92, ic: 3.43 },
+    key: { decision: "conditional", why: "DSCR 1,14x — tipis di atas 1,0x. CFO 60 < debt service 84. Layak didanai HANYA dengan struktur ketat: plafon terbatas, pricing tinggi, covenant ketat + monitoring intensif." },
+    term: { plafonMax: 100, pricingMin: 3.0, covNeed: ["dscr", "der"] },
+    comm: [
+      { q: "Berapa DSCR (basis EBITDA)? (x)", ans: 1.14, tol: 0.1, why: "96 ÷ 84 = 1,14x (basis EBITDA). Basis CFO: 60 ÷ 84 = 0,71x — JAUH lebih ketat. Inilah jebakan K2: EBITDA terlihat cukup, kas tidak." },
+      { q: "Berapa interest coverage? (x)", ans: 3.43, tol: 0.2, why: "96 ÷ 28 = 3,43x." },
+      { q: "CFO − debt service = ? (Rp miliar)", ans: -24, tol: 5, why: "60 − 84 = −24. Arus kas tidak menutup cicilan." }
+    ]
+  },
+  C: {
+    name: "PT Lintas Nusa", sector: "Konstruksi",
+    nums: [
+      ["Pendapatan", 900, "Rp miliar"], ["EBITDA", 36, "Rp miliar"],
+      ["Total utang", 450, "Rp miliar"], ["Ekuitas", 150, "Rp miliar"],
+      ["Beban bunga", 54, "Rp miliar"], ["Debt service (pokok+bunga)", 120, "Rp miliar"],
+      ["CFO", -20, "Rp miliar"], ["Aset lancar", 280, "Rp miliar"],
+      ["Liabilitas lancar", 350, "Rp miliar"], ["Nilai agunan (appraisal)", 200, "Rp miliar"]
+    ],
+    qual: ["Gagal bayar bunga 1x tahun lalu (sudah di-cure, tapi tercatat).",
+      "Proyek macet 2 lokasi; pendapatan turun 30% YoY.",
+      "Modal kerja negatif — liabilitas lancar > aset lancar."],
+    calc: { dscr: 0.30, der: 12.5, ic: 0.67 },
+    key: { decision: "reject", why: "DSCR 0,30x — EBITDA tidak menutup sepertiga cicilan. CFO negatif. Debt/EBITDA 12,5x. Ini bukan underwriting, ini donasi." },
+    term: null,
+    comm: [
+      { q: "Berapa DSCR (basis EBITDA)? (x)", ans: 0.30, tol: 0.05, why: "36 ÷ 120 = 0,30x (basis EBITDA). Basis CFO: −20 ÷ 120 = negatif — kas operasi pun tidak ada." },
+      { q: "Berapa Debt/EBITDA? (x)", ans: 12.5, tol: 0.5, why: "450 ÷ 36 = 12,5x." },
+      { q: "Net working capital? (Rp miliar)", ans: -70, tol: 5, why: "280 − 350 = −70. Likuiditas jebol." }
+    ]
+  }
+};
+var COVS = [
+  { id: "dscr", label: "DSCR minimum" }, { id: "der", label: "Debt/EBITDA maksimum" },
+  { id: "ic", label: "Interest coverage minimum" }, { id: "cr", label: "Current ratio minimum" },
+  { id: "nw", label: "Net worth minimum" }
+];
+var cur = null, decision = null, covSel = [];
+
+function show(id){ $("#"+id).style.display="block"; $("#"+id).scrollIntoView({behavior:"smooth",block:"start"}); }
+
+(function renderCards(){
+  var h = "";
+  Object.keys(BORROWERS).forEach(function(k){
+    var b = BORROWERS[k], st = cdLoad("sim_"+k);
+    h += '<div class="cd-card" style="margin:0"><h3>'+b.name+'</h3>'
+      + '<p style="font-size:.85rem;color:var(--ink-soft)">'+b.sector+' · '+(st&&st.score!==undefined?("Skor: <b>"+st.score+"/"+st.max+"</b>"):"Belum dikerjakan")+'</p>'
+      + '<button class="cd-btn" data-b="'+k+'">Buka paket →</button></div>';
+  });
+  $("#borrower-cards").innerHTML = h;
+  $$("#borrower-cards button").forEach(function(btn){
+    btn.addEventListener("click", function(){ openBorrower(btn.dataset.b); });
+  });
+})();
+
+function openBorrower(k){
+  cur = k; decision = null; covSel = [];
+  var b = BORROWERS[k];
+  $("#pkg-name").textContent = b.name;
+  var h = "<tr><th>Pos</th><th class='num'>Nilai</th><th>Satuan</th></tr>";
+  b.nums.forEach(function(n){ h += "<tr><td>"+n[0]+"</td><td class='num'>"+fmtID(n[1])+"</td><td>"+n[2]+"</td></tr>"; });
+  $("#pkg-tbl").innerHTML = h;
+  /* Jembatan EBITDA→CFO (M3): DSCR basis CFO ditampilkan eksplisit */
+  var cfo = null, ds = null;
+  b.nums.forEach(function(n){ if(n[0]==="CFO") cfo = n[1]; if(n[0].indexOf("Debt service")===0) ds = n[1]; });
+  var el = document.getElementById("pkg-dscr-cfo");
+  if(el) el.textContent = (cfo!==null && ds) ? (fmtID(cfo/ds,1)+"x (CFO "+fmtID(cfo)+" ÷ debt service "+fmtID(ds)+")") : "—";
+  $("#pkg-qual").innerHTML = b.qual.map(function(q){return "<li>"+q+"</li>";}).join("");
+  ["step-package","step-decision","step-committee","step-verdict"].forEach(function(id){$("#"+id).style.display="none";});
+  show("step-package");
+}
+
+$("#to-decision").addEventListener("click", function(){
+  var h = "";
+  COVS.forEach(function(c){
+    h += '<button class="cd-opt" data-cov="'+c.id+'" style="width:auto">'+c.label+'</button>';
+  });
+  $("#cov-picks").innerHTML = h;
+  $$("#cov-picks button").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var id = btn.dataset.cov;
+      if(covSel.indexOf(id)>=0){ covSel = covSel.filter(function(x){return x!==id;}); btn.classList.remove("sel"); }
+      else { covSel.push(id); btn.classList.add("sel"); }
+    });
+  });
+  $$("#decision-btns .cd-opt").forEach(function(b){ b.classList.remove("sel"); });
+  $("#term-wrap").style.display = "none";
+  show("step-decision");
+});
+$$("#decision-btns .cd-opt").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    $$("#decision-btns .cd-opt").forEach(function(b){b.classList.remove("sel");});
+    btn.classList.add("sel"); decision = btn.dataset.dec;
+    $("#term-wrap").style.display = (decision==="reject") ? "none" : "block";
+  });
+});
+
+$("#to-committee").addEventListener("click", function(){
+  if(!decision){ alert("Pilih keputusan dulu."); return; }
+  if(decision!=="reject"){
+    if(covSel.length!==2){ alert("Pilih tepat 2 covenant kunci."); return; }
+    if($("#t-plafon").value===""||$("#t-pricing").value===""){ alert("Isi plafon dan pricing."); return; }
+    var plafonNum = parseIDNumber($("#t-plafon").value, false),
+        pricingNum = parseIDNumber($("#t-pricing").value, true);
+    if(isNaN(plafonNum) || plafonNum<=0){ alert("Plafon harus angka > 0."); return; }
+    if(isNaN(pricingNum) || pricingNum<0){ alert("Pricing (margin) tidak boleh negatif."); return; }
+    if($("#t-tenor").value===""){ alert("Isi tenor — term sheet tanpa tenor tidak lengkap."); return; }
+    var tenorNum = parseIDNumber($("#t-tenor").value, true);
+    if(isNaN(tenorNum) || tenorNum<=0 || tenorNum>30){ alert("Tenor harus angka > 0 dan ≤ 30 tahun."); return; }
+    if($("#t-coll").value===""){ alert("Pilih coverage agunan — term sheet tanpa agunan tidak lengkap."); return; }
+  }
+  var b = BORROWERS[cur], h = "";
+  b.comm.forEach(function(cq,i){
+    h += '<div class="cd-field" style="margin-bottom:.8rem"><label>'+(i+1)+'. '+cq.q+'</label>'
+      + '<input id="cq'+i+'" inputmode="decimal" placeholder="mis. 2,50"></div>';
+  });
+  $("#comm-qs").innerHTML = h;
+  show("step-committee");
+});
+
+$("#to-verdict").addEventListener("click", function(){
+  var b = BORROWERS[cur], score = 0, max = 0, fb = [];
+  /* 1. keputusan (3) */
+  max += 3;
+  var dScore = 0;
+  if(decision === b.key.decision) dScore = 3;
+  else if(cur==="B" && decision==="reject") dScore = 1;
+  else if(cur==="C" && decision==="conditional") dScore = 1;
+  score += dScore;
+  var dLabel = {approve:"APPROVE",conditional:"APPROVE DENGAN SYARAT",reject:"REJECT"}[decision];
+  var kLabel = {approve:"APPROVE",conditional:"APPROVE DENGAN SYARAT",reject:"REJECT"}[b.key.decision];
+  fb.push("<b>Keputusan Anda: "+dLabel+"</b> — kunci komite: <b>"+kLabel+"</b> ("+dScore+"/3).<br>"+b.key.why);
+  /* 2. term sheet (3) — hanya bila tidak reject */
+  if(b.term && decision!=="reject"){
+    max += 3;
+    var plafon = parseIDNumber($("#t-plafon").value,false),
+        pricing = parseIDNumber($("#t-pricing").value,true),
+        coll = $("#t-coll").value, tScore = 0, tFb = [];
+    if(!isNaN(plafon) && plafon>0 && plafon<=b.term.plafonMax){ tScore++; tFb.push("plafon "+fmtID(plafon)+" ≤ batas wajar "+fmtID(b.term.plafonMax)+" ✓"); }
+    else tFb.push("plafon "+(isNaN(plafon)?"tidak valid":fmtID(plafon))+" — batas wajar ≤ "+fmtID(b.term.plafonMax)+" ✗");
+    if(!isNaN(pricing) && pricing>=b.term.pricingMin){ tScore++; tFb.push("pricing +"+fmtID(pricing,2)+"pp ≥ minimum +"+fmtID(b.term.pricingMin,2)+"pp ✓"); }
+    else tFb.push("pricing terlalu murah untuk risikonya ✗ (minimum +"+fmtID(b.term.pricingMin,2)+"pp)");
+    var covOk = b.term.covNeed.every(function(c){return covSel.indexOf(c)>=0;});
+    if(covOk){ tScore++; tFb.push("covenant mencakup yang kunci ✓"); }
+    else tFb.push("covenant kunci belum lengkap ✗ (butuh: "+b.term.covNeed.join(", ")+")");
+    score += tScore;
+    var tenorV = $("#t-tenor").value, collLbl = {high:"≥150%", mid:"100–150%", low:"<100%"}[coll]||"—";
+    fb.push("<b>Term sheet ("+tScore+"/3):</b><br>• "+tFb.join("<br>• ")
+      + "<br>• tenor "+fmtID(parseIDNumber(tenorV,true),1)+" thn & agunan "+collLbl+" — wajib diisi, tidak dinilai otomatis (bahan debrief).");
+  } else if(decision==="reject"){
+    fb.push("Term sheet tidak diperlukan untuk keputusan REJECT — tepat.");
+  }
+  /* 3. komite (3) */
+  max += 3;
+  var cScore = 0, cFb = [];
+  b.comm.forEach(function(cq,i){
+    var v = parseIDNumber($("#cq"+i).value, true);
+    var ok = !isNaN(v) && Math.abs(v-cq.ans) <= cq.tol; /* tol = ABSOLUT (fix 2026-11-04: dulu tol*max(1,|ans|) = relatif absurd) */
+    if(ok) cScore++;
+    cFb.push("Q"+(i+1)+": "+(ok?"✓":"✗")+" — "+cq.why);
+  });
+  score += cScore;
+  fb.push("<b>Komite ("+cScore+"/3):</b><br>• "+cFb.join("<br>• "));
+  var verdict = score>=Math.ceil(max*0.7) ? "LULUS" : "BELUM LULUS";
+  var cls = verdict==="LULUS" ? "ok" : "bad";
+  $("#verdict-box").innerHTML = '<div class="cd-result show '+cls+'"><b>Skor: '+score+'/'+max+' — '+verdict+'</b></div>'
+    + '<div class="cd-kunci"><b>Kunci komite — '+b.name+':</b><br>• '+fb.join('<br><br>• ')+'</div>';
+  cdSave("sim_"+cur, {score:score, max:max, decision:decision});
+  show("step-verdict");
+});
+$("#again").addEventListener("click", function(){ openBorrower(cur); });
+$("#next-borrower").addEventListener("click", function(){
+  var keys = Object.keys(BORROWERS), i = keys.indexOf(cur);
+  openBorrower(keys[(i+1)%keys.length]);
+});

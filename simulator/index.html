@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Decision Simulator · Credit Desk</title>
+<meta name="description" content="Simulator keputusan kredit flagship: terima paket borrower, isi term sheet, hadapi 3 pertanyaan komite, terima vonis approve/reject.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="cd-nav">
+  <a href="../" class="brandmark"><span class="desk-badge">CREDIT DESK</span></a>
+  <span class="mantra">Ukur. Nilai. Putuskan.</span>
+</nav>
+<div class="cd-wrap">
+  <div class="cd-hero">
+    <h1>Credit Decision Simulator</h1>
+    <p class="tag">Flagship — putuskan seperti pemberi pinjaman.</p>
+    <p>Anda analis kredit. Tiga paket borrower masuk ke meja Anda hari ini.
+    Baca paketnya, putuskan <b>approve / reject / approve dengan syarat</b>,
+    susun term sheet bila menyetujui, lalu hadapi 3 pertanyaan komite kredit.
+    <span class="cd-mantra">Ukur. Nilai. Putuskan.</span></p>
+  </div>
+
+  <div class="cd-card" id="step-borrower">
+    <h2>Langkah 1 — Pilih paket borrower</h2>
+    <p class="cd-sub">Selesaikan satu per satu. Skor tersimpan per borrower.</p>
+    <div class="ilus">ILUSTRATIF — SEMUA ANGKA FIKTIF UNTUK LATIHAN</div>
+    <div class="cd-grid" id="borrower-cards"></div>
+  </div>
+
+  <div class="cd-card" id="step-package" style="display:none">
+    <h2>Langkah 2 — Paket borrower: <span id="pkg-name"></span></h2>
+    <div class="ilus">ILUSTRATIF — ANGKA FIKTIF</div>
+    <div class="tblwrap"><table class="cd-tbl" id="pkg-tbl"></table></div>
+    <div class="honest" style="margin-top:.8rem"><strong>Konvensi DSCR di simulator ini:</strong> EBITDA ÷ debt service — konvensi yang umum di <em>covenant</em> pinjaman korporasi. K2 mengajarkan CFO ÷ debt service sebagai standar emas (kas yang benar-benar membayar utang). Keduanya valid <em>bila dideklarasikan</em>; yang berbahaya adalah campur aduk tanpa sadar. Jembatan: DSCR basis CFO = <span id="pkg-dscr-cfo"></span> — bandingkan dengan DSCR basis EBITDA di pertanyaan komite.</div>
+    <h3>Informasi kualitatif</h3>
+    <ul id="pkg-qual" style="font-size:.9rem"></ul>
+    <div class="cd-btnrow"><button class="cd-btn" id="to-decision">Lanjut ke keputusan →</button></div>
+  </div>
+
+  <div class="cd-card" id="step-decision" style="display:none">
+    <h2>Langkah 3 — Keputusan Anda</h2>
+    <p class="cd-sub">Sebagai analis kredit: berani tidak memberi pinjaman — dan dengan struktur apa?</p>
+    <div class="cd-btnrow" id="decision-btns">
+      <button class="cd-opt" data-dec="approve" style="width:auto;flex:1;min-width:10rem">✅ APPROVE</button>
+      <button class="cd-opt" data-dec="conditional" style="width:auto;flex:1;min-width:10rem">⚠️ APPROVE DENGAN SYARAT</button>
+      <button class="cd-opt" data-dec="reject" style="width:auto;flex:1;min-width:10rem">❌ REJECT</button>
+    </div>
+    <div id="term-wrap" style="display:none">
+      <h3>Term sheet (wajib bila approve / conditional)</h3>
+      <p class="cd-sub">Yang dinilai otomatis: plafon, pricing, covenant (3 poin). Tenor &amp; agunan wajib diisi — tidak dinilai otomatis, jadi bahan debrief.</p>
+      <div class="cd-grid">
+        <div class="cd-field"><label>Plafon (Rp miliar)</label>
+          <input id="t-plafon" inputmode="decimal" placeholder="mis. 150">
+          <div class="cd-hint">Batas atas wajar = debt capacity − utang existing.</div></div>
+        <div class="cd-field"><label>Tenor (tahun)</label>
+          <input id="t-tenor" inputmode="decimal" placeholder="mis. 5"></div>
+        <div class="cd-field"><label>Pricing: margin di atas base 8% (pp)</label>
+          <input id="t-pricing" inputmode="decimal" placeholder="mis. 2,5">
+          <div class="cd-hint">Margin = risk premium. Makin berisiko → makin tinggi.</div></div>
+        <div class="cd-field"><label>Coverage agunan</label>
+          <select id="t-coll"><option value="">— pilih —</option>
+            <option value="high">≥ 150% dari plafon</option>
+            <option value="mid">100–150% dari plafon</option>
+            <option value="low">&lt; 100% dari plafon</option></select></div>
+      </div>
+      <div class="cd-field" style="margin-top:.8rem"><label>Covenant kunci (pilih tepat 2)</label>
+        <div class="cd-btnrow" id="cov-picks"></div></div>
+    </div>
+    <div class="cd-btnrow"><button class="cd-btn" id="to-committee">Hadapi komite →</button></div>
+  </div>
+
+  <div class="cd-card" id="step-committee" style="display:none">
+    <h2>Langkah 4 — Pertanyaan komite kredit</h2>
+    <p class="cd-sub">Komite tidak percaya narasi — mereka minta angka. Jawab dengan format Indonesia (mis. 2,50).</p>
+    <div id="comm-qs"></div>
+    <div class="cd-btnrow"><button class="cd-btn amber" id="to-verdict">Minta vonis komite</button></div>
+  </div>
+
+  <div class="cd-card" id="step-verdict" style="display:none">
+    <h2>Langkah 5 — Vonis komite</h2>
+    <div id="verdict-box"></div>
+    <div class="cd-btnrow">
+      <button class="cd-btn ghost" id="again">⟲ Ulangi borrower ini</button>
+      <button class="cd-btn" id="next-borrower">Borrower berikutnya →</button>
+    </div>
+  </div>
+
+  <div class="cd-pager"><a href="../covenant-designer/">→ Covenant Designer</a><a href="../monitoring/">→ Monitoring Drill</a></div>
+  <div class="cd-foot">Credit Desk · <i>"Keraguan adalah pekerjaan. Bukan kelemahan."</i> · Semua angka di halaman ini ilustratif/fiktif untuk latihan.</div>
+</div>
+<script src="../js/common.js"></script>
+<script src="../js/simulator.js"></script>
+</body>
+</html>

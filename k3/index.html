@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K3 · Covenant &amp; Struktur Kredit · Credit Desk</title>
+<meta name="description" content="K3 Credit Desk: anatomi term sheet, merancang paket covenant dengan headroom, dan pricing risiko kredit.">
+<link rel="canonical" href="https://credit-desk-afy.pages.dev/k3/">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="cd-nav">
+  <a href="/">← Credit Desk</a>
+  <span class="mantra">Ukur. Nilai. Putuskan.</span>
+</nav>
+
+<header class="cd-hero">
+  <p class="kicker">K3 · Struktur</p>
+  <h1>Covenant &amp; <em>Struktur Kredit.</em></h1>
+  <p class="lede">Keputusan "approve" tanpa struktur = cek kosong. Modul ini mengajar <strong>merancang pagar</strong>: covenant yang melindungi lender <em>sebelum</em> borrower jatuh, bukan sesudah.</p>
+</header>
+
+<main class="wrap">
+
+<section class="cd-sec">
+  <div class="prereq">
+    <h3>Prasyarat &amp; rujukan (tidak diulang di sini)</h3>
+    <ul>
+      <li><strong>Teori covenant &amp; DSCR:</strong> <a href="https://fsa-lab.pages.dev/modul-23/">FSA Lab M23</a> — wajib dikuasai dulu.</li>
+      <li><strong>Tool uji:</strong> covenant break predictor di FSA Lab (pakai sebagai pemeriksa silang rancanganmu).</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cd-sec">
+  <h2>1 · Anatomi term sheet</h2>
+  <p>Term sheet = kontrak mini sebelum perjanjian kredit final. Tujuh blok yang wajib ada:</p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Blok</th><th>Isi</th><th>Contoh</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Limit &amp; tenor</strong></td><td>Plafon + jangka waktu</td><td class="num">Rp10 miliar, 4 tahun</td></tr>
+      <tr><td><strong>Pricing</strong></td><td>Bunga + fee</td><td class="num">11% + provisi 1%</td></tr>
+      <tr><td><strong>Repayment</strong></td><td>Pola pembayaran</td><td>Kuartalan, anuitas</td></tr>
+      <tr><td><strong>Covenants</strong></td><td>Janji borrower (lihat §2)</td><td>DSCR ≥ 1,25×; D/E ≤ 2×</td></tr>
+      <tr><td><strong>Security</strong></td><td>Agunan</td><td>Gudang + fidusia piutang</td></tr>
+      <tr><td><strong>Conditions precedent</strong></td><td>Syarat sebelum pencairan</td><td>Laporan audit, asuransi agunan</td></tr>
+      <tr><td><strong>Events of default</strong></td><td>Pemicu penarikan fasilitas</td><td>Breach covenant 2 kuartal berturut-turut</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="cd-sec">
+  <h2>2 · Tiga jenis covenant</h2>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Jenis</th><th>Arti</th><th>Contoh</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Affirmative</strong></td><td>Yang <em>wajib dilakukan</em> borrower</td><td>Laporan keuangan kuartalan ≤45 hari; asuransi agunan aktif</td></tr>
+      <tr><td><strong>Negative</strong></td><td>Yang <em>dilarang</em> tanpa izin</td><td>Tidak boleh akuisisi &gt; Rp2M; tidak boleh dividen bila DSCR &lt; 1,5×</td></tr>
+      <tr><td><strong>Financial</strong></td><td>Angka yang <em>wajib dijaga</em></td><td>DSCR ≥ 1,25×; D/E ≤ 2×; current ratio ≥ 1,2×</td></tr>
+    </tbody>
+  </table></div>
+  <div class="honest"><strong>Prinsip penetapan threshold:</strong> covenant yang tidak pernah bisa dilanggar = tidak berguna; covenant yang dilanggar dalam skenario normal = menghukum borrower yang sehat. Threshold yang benar = <strong>proyeksi wajar − headroom</strong> (ruang napas 15–25%), sehingga pelanggaran = sinyal dini yang valid, bukan noise.</div>
+</section>
+
+<section class="cd-sec">
+  <h2>3 · Pricing = harga risiko</h2>
+  <p>Bunga kredit bukan angka negosiasi bebas — ia punya anatomi:</p>
+  <p class="mono" style="font-size:1.05rem">Pricing = cost of funds + risk premium + fees</p>
+  <ul>
+    <li><strong>Cost of funds</strong> — biaya dana bank itu sendiri (mis. 6%).</li>
+    <li><strong>Risk premium</strong> — harga atas risiko borrower ini (makin lemah 5C, makin mahal; mis. 3–5%).</li>
+    <li><strong>Fees</strong> — provisi, commitment fee (dibayar di depan / atas plafon tak terpakai).</li>
+  </ul>
+  <p>Borrower yang menawar bunga terlalu rendah pada dasarnya meminta lender <strong>mensubsidi risikonya</strong> — analis yang baik bisa menunjukkan perhitungannya.</p>
+</section>
+
+<section class="cd-sec">
+  <h2>4 · Cure, waiver &amp; pelanggaran</h2>
+  <ul>
+    <li><strong>Technical breach</strong> (melanggar angka, tapi masih bayar) ≠ <strong>payment default</strong> (tidak bayar). Yang pertama = meja perundingan; yang kedua = meja krisis.</li>
+    <li><strong>Cure right:</strong> hak borrower memperbaiki dalam X hari (mis. injeksi modal pemilik).</li>
+    <li><strong>Waiver:</strong> lender memaafkan pelanggaran dengan syarat (biasanya: fee + covenant lebih ketat).</li>
+  </ul>
+  <p>Covenant yang baik memberi lender <strong>kursi di meja</strong> sebelum keadaan memburuk — bukan palu sesudahnya.</p>
+</section>
+
+<section class="cd-sec">
+  <div class="decision">
+    <h3>Keputusan K3 — Rancang Paket Covenant</h3>
+    <p><strong>Kasus (FIKTIF — PT Sinar Kemas,</strong> lanjutan K1; disetujui dengan struktur): DSCR proyeksi 1,6× · D/E 1,5× · current ratio 1,8× · konsentrasi pelanggan 70% ke 3 buyer.</p>
+    <p>Tugas: rancang <strong>3 financial covenant + 1 negative covenant</strong>. Untuk tiap financial covenant: tulis threshold + headroom yang kamu beri (dalam %) + alasan 1 kalimat. Lalu tulis vonis struktur: tenor &amp; pricing yang kamu usulkan.</p>
+    <label>Covenant 1 (threshold + headroom + alasan):</label>
+    <input type="text" id="k3-c1" placeholder="mis. DSCR ≥ 1,25× — headroom 22% dari proyeksi 1,6× karena…">
+    <label>Covenant 2:</label>
+    <input type="text" id="k3-c2" placeholder="mis. D/E ≤ 2,0× — …">
+    <label>Covenant 3:</label>
+    <input type="text" id="k3-c3" placeholder="mis. …">
+    <label>Negative covenant (khusus risiko kasus ini):</label>
+    <input type="text" id="k3-neg" placeholder="mis. larangan …">
+    <label>Usulan tenor + pricing + 1 kalimat alasan:</label>
+    <textarea id="k3-struktur" placeholder="…"></textarea>
+    <div class="btnrow"><button class="btn" id="k3-save">Simpan rancangan →</button><span class="okmsg" id="k3-ok"></span></div>
+    <p style="font-size:.85rem;color:#B9C2D6;margin-top:.8rem">Contoh kunci (bukan satu-satunya jawaban benar): DSCR ≥ 1,25× (headroom ~22%); D/E ≤ 2,0×; current ratio ≥ 1,3×; negative: dividen dilarang bila DSCR &lt; 1,5× + belanja modal &gt; Rp3M/tahun wajib izin (konsentrasi pelanggan = risiko kas).</p>
+  </div>
+</section>
+
+<section class="cd-sec">
+  <h2>Quiz &amp; Gerbang</h2>
+  <p>Butuh ≥80% untuk lulus modul ini.</p>
+  <div id="quiz-wrap"></div>
+  <div class="btnrow"><button class="btn" id="quiz-submit">Kumpulkan Jawaban</button></div>
+  <div id="gate-box"></div>
+  <p style="margin-top:1.5rem"><a href="/k4/">Lanjut ke K4 →</a> · <a href="/k2/">← K2</a></p>
+</section>
+
+</main>
+
+<footer class="cd-foot">
+  <div class="wrap">
+    <div><strong style="color:#fff">Credit Desk</strong> · <span style="color:var(--amber)">Ukur. Nilai. Putuskan.</span></div>
+    <div><a href="https://fsa-lab.pages.dev/">FSA Lab</a> · <a href="https://fmva-sprint.pages.dev/">FMVA Sprint</a></div>
+  </div>
+</footer>
+
+<script src="/js/parse-id.js"></script>
+<script src="/js/quiz.js"></script>
+<script src="/js/k3.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K2 · Membaca Laporan untuk Kredit · Credit Desk</title>
+<meta name="description" content="K2 Credit Desk: cash flow adequacy, debt capacity, kualitas laba dari mata lender.">
+<link rel="canonical" href="https://credit-desk-afy.pages.dev/k2/">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="cd-nav">
+  <a href="/">← Credit Desk</a>
+  <span class="mantra">Ukur. Nilai. Putuskan.</span>
+</nav>
+
+<header class="cd-hero">
+  <p class="kicker">K2 · Membaca untuk keputusan</p>
+  <h1>Membaca Laporan <em>untuk Kredit.</em></h1>
+  <p class="lede">Investor membaca laporan untuk mencari pertumbuhan. Lender membaca laporan yang sama untuk mencari <strong>kepastian pembayaran</strong>. Angka yang sama, pertanyaan yang berbeda.</p>
+</header>
+
+<main class="wrap">
+
+<section class="cd-sec">
+  <div class="prereq">
+    <h3>Prasyarat &amp; rujukan (tidak diulang di sini)</h3>
+    <ul>
+      <li><strong>Mekanik laporan (IS/BS/CF):</strong> <a href="https://fsa-lab.pages.dev/">FSA Lab M1–M18</a></li>
+      <li><strong>Mekanik interim:</strong> <a href="https://fsa-lab.pages.dev/modul-38/">FSA Lab M38</a></li>
+      <li><strong>Latihan baca filing real:</strong> <a href="https://fsa-lab.pages.dev/bedah-sendiri/klbf/">Bedah Sendiri KLBF</a></li>
+      <li><strong>3-statement modelling:</strong> <a href="https://fmva-sprint.pages.dev/">FMVA Sprint</a> Hari 01–04</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cd-sec">
+  <h2>1 · Cash flow adequacy — pertanyaan pertama lender</h2>
+  <p>Sebelum rasio apapun, lender menanyakan satu hal: <strong>apakah kas operasi cukup membayar kewajiban utang tahun ini?</strong></p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Ukuran</th><th>Rumus (mata lender)</th><th>Ambang sehat</th></tr></thead>
+    <tbody>
+      <tr><td><strong>DSCR</strong> (Debt Service Coverage Ratio)</td><td class="num">CFO ÷ (cicilan pokok + bunga)</td><td class="num">≥ 1,25×</td></tr>
+      <tr><td><strong>Interest coverage</strong></td><td class="num">EBITDA ÷ beban bunga</td><td class="num">≥ 3× (korporasi)</td></tr>
+      <tr><td><strong>CFO / total utang</strong></td><td class="num">CFO ÷ total liabilitas berbunga</td><td class="num">≥ 20%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="honest"><strong>Jebakan:</strong> DSCR dari <em>laba</em> bukan dari <em>kas</em> adalah ilusi. Laba bisa naik sementara kas operasi negatif (piutang menumpuk). Lender selalu mulai dari CFO — yang membayar utang adalah kas, bukan laba akuntansi.</div>
+</section>
+
+<section class="cd-sec">
+  <h2>2 · Debt capacity — berapa MAKSIMAL boleh dipinjamkan?</h2>
+  <p>Kapasitas utang = level utang maksimum di mana borrower <strong>tetap</strong> memenuhi DSCR minimum dalam skenario wajar:</p>
+  <ol>
+    <li>Ambil CFO yang <strong>dinormalisasi</strong> (rata-rata 3 tahun, buang one-off).</li>
+    <li>Tentukan DSCR minimum yang kamu tuntut (mis. 1,25×).</li>
+    <li>Debt service maksimum = CFO normalisasi ÷ 1,25.</li>
+    <li>Kurangi debt service dari utang <em>existing</em> → sisa = ruang untuk utang baru.</li>
+    <li>Konversi ke limit pinjaman via tenor &amp; bunga (anuitas).</li>
+  </ol>
+  <p>Ini bukan valuasi — ini <strong>pagar</strong>. Beda disiplin, beda tujuan.</p>
+</section>
+
+<section class="cd-sec">
+  <h2>3 · Kualitas laba dari mata lender</h2>
+  <p>Investor suka accruals (tanda pertumbuhan). Lender curiga pada accruals (tanda kas belum masuk):</p>
+  <ul>
+    <li><strong>Sloan ratio tinggi</strong> (accruals besar vs aset) = laba "kertas" — capacity yang dilaporkan melebih-lebihkan capacity yang sebenarnya.</li>
+    <li><strong>CFO/NI &lt; 1 bertahun-tahun</strong> = laba tidak menjadi kas. Untuk lender, ini lampu kuning berkedip.</li>
+    <li><strong>EBITDA vs CFO:</strong> EBITDA mengabaikan modal kerja &amp; pajak &amp; bunga. Lender yang memakai EBITDA mentah untuk DSCR sedang menipu dirinya sendiri.</li>
+  </ul>
+</section>
+
+<section class="cd-sec">
+  <div class="decision">
+    <h3>Keputusan K2 — Worksheet Debt Capacity</h3>
+    <p><strong>Kasus (FIKTIF — PT Nusantara Logistik).</strong> Angka dalam Rp miliar:</p>
+    <div class="tblwrap"><table class="stmt">
+      <thead><tr><th>Pos</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
+      <tbody>
+        <tr><td>CFO</td><td class="num">42</td><td class="num">48</td><td class="num">45</td></tr>
+        <tr><td>Laba bersih</td><td class="num">30</td><td class="num">38</td><td class="num">55</td></tr>
+        <tr><td>Debt service existing (pokok+bunga)/tahun</td><td class="num" colspan="3">28</td></tr>
+        <tr><td>Total utang berbunga existing</td><td class="num" colspan="3">120</td></tr>
+      </tbody>
+    </table></div>
+    <p>Tugas: (1) hitung CFO normalisasi (rata-rata 3 thn); (2) hitung DSCR existing; (3) dengan DSCR minimum 1,25×, berapa debt service maksimum? (4) berapa ruang utang baru per tahun? Tulis angkanya + vonis: layakkah diberi tambahan kredit Rp40 miliar (tenor 4 thn, bunga 11%)?</p>
+    <label>CFO normalisasi (Rp miliar):</label>
+    <input type="text" id="k2-cfo" inputmode="decimal" placeholder="mis. 45">
+    <label>DSCR existing (×):</label>
+    <input type="text" id="k2-dscr" inputmode="decimal" placeholder="mis. 1,61">
+    <label>Ruang debt service baru per tahun (Rp miliar):</label>
+    <input type="text" id="k2-ruang" inputmode="decimal" placeholder="mis. 8">
+    <div class="verdict-row">
+      <button class="verdict" data-v="approve">LAYAK — BERI TAMBAHAN</button>
+      <button class="verdict" data-v="reject">TIDAK LAYAK</button>
+      <button class="verdict" data-v="restructure">LAYAK DENGAN SYARAT</button>
+    </div>
+    <label>Alasan 2 kalimat (perhatikan: laba 2025 melonjak tapi CFO datar — apa artinya?):</label>
+    <textarea id="k2-alasan" placeholder="…"></textarea>
+    <div class="btnrow"><button class="btn" id="k2-save">Simpan worksheet →</button><span class="okmsg" id="k2-ok"></span></div>
+    <p style="font-size:.85rem;color:#B9C2D6;margin-top:.8rem">Kunci (cek setelah mengerjakan): CFO norm = 45; DSCR = 45÷28 = 1,61×; debt service maks = 45÷1,25 = 36; ruang = 36−28 = 8/thn. Cicilan Rp40M/4thn @11% ≈ Rp12,9M/thn &gt; 8 → <strong>tidak layak penuh</strong>; laba 2025 yang melonjak tanpa CFO = accruals — lampu kuning.</p>
+  </div>
+</section>
+
+<section class="cd-sec">
+  <h2>Quiz &amp; Gerbang</h2>
+  <p>Butuh ≥80% untuk lulus modul ini.</p>
+  <div id="quiz-wrap"></div>
+  <div class="btnrow"><button class="btn" id="quiz-submit">Kumpulkan Jawaban</button></div>
+  <div id="gate-box"></div>
+  <p style="margin-top:1.5rem"><a href="/k3/">Lanjut ke K3 →</a> · <a href="/k1/">← K1</a></p>
+</section>
+
+</main>
+
+<footer class="cd-foot">
+  <div class="wrap">
+    <div><strong style="color:#fff">Credit Desk</strong> · <span style="color:var(--amber)">Ukur. Nilai. Putuskan.</span></div>
+    <div><a href="https://fsa-lab.pages.dev/">FSA Lab</a> · <a href="https://fmva-sprint.pages.dev/">FMVA Sprint</a></div>
+  </div>
+</footer>
+
+<script src="/js/parse-id.js"></script>
+<script src="/js/quiz.js"></script>
+<script src="/js/k2.js"></script>
+</body>
+</html>

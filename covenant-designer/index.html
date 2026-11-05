@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Covenant Designer · Credit Desk</title>
+<meta name="description" content="Rancang paket covenant, tetapkan threshold, uji terhadap 3 skenario stress, lihat peta breach.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="cd-nav">
+  <a href="../" class="brandmark"><span class="desk-badge">CREDIT DESK</span></a>
+  <span class="mantra">Ukur. Nilai. Putuskan.</span>
+</nav>
+<div class="cd-wrap">
+  <div class="cd-hero">
+    <h1>Covenant Designer</h1>
+    <p class="tag">Rancang. Uji. Ketahui kapan dilanggar.</p>
+    <p>Covenant yang baik bukan yang ketat — tapi yang memberi sinyal <b>sebelum</b>
+    borrower tenggelam, dengan headroom yang realistis.
+    <span class="cd-mantra">Ukur. Nilai. Putuskan.</span></p>
+  </div>
+
+  <div class="cd-card">
+    <h2>Langkah 1 — Profil borrower</h2>
+    <div class="ilus">ILUSTRATIF — PT CAHAYA PERKASA (LOGISTIK), ANGKA FIKTIF Rp MILIAR</div>
+    <div class="tblwrap"><table class="cd-tbl" id="prof-tbl"></table></div>
+    <p class="cd-sub">Skenario stress: <b>Base</b> (angka di atas) · <b>Downturn</b> (EBITDA −20%) ·
+    <b>Severe</b> (EBITDA −35%, bunga +200bps, modal kerja memburuk).</p>
+  </div>
+
+  <div class="cd-card">
+    <h2>Langkah 2 — Pilih 3–5 covenant</h2>
+    <div class="cd-btnrow" id="cov-list" style="flex-direction:column;align-items:stretch"></div>
+    <p class="cd-hint" id="cov-count">0 dipilih (pilih 3–5).</p>
+  </div>
+
+  <div class="cd-card" id="thresh-card" style="display:none">
+    <h2>Langkah 3 — Tetapkan threshold</h2>
+    <p class="cd-sub">Threshold = batas yang memicu breach. Beri headroom dari angka base —
+    terlalu ketat = breach teknis terus; terlalu longgar = tidak memberi sinyal.</p>
+    <div id="thresh-inputs"></div>
+    <div class="cd-btnrow"><button class="cd-btn amber" id="run-stress">▶ Jalankan uji stress</button></div>
+  </div>
+
+  <div class="cd-card" id="result-card" style="display:none">
+    <h2>Langkah 4 — Peta breach</h2>
+    <div class="tblwrap"><table class="cd-tbl" id="stress-tbl"></table></div>
+    <div id="stress-verdict"></div>
+    <div class="cd-btnrow"><button class="cd-btn ghost" id="copy-pkg">📋 Salin paket covenant</button></div>
+  </div>
+
+  <div class="cd-pager"><a href="../simulator/">→ Credit Decision Simulator</a><a href="../monitoring/">→ Monitoring Drill</a></div>
+  <div class="cd-foot">Credit Desk · <i>"Keraguan adalah pekerjaan. Bukan kelemahan."</i> · Semua angka ilustratif/fiktif.</div>
+</div>
+<script src="../js/common.js"></script>
+<script src="../js/covenant-designer.js"></script>
+</body>
+</html>

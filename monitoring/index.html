@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitoring Drill · Credit Desk</title>
+<meta name="description" content="Drill monitoring kuartalan: terima update borrower, putuskan rating, migrasi stage ECL, dan tindakan — 4 kuartal berurutan.">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="cd-nav">
+  <a href="../" class="brandmark"><span class="desk-badge">CREDIT DESK</span></a>
+  <span class="mantra">Ukur. Nilai. Putuskan.</span>
+</nav>
+<div class="cd-wrap">
+  <div class="cd-hero">
+    <h1>Monitoring Drill</h1>
+    <p class="tag">Kredit tidak selesai saat dicairkan.</p>
+    <p>Anda memegang fasilitas <b>Rp150 miliar</b> untuk <b>PT Wira Karya</b> (manufaktur).
+    Setiap kuartal Anda menerima update — putuskan <b>rating internal</b>,
+    <b>stage ECL</b>, dan <b>tindakan</b>. Empat kuartal berurutan, tidak bisa mundur.
+    <span class="cd-mantra">Ukur. Nilai. Putuskan.</span></p>
+  </div>
+
+  <div class="ilus">ILUSTRATIF — SEMUA ANGKA FIKTIF UNTUK LATIHAN (Rp MILIAR)</div>
+  <div class="prog"><div id="qprog"></div></div>
+  <div id="quarters"></div>
+
+  <div class="cd-card" id="final-card" style="display:none">
+    <h2>Hasil akhir drill</h2>
+    <div id="final-box"></div>
+    <div class="cd-btnrow"><button class="cd-btn ghost" id="restart">⟲ Ulangi drill</button></div>
+  </div>
+
+  <div class="cd-pager"><a href="../simulator/">→ Credit Decision Simulator</a><a href="../covenant-designer/">→ Covenant Designer</a></div>
+  <div class="cd-foot">Credit Desk · <i>"Keraguan adalah pekerjaan. Bukan kelemahan."</i> · Semua angka ilustratif/fiktif.</div>
+</div>
+<script src="../js/common.js"></script>
+<script src="../js/monitoring.js"></script>
+</body>
+</html>

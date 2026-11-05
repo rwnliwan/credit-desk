@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K5 — Studi Kasus Kredit · Credit Desk</title>
+<meta name="description" content="Tiga studi kasus keputusan kredit: non-bank (KLBF), bank (BBRI), workout (WSKT). Paket borrower, pertanyaan komite, keputusan, dan kunci builder.">
+<link rel="canonical" href="https://credit-desk-afy.pages.dev/k5/">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="cd-nav">
+  <a href="../" class="brandmark"><span class="desk-badge">CREDIT DESK</span></a>
+  <span class="nav-links"><a href="../">Beranda</a><a href="../k1/">K1</a><a href="../k2/">K2</a><a href="../k3/">K3</a><a href="../k4/">K4</a><a href="../k5/" class="active">K5</a><a href="../k6/">K6</a></span>
+</nav>
+
+<main class="wrap">
+  <p class="kicker">K5 · Studi Kasus Kredit</p>
+  <h1>Tiga Keputusan, Tiga Borrower</h1>
+  <p class="lede">Di meja kredit, unit belajarnya bukan pemahaman — melainkan <strong>keputusan</strong>.
+  Tiga case di bawah memakai angka dari filing real yang sudah diverifikasi builder (bukan ilustrasi).
+  Baca paket borrower, jawab tiga pertanyaan komite, buat keputusanmu, baru buka kunci.</p>
+
+  <div class="rule"><strong>Aturan main:</strong> Tulis keputusan + alasanmu <em>sebelum</em> membuka kunci.
+  Kunci builder adalah satu interpretasi profesional, bukan vonis. Kalau keputusanmu beda tapi alasannya kuat — itu sah.</div>
+
+  <div class="prasyarat"><strong>Prasyarat &amp; rujukan.</strong> Mekanik laporan:
+  <a href="https://fsa-lab.pages.dev/modul-01/">FSA M1–M18</a> ·
+  Rasio bank: <a href="https://fsa-lab.pages.dev/modul-30/">FSA M30</a> ·
+  Covenant: <a href="https://fsa-lab.pages.dev/modul-23/">FSA M23</a> ·
+  Latihan baca filing: <a href="https://fsa-lab.pages.dev/bedah-sendiri/">Bedah Sendiri</a> ·
+  Workout &amp; staging: <a href="../k4/">K4</a>.</div>
+
+  <!-- ==================== CASE A : KLBF ==================== -->
+  <section class="case" id="case-klbf">
+    <div class="case-head">
+      <span class="tag">CASE A</span><span class="tag">NON-BANK</span>
+      <h2>PT Kalbe Farma Tbk (KLBF) — Fasilitas Modal Kerja Rp500 Miliar</h2>
+      <p style="color:#C9D2E3;margin:.3rem 0 0">Permohonan: revolving credit facility Rp500 miliar, tenor 3 tahun.
+      Angka: LK konsolidasian auditan 2024 (KAP Purwantono, Sungkoro &amp; Surja/EY, WTP).</p>
+    </div>
+    <div class="case-body">
+      <h3>Paket borrower (angka terverifikasi)</h3>
+      <table class="figures">
+        <tr><th>Pos</th><th>2024</th><th>Sumber</th></tr>
+        <tr><td>Penjualan neto</td><td class="num">Rp32,63 T</td><td class="src">LK hal. 4</td></tr>
+        <tr><td>Laba usaha (terhitung builder)</td><td class="num">Rp4,08 T</td><td class="src">LK hal. 4</td></tr>
+        <tr><td>Beban bunga &amp; keuangan</td><td class="num">Rp69,2 M</td><td class="src">LK hal. 4</td></tr>
+        <tr><td>Interest coverage (laba usaha ÷ beban bunga)</td><td class="num">58,9×</td><td class="src">Terhitung</td></tr>
+        <tr><td>Arus kas operasi</td><td class="num">Rp4,79 T</td><td class="src">LK hal. 7</td></tr>
+        <tr><td>Kas dan setara kas</td><td class="num">Rp4,72 T</td><td class="src">LK hal. 1</td></tr>
+        <tr><td>Total utang bank (pendek + bagian lancar + panjang)</td><td class="num">Rp387,6 M</td><td class="src">LK hal. 2</td></tr>
+        <tr><td>D/E (total liabilitas ÷ ekuitas)</td><td class="num">0,20×</td><td class="src">Terhitung</td></tr>
+        <tr><td>Current ratio</td><td class="num">4,11×</td><td class="src">Terhitung</td></tr>
+        <tr><td>Dividen + buyback 2024</td><td class="num">Rp1,89 T</td><td class="src">LK hal. 8</td></tr>
+        <tr><td>Pinjaman konversi baru 2024</td><td class="num">Rp129,5 M</td><td class="src">LK hal. 2</td></tr>
+      </table>
+
+      <div class="committee">
+        <h4>🏛️ Tiga pertanyaan komite</h4>
+        <ol>
+          <li>Dengan coverage 58,9× dan kas Rp4,7 T, untuk apa sebenarnya borrower butuh Rp500 miliar? Apa risiko <em>use of proceeds</em> yang tidak tertulis?</li>
+          <li>Dividen + buyback Rp1,89 T di tahun yang sama muncul pinjaman konversi Rp129,5 M — covenant apa yang kamu pasang untuk melindungi arus kas kreditur?</li>
+          <li>Kalau penjualan turun 20% (skenario stress), apakah debt service Rp500 miliar + bunga masih tertutup CFO? Tunjukkan hitungan kasarmu.</li>
+        </ol>
+      </div>
+
+      <div class="decision-box">
+        <h4>Keputusanmu</h4>
+        <div class="decision-btns" data-case="klbf">
+          <button class="cbtn approve" data-v="approve">Approve</button>
+          <button class="cbtn cond" data-v="conditional">Approve bersyarat</button>
+          <button class="cbtn reject" data-v="reject">Reject</button>
+        </div>
+        <div class="hidden" data-terms="klbf">
+          <label class="f">Struktur yang kamu syaratkan (limit, tenor, pricing, covenant kunci, collateral)</label>
+          <textarea id="terms-klbf" placeholder="cth: limit Rp500M, tenor 3 thn, bunga JIBOR+250bps, covenant: dividend ≤50% laba, D/E ≤1,0×, ..."></textarea>
+        </div>
+        <label class="f">Alasan (min. 2 kalimat, kutip minimal 1 angka)</label>
+        <textarea id="why-klbf" placeholder="Tulis alasan keputusanmu di sini..."></textarea>
+        <p style="margin-top:.8rem"><button class="cbtn primary" id="reveal-klbf">Buka kunci builder</button>
+        <span class="src" id="saved-klbf"></span></p>
+        <div class="reveal hidden" id="key-klbf">
+          <h4>Kunci builder <span class="badge cond">CONDITIONAL APPROVE</span></h4>
+          <p class="verdict-block">"Kredit termudah pun butuh struktur: approve Rp500 miliar dengan covenant dividen dan negative pledge atas pinjaman konversi."</p>
+          <p><strong>Alasan:</strong> Kapasitas bayar tidak diragukan (coverage 58,9×; utang bank existing hanya Rp388 M vs CFO Rp4,79 T — fasilitas baru 0,1× CFO).
+          Tapi pola 2024 — mengembalikan Rp1,89 T ke pemegang saham sambil membuka pinjaman konversi — adalah <em>leakage</em> kas yang harus dikunci lewat covenant:
+          (1) dividend covenant ≤ 60% laba bersih; (2) negative pledge; (3) D/E ≤ 1,0× (headroom besar dari 0,20×, tapi ada); (4) reporting kuartalan.
+          Pricing: borrower sekuat ini layak spread tipis — JIBOR + 175–225 bps.</p>
+          <p><strong>Yang dinilai komite:</strong> apakah kamu tergoda approve polos karena angkanya "terlalu bagus"? Analis kredit yang baik justru paling waspada pada kredit yang terlihat mudah.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CASE B : BBRI ==================== -->
+  <section class="case" id="case-bbri">
+    <div class="case-head">
+      <span class="tag">CASE B</span><span class="tag">BANK</span>
+      <h2>PT Bank Rakyat Indonesia (BBRI) — Limit Interbank Rp2 Triliun</h2>
+      <p style="color:#C9D2E3;margin:.3rem 0 0">Permohonan: limit penempatan interbank + rencana partisipasi obligasi subordinasi.
+      Angka: LK konsolidasian auditan 2024 filing IDX (KAP EY, WTM) + rasio diungkap bank (press conf 12 Feb 2025).</p>
+    </div>
+    <div class="case-body">
+      <h3>Paket counterparty (angka terverifikasi)</h3>
+      <table class="figures">
+        <tr><th>Pos</th><th>2024</th><th>Sumber</th></tr>
+        <tr><td>CAR</td><td class="num">26,63%</td><td class="src">Diungkap bank</td></tr>
+        <tr><td>NPL gross</td><td class="num">2,78%</td><td class="src">Diungkap bank</td></tr>
+        <tr><td>NPL coverage</td><td class="num">215,01%</td><td class="src">Diungkap bank</td></tr>
+        <tr><td>NIM</td><td class="num">7,74%</td><td class="src">Diungkap bank</td></tr>
+        <tr><td>CASA ratio</td><td class="num">67,3%</td><td class="src">Diungkap bank</td></tr>
+        <tr><td>LDR</td><td class="num">88,85%</td><td class="src">Diungkap bank</td></tr>
+        <tr><td>Beban CKPN</td><td class="num">Rp41,76 T (+41,4% YoY)</td><td class="src">LK hal. 16</td></tr>
+        <tr><td>Cost of credit (terhitung)</td><td class="num">3,35%</td><td class="src">Terhitung</td></tr>
+        <tr><td>Laba atribusional</td><td class="num">Rp60,15 T (+0,1% YoY)</td><td class="src">LK hal. 18</td></tr>
+        <tr><td>Dividend payout ratio</td><td class="num">92,7%</td><td class="src">Terhitung</td></tr>
+        <tr><td>PPoP growth</td><td class="num">+9,6% YoY</td><td class="src">Diungkap bank</td></tr>
+      </table>
+
+      <div class="committee">
+        <h4>🏛️ Tiga pertanyaan komite</h4>
+        <ol>
+          <li>PPoP +9,6% tapi laba bersih +0,1% — CKPN "memakan" laba. Sebagai calon pemegang subdebt, apa yang kamu tanyakan tentang kualitas aset mikro ke depan?</li>
+          <li>DPR 92,7% + CAR 26,63%: apakah dividen jumbo ini menggerus buffer modal yang seharusnya melindungi kreditur subordinasi?</li>
+          <li>Kalau CoC naik ke 4,5% tahun depan (stress), berapa laba yang tersisa? Apakah kupon subdebt masih aman?</li>
+        </ol>
+      </div>
+
+      <div class="decision-box">
+        <h4>Keputusanmu</h4>
+        <div class="decision-btns" data-case="bbri">
+          <button class="cbtn approve" data-v="approve">Approve</button>
+          <button class="cbtn cond" data-v="conditional">Approve bersyarat</button>
+          <button class="cbtn reject" data-v="reject">Reject</button>
+        </div>
+        <div class="hidden" data-terms="bbri">
+          <label class="f">Struktur yang kamu syaratkan</label>
+          <textarea id="terms-bbri" placeholder="cth: limit interbank Rp2T tenor ≤90 hari; subdebt hanya jika kupon ≥...; trigger review bila NPL >3,5%..."></textarea>
+        </div>
+        <label class="f">Alasan (min. 2 kalimat, kutip minimal 1 angka)</label>
+        <textarea id="why-bbri" placeholder="Tulis alasan keputusanmu di sini..."></textarea>
+        <p style="margin-top:.8rem"><button class="cbtn primary" id="reveal-bbri">Buka kunci builder</button>
+        <span class="src" id="saved-bbri"></span></p>
+        <div class="reveal hidden" id="key-bbri">
+          <h4>Kunci builder <span class="badge cond">CONDITIONAL APPROVE</span></h4>
+          <p class="verdict-block">"Interbank: approve. Subdebt: approve dengan trigger — bank kuat, tapi arah kualitas asetnya yang kamu beli, bukan levelnya."</p>
+          <p><strong>Alasan:</strong> Level-nya fortress: CAR 26,63%, coverage 215%, CASA 67,3%. Tapi <em>arahnya</em> melemah: CoC 3,35% dan naik, CKPN +41,4% memakan PPoP yang sebenarnya tumbuh 9,6%.
+          Untuk interbank jangka pendek, risiko gagal bayar praktis nol — approve. Untuk subdebt (tenor panjang, posisi junior),
+          pasang trigger: review bila NPL gross &gt; 3,5% atau CoC &gt; 4,0%, dan minta kupon yang menghargai tren, bukan level.
+          DPR 92,7% bukan masalah hari ini (CAR 26,63% = buffer tebal), tapi catat sebagai pertanyaan monitoring.</p>
+          <p><strong>Yang dinilai komite:</strong> apakah kamu membedakan risiko jangka pendek vs subordinasi jangka panjang? Analis kredit menilai <em>arah</em>, bukan cuma <em>level</em>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CASE C : WSKT ==================== -->
+  <section class="case" id="case-wskt">
+    <div class="case-head">
+      <span class="tag">CASE C</span><span class="tag">WORKOUT</span>
+      <h2>PT Waskita Karya (WSKT) — Restrukturisasi vs Tarik Fasilitas</h2>
+      <p style="color:#C9D2E3;margin:.3rem 0 0">Situasi: BUMN karya dalam restrukturisasi via MRA/KMKP (efektif 17 Okt 2024) + RUPO obligasi. Permohonan PKPU 2024 DICABUT (PN Jkt Pst, Feb 2025) — tidak ada homologasi PKPU. Bankmu punya eksposur Rp800 miliar (fasilitas modal kerja + garansi, ilustratif).
+      Angka neraca: LK auditan 31 Des 2024 (komparatif dalam LK interim Q2 2025).</p>
+    </div>
+    <div class="case-body">
+      <h3>Paket borrower (angka terverifikasi)</h3>
+      <table class="figures">
+        <tr><th>Pos</th><th>31 Des 2024</th><th>Sumber</th></tr>
+        <tr><td>Total liabilitas</td><td class="num">Rp68,30 T</td><td class="src">LK auditan 2024 ✓</td></tr>
+        <tr><td>Total aset</td><td class="num">Rp77,16 T</td><td class="src">LK auditan 2024 ✓</td></tr>
+        <tr><td>Total ekuitas (terhitung)</td><td class="num">Rp8,86 T</td><td class="src">Terhitung ✓</td></tr>
+        <tr><td>D/E</td><td class="num">7,71×</td><td class="src">Terhitung ✓</td></tr>
+        <tr><td>Kas dan setara kas</td><td class="num">Rp2,52 T</td><td class="src">LK auditan 2024 ✓</td></tr>
+        <tr><td>Pendapatan usaha 2024</td><td class="num">±Rp10,7 T</td><td class="src">Dilaporkan media dari LK*</td></tr>
+        <tr><td>Rugi atribusional 2024</td><td class="num">±Rp2,58 T</td><td class="src">Dilaporkan media dari LK*</td></tr>
+        <tr><td>Status restrukturisasi</td><td class="num">MRA/KMKP + RUPO obligasi; divestasi aset berjalan</td><td class="src">Keterbukaan publik</td></tr>
+      </table>
+      <p class="src">* Angka bertanda ± adalah pembulatan dari pemberitaan (investor.id, petromindo) atas LK — bukan ekstraksi langsung builder. Semua angka ✓ diekstrak langsung dari LK auditan.</p>
+
+      <div class="committee">
+        <h4>🏛️ Tiga pertanyaan komite</h4>
+        <ol>
+          <li>D/E 7,71× dengan kas Rp2,5 T vs liabilitas Rp68,3 T. Hitung kasar: berapa tahun pendapatan (Rp10,7 T) yang dibutuhkan untuk melunasi liabilitas — dan apa artinya untuk keputusanmu?</li>
+          <li>Skema MRA sudah efektif = ada kerangka restrukturisasi yang disepakati kreditur. Dalam kondisi apa kamu ikut skema, dan dalam kondisi apa kamu tarik fasilitas (exit) meski rugi?</li>
+          <li>Kalau restructure: sebutkan minimal 2 term konkret (mis. tenor extension berapa tahun, haircut bunga/pokok, debt-to-equity swap, jaminan tambahan). Kalau exit: lewat jalur apa (jual di secondary? set-off?) dan berapa recovery yang kamu targetkan?</li>
+        </ol>
+      </div>
+
+      <div class="decision-box">
+        <h4>Keputusanmu</h4>
+        <div class="decision-btns" data-case="wskt">
+          <button class="cbtn cond" data-v="restructure">Restructure</button>
+          <button class="cbtn reject" data-v="exit">Tarik / exit</button>
+        </div>
+        <div class="hidden" data-terms="wskt">
+          <label class="f">Term restrukturisasi ATAU rencana exit yang kamu usulkan</label>
+          <textarea id="terms-wskt" placeholder="cth restructure: tenor +5 thn, bunga 3% 2 thn pertama, jaminan proyek X... / cth exit: jual 60% eksposur di secondary target recovery 70%..."></textarea>
+        </div>
+        <label class="f">Alasan (min. 2 kalimat, kutip minimal 1 angka)</label>
+        <textarea id="why-wskt" placeholder="Tulis alasan keputusanmu di sini..."></textarea>
+        <p style="margin-top:.8rem"><button class="cbtn primary" id="reveal-wskt">Buka kunci builder</button>
+        <span class="src" id="saved-wskt"></span></p>
+        <div class="reveal hidden" id="key-wskt">
+          <h4>Kunci builder <span class="badge cond">RESTRUCTURE BERSYARAT</span></h4>
+          <p class="verdict-block">"Jangan tarik di titik terendah tanpa hitung recovery — tapi jangan restructure tanpa haircut yang riil. Ikut skema MRA dengan syarat."</p>
+          <p><strong>Alasan:</strong> D/E 7,71× berarti ekuitas hampir habis; exit sekarang = jual di secondary dengan diskon dalam (recovery mungkin 40–60%, <em>ilustratif — bukan valuasi</em>).
+          Skema MRA yang sudah efektif memberi kerangka kolektif — ikut skema dengan syarat: (1) tenor extension ≥ 5 tahun dengan grace period;
+          (2) konversi sebagian utang menjadi ekuitas (debt-to-equity swap) agar D/E turun di bawah 3×;
+          (3) jaminan atas aset/proyek spesifik (bukan unsecured); (4) covenant: divestasi aset sesuai jadwal, dana hasil divestasi untuk prepayment.
+          Trigger exit: bila divestasi meleset 2 kuartal berturut-turut → jual eksposur, terima haircut.</p>
+          <p><strong>Yang dinilai komite:</strong> workout bukan soal "optimis vs pesimis" — soal <em>perbandingan recovery</em>: berapa dapatnya kalau restructure vs kalau exit sekarang. Analis yang hanya bisa bilang "tarik, terlalu berisiko" tanpa hitung recovery belum berpikir seperti workout officer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="card">
+    <h3>Output modul</h3>
+    <p>Keputusanmu tersimpan di browser (localStorage <span class="mono">cd_k5_*</span>). Jadikan satu case sebagai
+    <strong>credit memo portofolio</strong> via <a href="https://fsa-lab.pages.dev/memo-kredit/">Credit Memo Builder FSA Lab</a> —
+    panduan paket lamaran ada di <a href="../k6/">K6</a>.</p>
+  </div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>Credit Desk — <em>Ukur. Nilai. Putuskan.</em></span>
+  <span>Angka case dari filing real terverifikasi builder · <a href="../">Beranda</a></span>
+</div></footer>
+
+<script src="/js/k5.js"></script>
+</body>
+</html>

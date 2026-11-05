@@ -1,0 +1,30 @@
+/* K3 — quiz + covenant designer wiring */
+(function(){
+  "use strict";
+  window.CD_QUIZ = [
+    {q:"Fungsi UTAMA covenant bagi lender adalah…",
+     opts:["Menghukum borrower yang melanggar","Memberi lender kursi di meja perundingan SEBELUM keadaan memburuk (sinyal dini)","Menambah pendapatan bank dari denda","Menggantikan analisis 5C"],
+     ans:1,
+     why:"Covenant yang baik = early warning system. Pelanggaran technical breach membuka negosiasi (waiver/cure), bukan langsung krisis."},
+    {q:"Threshold covenant yang BENAR ditetapkan dengan cara:",
+     opts:["Setinggi mungkin agar borrower disiplin","Serendah mungkin agar tidak pernah dilanggar","Proyeksi wajar − headroom 15–25%, sehingga pelanggaran = sinyal valid bukan noise","Menyalin threshold bank kompetitor"],
+     ans:2,
+     why:"Terlalu ketat = menghukum borrower sehat; terlalu longgar = tidak berguna. Headroom membuat pelanggaran menjadi informasi, bukan kecelakaan."},
+    {q:"Perbedaan technical breach vs payment default:",
+     opts:["Tidak ada bedanya — keduanya sama bahayanya","Technical breach = melanggar angka tapi masih bayar (meja perundingan); payment default = tidak bayar (meja krisis)","Technical breach lebih berbahaya dari payment default","Payment default bisa di-waiver, technical breach tidak"],
+     ans:1,
+     why:"Pembedaan ini menentukan respons: negosiasi + waiver + covenant lebih ketat vs tindakan krisis (restructure/tarik fasilitas)."},
+    {q:"Anatomi pricing kredit yang benar:",
+     opts:["Bunga = angka hasil negosiasi dengan borrower","Pricing = cost of funds + risk premium + fees","Pricing = BI rate + margin tetap 2%","Pricing = bunga deposito + 1%"],
+     ans:1,
+     why:"Setiap komponen punya alasan: biaya dana bank, harga risiko borrower spesifik, dan fee. Borrower yang menawar terlalu rendah meminta subsidi risiko."},
+    {q:"Negative covenant yang PALING tepat untuk PT Sinar Kemas (konsentrasi 70% ke 3 pelanggan):",
+     opts:["Larangan mengganti direktur utama","Larangan dividen bila DSCR < 1,5× dan belanja modal besar wajib izin","Larangan membuka cabang baru","Larangan memakai konsultan eksternal"],
+     ans:1,
+     why:"Covenant harus menjawab risiko spesifik kasus ini: konsentrasi pelanggan = risiko kas. Negative covenant yang tepat memagari perilaku yang memperbesar risiko itu."}
+  ];
+  window.CD_GATE = "cd_gate_k3";
+  window.CDQuiz.init();
+  window.CDDecision.init("cd_k3");
+  window.CDDecision.saveText("k3", ["k3-c1","k3-c2","k3-c3","k3-neg","k3-struktur"]);
+})();
