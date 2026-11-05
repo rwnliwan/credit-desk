@@ -38,7 +38,7 @@ a:hover{color:var(--reject)}
 .cd-hero h1 em{color:var(--amber);font-style:normal}
 .cd-hero .lede{max-width:42rem;margin:0 auto;color:#D8DEEA;font-size:1.02rem}
 .cd-hero .rule{max-width:44rem;margin:1.4rem auto 0;border:1px solid rgba(217,164,65,.5);border-radius:var(--radius);
-  padding:.8rem 1.1rem;font-style:italic;color:var(--amber-soft);font-size:.92rem}
+  background:transparent;padding:.8rem 1.1rem;font-style:italic;color:var(--amber-soft);font-size:.92rem}
 
 /* layout */
 .wrap{max-width:52rem;margin:0 auto;padding:0 1.2rem}
