@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://credit-desk-afy.pages.dev/sitemap.xml
