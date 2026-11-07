@@ -18,7 +18,7 @@
   <p class="kicker">K5 · Studi Kasus Kredit</p>
   <h1>Tiga Keputusan, Tiga Borrower</h1>
   <p class="lede">Di meja kredit, unit belajarnya bukan pemahaman — melainkan <strong>keputusan</strong>.
-  Tiga case di bawah memakai angka dari filing real yang sudah diverifikasi builder (bukan ilustrasi).
+  Tiga case di bawah memakai angka dari filing real yang sudah diverifikasi builder (bukan ilustrasi). Angka bertanda ± adalah pembulatan dari pemberitaan atas LK — lihat catatan kaki di bawah tabel.
   Baca paket borrower, jawab tiga pertanyaan komite, buat keputusanmu, baru buka kunci.</p>
 
   <div class="rule"><strong>Aturan main:</strong> Tulis keputusan + alasanmu <em>sebelum</em> membuka kunci.
@@ -46,7 +46,7 @@
         <tr><td>Penjualan neto</td><td class="num">Rp32,63 T</td><td class="src">LK hal. 4</td></tr>
         <tr><td>Laba usaha (terhitung builder)</td><td class="num">Rp4,08 T</td><td class="src">LK hal. 4</td></tr>
         <tr><td>Beban bunga &amp; keuangan</td><td class="num">Rp69,2 M</td><td class="src">LK hal. 4</td></tr>
-        <tr><td>Interest coverage (laba usaha ÷ beban bunga)</td><td class="num">58,9×</td><td class="src">Terhitung</td></tr>
+        <tr><td>Interest coverage (EBIT ÷ beban bunga)</td><td class="num">58,9×</td><td class="src">Terhitung — basis EBIT (K2: EBITDA)</td></tr>
         <tr><td>Arus kas operasi</td><td class="num">Rp4,79 T</td><td class="src">LK hal. 7</td></tr>
         <tr><td>Kas dan setara kas</td><td class="num">Rp4,72 T</td><td class="src">LK hal. 1</td></tr>
         <tr><td>Total utang bank (pendek + bagian lancar + panjang)</td><td class="num">Rp387,6 M</td><td class="src">LK hal. 2</td></tr>
@@ -74,7 +74,7 @@
         </div>
         <div class="hidden" data-terms="klbf">
           <label class="f">Struktur yang kamu syaratkan (limit, tenor, pricing, covenant kunci, collateral)</label>
-          <textarea id="terms-klbf" placeholder="cth: limit Rp500M, tenor 3 thn, bunga JIBOR+250bps, covenant: dividend ≤50% laba, D/E ≤1,0×, ..."></textarea>
+          <textarea id="terms-klbf" placeholder="cth: limit Rp500 miliar, tenor 3 thn, bunga JIBOR+250bps, covenant: dividend ≤50% laba, D/E ≤1,0×, ..."></textarea>
         </div>
         <label class="f">Alasan (min. 2 kalimat, kutip minimal 1 angka)</label>
         <textarea id="why-klbf" placeholder="Tulis alasan keputusanmu di sini..."></textarea>
@@ -83,7 +83,7 @@
         <div class="reveal hidden" id="key-klbf">
           <h4>Kunci builder <span class="badge cond">CONDITIONAL APPROVE</span></h4>
           <p class="verdict-block">"Kredit termudah pun butuh struktur: approve Rp500 miliar dengan covenant dividen dan negative pledge atas pinjaman konversi."</p>
-          <p><strong>Alasan:</strong> Kapasitas bayar tidak diragukan (coverage 58,9×; utang bank existing hanya Rp388 M vs CFO Rp4,79 T — fasilitas baru 0,1× CFO).
+          <p><strong>Alasan:</strong> Kapasitas bayar tidak diragukan (coverage 58,9×; utang bank existing hanya Rp388 miliar vs CFO Rp4,79 T — fasilitas baru 0,1× CFO).
           Tapi pola 2024 — mengembalikan Rp1,89 T ke pemegang saham sambil membuka pinjaman konversi — adalah <em>leakage</em> kas yang harus dikunci lewat covenant:
           (1) dividend covenant ≤ 60% laba bersih; (2) negative pledge; (3) D/E ≤ 1,0× (headroom besar dari 0,20×, tapi ada); (4) reporting kuartalan.
           Pricing: borrower sekuat ini layak spread tipis — JIBOR + 175–225 bps.</p>
@@ -181,7 +181,7 @@
       <div class="committee">
         <h4>🏛️ Tiga pertanyaan komite</h4>
         <ol>
-          <li>D/E 7,71× dengan kas Rp2,5 T vs liabilitas Rp68,3 T. Hitung kasar: berapa tahun pendapatan (Rp10,7 T) yang dibutuhkan untuk melunasi liabilitas — dan apa artinya untuk keputusanmu?</li>
+          <li>D/E 7,71× dengan kas Rp2,5 T vs liabilitas Rp68,3 T. Hitung kasar: liabilitas = 6,4× pendapatan tahunan (Rp10,7 T) — dan ingat pendapatan bukan kas: rugi Rp2,58 T artinya tidak ada kas operasi untuk melunasi. Apa artinya untuk keputusanmu?</li>
           <li>Skema MRA sudah efektif = ada kerangka restrukturisasi yang disepakati kreditur. Dalam kondisi apa kamu ikut skema, dan dalam kondisi apa kamu tarik fasilitas (exit) meski rugi?</li>
           <li>Kalau restructure: sebutkan minimal 2 term konkret (mis. tenor extension berapa tahun, haircut bunga/pokok, debt-to-equity swap, jaminan tambahan). Kalau exit: lewat jalur apa (jual di secondary? set-off?) dan berapa recovery yang kamu targetkan?</li>
         </ol>
