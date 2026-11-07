@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K7 · Memo, Rating &amp; Regulasi · Credit Desk</title>
+<meta name="description" content="K7 Credit Desk: menulis credit memo, skala rating internal, matematika recovery/LGD dan valuasi agunan, kerangka regulasi Indonesia (POJK 40/2019, PSAK 71, BMPK), stress testing portofolio, dan kerangka Character/red flag.">
+<link rel="canonical" href="https://credit-desk-afy.pages.dev/k7/">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav class="cd-nav">
+  <a href="/">← Credit Desk</a>
+  <span class="mantra">Ukur. Nilai. Putuskan.</span>
+</nav>
+
+<header class="cd-hero">
+  <p class="kicker">K7 · Penutup kurikulum</p>
+  <h1>Keputusan yang <em>Tertulis.</em></h1>
+  <p class="lede">K1–K6 mengajar <strong>memutuskan</strong>. K7 mengajar membuat keputusan itu <strong>bisa dipertahankan</strong> — di depan komite, di depan regulator, dan di depan dirimu sendiri setahun kemudian. Memo, rating, recovery, regulasi, stress test, dan Character: lima alat yang mengubah vonis menjadi berkas yang tahan interogasi.</p>
+</header>
+
+<main class="wrap">
+
+<section class="cd-sec">
+  <div class="prereq">
+    <h3>Prasyarat &amp; rujukan (tidak diulang di sini)</h3>
+    <ul>
+      <li><strong>Kerangka 5C+1 &amp; kasus PT Sinar Kemas:</strong> <a href="/k1/">K1</a> — semua contoh di modul ini memakai borrower fiktif yang sama.</li>
+      <li><strong>DSCR &amp; debt capacity:</strong> <a href="/k2/">K2</a> — angka DSCR 1,6× dan anuitas ≈Rp2,9 miliar/tahun dipakai lagi di §1 dan §4.</li>
+      <li><strong>Covenant &amp; headroom:</strong> <a href="/k3/">K3</a> — threshold DSCR ≥ 1,25×, D/E ≤ 1,8×, CR ≥ 1,4×.</li>
+      <li><strong>Staging PSAK 71 &amp; monitoring:</strong> <a href="/k4/">K4</a> — update Q1 Sinar Kemas (DSCR 1,3×) menjadi bahan §1 dan Keputusan K7.</li>
+      <li><strong>PD, LGD, EAD &amp; pricing:</strong> <a href="/k6/">K6</a> Q5 &amp; Q8 — rumus expected loss dan komponen harga pinjaman.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cd-sec">
+  <h2>1 · Credit memo — dokumen yang diinterogasi</h2>
+  <p>Memo kredit bukan ringkasan laporan keuangan. Memo adalah <strong>argumen tertulis</strong>: "beri pinjaman ini, dengan struktur ini, karena bukti ini — dan inilah yang bisa salah." Analis yang baik menulis memo seolah akan diinterogasi komite — karena memang akan (K1 §3).</p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Bagian memo</th><th>Isi</th><th>Pertanyaan yang dijawab</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Ringkasan eksekutif &amp; rekomendasi</strong></td><td>Vonis + jumlah + tenor + pricing + 2–3 angka kunci</td><td>Apa keputusannya — dibaca pertama oleh komite</td></tr>
+      <tr><td><strong>2. Profil borrower</strong></td><td>Bisnis, pemilik, struktur grup, posisi pasar</td><td>Siapa yang meminjam, dan dari mana uang kembali</td></tr>
+      <tr><td><strong>3. Analisis 5C+1</strong></td><td>Character, Capacity, Capital, Collateral, Conditions, Cash flow</td><td>Di mana kekuatan dan kelemahannya (K1)</td></tr>
+      <tr><td><strong>4. Proyeksi &amp; debt capacity</strong></td><td>CFO ternormalisasi, DSCR, headroom, stress sederhana</td><td>Berapa maksimal boleh dipinjamkan (K2, §4)</td></tr>
+      <tr><td><strong>5. Struktur &amp; covenant</strong></td><td>Tenor, pricing, agunan, paket covenant</td><td>Apa pagarnya bila proyeksi meleset (K3)</td></tr>
+      <tr><td><strong>6. Risiko &amp; mitigasi</strong></td><td>Risiko terbesar + mitigasi per risiko</td><td>Apa yang bisa salah — dan apa yang melindungimu</td></tr>
+      <tr><td><strong>7. Rating internal</strong></td><td>Grade + skor + PD</td><td>Seberapa berisiko borrower ini, dalam satu angka (§1b)</td></tr>
+      <tr><td><strong>8. Rencana monitoring</strong></td><td>Frekuensi pantau, trigger watchlist, exit plan</td><td>Bagaimana kamu tahu bila keadaan memburuk (K4)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="honest"><strong>Ujian memo yang bagus:</strong> memo yang tidak menulis kelemahannya sendiri adalah memo yang tidak bisa dipercaya. Komite tidak menghukum analis yang jujur soal risiko — mereka menghukum analis yang risikonya ketahuan belakangan.</div>
+
+  <h3>1b · Rating internal — satu angka untuk risiko borrower</h3>
+  <p>Rating internal adalah <strong>grade yang diberikan bank kepada borrower</strong>, dikalibrasi dari data default historis bank itu sendiri. Skala di bawah ini adalah <span class="ilus">ILUSTRATIF</span> — contoh cara kerja skala, bukan tabel regulator. Setiap bank mengkalibrasi angkanya sendiri; yang tidak boleh berubah adalah <em>logikanya</em>: grade yang lebih buruk = PD lebih tinggi = harga lebih mahal atau struktur lebih keras.</p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Grade</th><th>Arti</th><th>PD 1 tahun (ilustratif)</th><th>Konsekuensi</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Sangat kuat</td><td class="num">0,10%</td><td>Pricing terbaik, covenant ringan</td></tr>
+      <tr><td><strong>2</strong></td><td>Kuat</td><td class="num">0,25%</td><td>Pricing baik</td></tr>
+      <tr><td><strong>3</strong></td><td>Memadai</td><td class="num">0,50%</td><td>Standar — approve dengan covenant normal</td></tr>
+      <tr><td><strong>4</strong></td><td>Di bawah memadai</td><td class="num">1,00%</td><td>Pricing lebih mahal, covenant ketat, monitoring kuartalan</td></tr>
+      <tr><td><strong>5</strong></td><td>Lemah</td><td class="num">2,50%</td><td>Approve hanya dengan struktur keras / agunan kuat</td></tr>
+      <tr><td><strong>6</strong></td><td>Sangat lemah</td><td class="num">7,50%</td><td>Watchlist — fasilitas baru hampir selalu ditolak</td></tr>
+      <tr><td><strong>7</strong></td><td>Default / impaired</td><td class="num">20,00%</td><td>Workout mode (K4 §3)</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Contoh terhitung — scorecard PT Sinar Kemas (FIKTIF, angka dari K1).</strong> Lima faktor, masing-masing dinilai 1–4:</p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Faktor</th><th>Data (K1)</th><th>Skor</th></tr></thead>
+    <tbody>
+      <tr><td>DSCR proyeksi</td><td>1,6×</td><td class="num">3</td></tr>
+      <tr><td>Leverage (D/E)</td><td>1,5×</td><td class="num">3</td></tr>
+      <tr><td>Likuiditas (current ratio)</td><td>1,8×</td><td class="num">3</td></tr>
+      <tr><td>Konsentrasi pelanggan</td><td>70% ke 3 buyer</td><td class="num">1</td></tr>
+      <tr><td>Character</td><td>Pemilik 15 tahun di industri, tidak pernah menunggak</td><td class="num">4</td></tr>
+      <tr><td><strong>Total</strong></td><td>Band: 17–20 → Grade 2 · 13–16 → Grade 3 · 9–12 → Grade 4 · 5–8 → Grade 5</td><td class="num"><strong>14 → Grade 3</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>Grade 3 berarti PD ilustratif 0,50%. Rating ini <strong>mengikat ke harga</strong> (K6 Q8): harga = cost of funds + expected loss + biaya operasional &amp; modal + margin. Dengan asumsi ilustratif — cost of funds 6,0%; expected loss = PD × LGD = 0,50% × 40% = 0,20% (LGD 40% asumsi ilustratif; perhitungannya di §2); biaya operasional &amp; modal 1,5%; margin target 1,0% — maka <strong>floor harga = 6,0 + 0,20 + 1,5 + 1,0 = 8,7%</strong>. Bunga 11% yang dikenakan ke Sinar Kemas = floor 8,7% + <strong>premi risiko 2,3 poin persentase</strong> (konsentrasi pelanggan + tenor 3 tahun). Bila grade turun ke Grade 4 (PD 1,00%), expected loss naik ke 0,40% dan floor naik ke 8,9% — harga atau struktur harus menyesuaikan, tidak bisa diam.</p>
+</section>
+
+<section class="cd-sec">
+  <h2>2 · Recovery, LGD &amp; valuasi agunan</h2>
+  <p>Expected loss = PD × LGD × EAD (K6 Q5). PD adalah "seberapa mungkin gagal bayar". <strong>LGD adalah "seberapa besar kerugian bila sudah gagal bayar"</strong> — dan ini satu-satunya komponen yang paling bisa dipengaruhi analis, lewat collateral, senioritas, dan covenant (K6 Q5). LGD = 1 − recovery rate.</p>
+  <p><strong>Contoh terhitung — PT Sinar Kemas (FIKTIF, EAD = fasilitas Rp7 miliar, asumsi fasilitas ditarik penuh).</strong> Agunan gudang + mesin, nilai pasar menurut appraisal Rp10 miliar (K1: nilai likuidasi estimasi Rp10 miliar — di sini dihitung langkah demi langkah dari nilai pasar):</p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Langkah</th><th>Hitungan</th><th class="num">Rp miliar</th></tr></thead>
+    <tbody>
+      <tr><td>Nilai pasar agunan (appraisal independen)</td><td>—</td><td class="num">10,0</td></tr>
+      <tr><td>Haircut forced sale 30% (jual cepat ≠ harga pasar)</td><td>10,0 × (1 − 30%)</td><td class="num">7,0</td></tr>
+      <tr><td>Biaya eksekusi (lelang, hukum, waktu 12–18 bulan)</td><td>10% × 7,0</td><td class="num">−0,7</td></tr>
+      <tr><td><strong>Recovery bersih dari agunan</strong></td><td>7,0 − 0,7</td><td class="num"><strong>6,3</strong></td></tr>
+      <tr><td><strong>Recovery rate</strong></td><td>6,3 ÷ 7,0</td><td class="num"><strong>90,0%</strong></td></tr>
+      <tr><td><strong>LGD</strong></td><td>1 − 90,0%</td><td class="num"><strong>10,0%</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>Maka expected loss = 0,50% (PD Grade 3) × 10,0% (LGD) × Rp7 miliar = <strong>Rp3,5 juta</strong>. Kecil — karena agunan menutup hampir seluruh eksposur. Tapi angka ini rapuh pada satu asumsi: <strong>senioritas</strong>. Bila agunan yang sama ternyata sudah dijaminkan ke kreditur lain (second ranking) dengan utang senior Rp5 miliar, recovery untuk fasilitas ini = 6,3 − 5,0 = <strong>Rp1,3 miliar</strong> → recovery rate 1,3 ÷ 7 = <strong>18,6%</strong> → LGD = <strong>81,4%</strong> → expected loss = 0,50% × 81,4% × Rp7 miliar = <strong>Rp28,5 juta</strong> — delapan kali lipat. Satu pertanyaan ("apakah agunan ini sudah dijaminkan ke pihak lain?") mengubah LGD dari 10% menjadi 81%. Itulah mengapa K6 Q10 menuntut analis menanyakan prioritas kreditor, bukan sekadar coverage.</p>
+  <h3>Menilai agunan — tiga pendekatan, satu disiplin</h3>
+  <ul>
+    <li><strong>Perbandingan pasar</strong> — harga transaksi aset sejenis di lokasi yang sama. Paling kuat untuk tanah/bangunan di lokasi likuid.</li>
+    <li><strong>Pendekatan pendapatan</strong> — nilai kini dari arus yang dihasilkan aset (mis. properti sewa). Bergantung pada asumsi sewa &amp; diskonto — uji asumsinya.</li>
+    <li><strong>Pendekatan biaya</strong> — biaya membangun kembali dikurangi penyusutan. Dipakai bila tidak ada pasar pembanding (mesin khusus, pabrik).</li>
+  </ul>
+  <p>Apapun pendekatannya, tiga disiplin berlaku: <strong>(1)</strong> appraisal oleh penilai independen, bukan oleh borrower; <strong>(2)</strong> yang dipakai untuk LGD adalah <em>forced-sale value</em>, bukan market value — lender menjual di kondisi terburuk, bukan terbaik; <strong>(3)</strong> appraisal punya umur — pasar bergerak, dan agunan yang dinilai 3 tahun lalu bukan lagi Rp10 miliar hari ini. Haircut internal di bawah ini adalah <span class="ilus">ILUSTRATIF</span> (rule of thumb bank, bukan angka regulator):</p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Jenis agunan</th><th>Haircut forced sale (ilustratif)</th><th>Alasan</th></tr></thead>
+    <tbody>
+      <tr><td>Tanah lokasi prima</td><td class="num">20–30%</td><td>Pasar dalam, pembeli banyak</td></tr>
+      <tr><td>Bangunan / ruko</td><td class="num">25–35%</td><td>Tergantung lokasi &amp; kondisi</td></tr>
+      <tr><td>Mesin / peralatan</td><td class="num">40–50%</td><td>Pembeli khusus, depresiasi cepat</td></tr>
+      <tr><td>Persediaan</td><td class="num">50–60%</td><td>Bisa usang / tidak laku</td></tr>
+      <tr><td>Piutang usaha</td><td class="num">30–50%</td><td>Tergantung kualitas debitur piutang</td></tr>
+    </tbody>
+  </table></div>
+  <div class="honest"><strong>Prinsip yang tidak boleh terbalik:</strong> collateral adalah <em>second way out</em> — jalan keluar kedua. Jalan keluar pertama tetap arus kas (K1, K6 Q10). LGD yang kecil tidak pernah membenarkan PD yang besar: meminjamkan ke borrower yang tidak bisa membayar hanya karena agunannya bagus = membeli masalah dengan diskon.</div>
+</section>
+
+<section class="cd-sec">
+  <h2>3 · Kerangka regulasi Indonesia — POJK, PSAK 71 &amp; BMPK</h2>
+  <p>Analis kredit di Indonesia bekerja di dalam tiga kerangka regulator yang saling mengunci. Bukan untuk dihafal pasalnya — tapi untuk dipahami logikanya, karena ketiganya menentukan apa yang boleh kamu putuskan dan bagaimana keputusanmu diaudit.</p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Kerangka</th><th>Yang diatur</th><th>Yang harus dipahami analis</th></tr></thead>
+    <tbody>
+      <tr><td><strong>POJK 40/POJK.03/2019</strong> — Penilaian Kualitas Aset Bank Umum</td><td>5 kategori kualitas kredit + PPKA (penyisihan penilaian kualitas aset)</td><td>Kolektibilitas borrower &amp; cadangan minimum per kategori</td></tr>
+      <tr><td><strong>PSAK 71</strong> — instrumen keuangan (ECL)</td><td>Staging 1/2/3 + CKPN 12-bulan vs lifetime</td><td>Staging sebagai radar dini (K4)</td></tr>
+      <tr><td><strong>PBI 7/3/PBI/2005</strong> — BMPK Bank Umum</td><td>Batas maksimum pemberian kredit sebagai % modal bank</td><td>Seberapa besar satu borrower/grup boleh menerima</td></tr>
+    </tbody>
+  </table></div>
+  <h3>3a · Kolektibilitas: 5 kategori, 1 garis NPL</h3>
+  <p>POJK 40/2019 membagi kualitas Kredit menjadi lima — Kol-1 dan Kol-2 adalah <em>performing loan</em>, Kol-3 sampai Kol-5 adalah <em>non-performing loan</em> (NPL):</p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Kolektibilitas</th><th>Tunggakan pokok/bunga</th><th>Status</th><th>PPKA khusus minimum*</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Kol-1 Lancar</strong></td><td>Tepat waktu</td><td>Performing</td><td class="num">— (penyisihan umum min. 1% dari aset produktif Lancar)</td></tr>
+      <tr><td><strong>Kol-2 Dalam Perhatian Khusus (DPK)</strong></td><td>1–90 hari</td><td>Performing</td><td class="num">5%</td></tr>
+      <tr><td><strong>Kol-3 Kurang Lancar</strong></td><td>91–120 hari</td><td><strong>NPL</strong></td><td class="num">15%</td></tr>
+      <tr><td><strong>Kol-4 Diragukan</strong></td><td>121–180 hari</td><td><strong>NPL</strong></td><td class="num">50%</td></tr>
+      <tr><td><strong>Kol-5 Macet</strong></td><td>&gt; 180 hari</td><td><strong>NPL</strong></td><td class="num">100%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">*PPKA khusus dihitung dari (nilai aset − nilai agunan), per POJK 40/2019 Pasal 44. Angka di atas adalah minimum regulator — bank boleh (dan sering) mencadangkan lebih.</p>
+  <p><strong>Contoh terhitung — PT Sinar Kemas (FIKTIF).</strong> Pakai nilai agunan bersih §2 (Rp6,3 miliar) dan eksposur Rp7 miliar — selisih yang tidak tertutup agunan = 7,0 − 6,3 = Rp0,7 miliar. Bila kolektibilitasnya turun ke DPK: PPKA khusus minimum = 5% × Rp0,7 miliar = <strong>Rp35 juta</strong>. Bila jatuh ke Macet: 100% × Rp0,7 miliar = <strong>Rp0,7 miliar</strong>. Dua pelajaran: (1) agunan yang kuat menekan cadangan — itulah insentif ekonomi di balik collateral; (2) begitu agunan tidak menutup eksposur, cadangannya melonjak 20× lipat dari DPK ke Macet. Dan ingat batas headline regulator (K6 Q11): <strong>NPL net bank &lt; 5%</strong> — portofolio yang NPL-nya merayap ke batas itu membuat komite menolak fasilitas baru, betapapun bagusnya satu borrower.</p>
+  <h3>3b · BMPK: rem konsentrasi di level bank</h3>
+  <p>BMPK (Batas Maksimum Pemberian Kredit) adalah <strong>batas persentase penyediaan dana terhadap modal bank</strong> — rem agar satu borrower atau satu grup tidak bisa menenggelamkan bank. Dihitung dari baki debet. Untuk Bank Umum (PBI 7/3/PBI/2005):</p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Penerima</th><th>BMPK maks. (% modal bank)</th><th>Contoh: bank bermodal Rp10.000 miliar</th></tr></thead>
+    <tbody>
+      <tr><td>Seluruh pihak terkait (total)</td><td class="num">10%</td><td class="num">Rp1.000 miliar</td></tr>
+      <tr><td>1 peminjam, bukan pihak terkait</td><td class="num">20%</td><td class="num">Rp2.000 miliar</td></tr>
+      <tr><td>1 kelompok peminjam, bukan pihak terkait</td><td class="num">25%</td><td class="num">Rp2.500 miliar</td></tr>
+    </tbody>
+  </table></div>
+  <p>Fasilitas Rp7 miliar untuk Sinar Kemas jauh di bawah BMPK mana pun — BMPK tidak mengikat satu pinjaman kecil. BMPK mengikat di <strong>level portofolio</strong>: 10 borrower grup yang sama, masing-masing Rp2.000 miliar, sudah menyentuh batas kelompok. Analis yang hanya melihat satu file tidak melihat BMPK; analis yang melihat portofolio melihatnya. Catatan: angka di atas untuk <strong>Bank Umum</strong> — BPR diatur terpisah (POJK 23/2022: 20% satu peminjam, 30% satu kelompok, 10% pihak terkait). Jangan campur keduanya.</p>
+  <div class="honest"><strong>Yang sering salah dipahami:</strong> kategori regulator (Kol-1 s.d. Kol-5) <strong>bukan</strong> rating internal (Grade 1–7 di §1). Keduanya mengukur hal yang sama — kualitas borrower — dari dua sudut yang berbeda. Bila rating internalmu bilang Grade 3 sementara kolektibilitasnya sudah Kol-3, salah satu dari keduanya salah. Rekonsiliasi keduanya adalah pekerjaan analis, bukan pekerjaan auditor.</div>
+</section>
+
+<section class="cd-sec">
+  <h2>4 · Stress testing portofolio</h2>
+  <p>Proyeksi base case menjawab "apa yang kami harapkan". Stress test menjawab <strong>"apa yang membunuh kami, dan seberapa jauh kami dari sana"</strong>. Kerangkanya sederhana: tentukan skenario → terapkan shock ke PD, LGD, dan EAD → hitung expected loss baru → putuskan aksi. Tiga skenario sudah cukup untuk latihan; bank besar memakai puluhan.</p>
+  <h3>4a · Stress satu nama — PT Sinar Kemas (FIKTIF)</h3>
+  <p>Base: CFO Rp4,5 miliar, anuitas ≈Rp2,9 miliar/tahun (Rp2,86 miliar), DSCR 1,6×, covenant DSCR ≥ 1,25× (K3).</p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Skenario</th><th>CFO</th><th>DSCR</th><th>Bacaan</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Base</strong></td><td class="num">Rp4,5 miliar</td><td class="num">1,6×</td><td>Sehat; headroom 0,35 di atas covenant</td></tr>
+      <tr><td><strong>CFO −25%</strong> (pelanggan besar menunda bayar)</td><td class="num">Rp3,375 miliar</td><td class="num">1,18×</td><td><strong>Breach covenant 1,25×</strong> — waiver / renegosiasi</td></tr>
+      <tr><td><strong>CFO −40%</strong> (dua pelanggan menunda + margin turun)</td><td class="num">Rp2,7 miliar</td><td class="num">0,94×</td><td><strong>Di bawah 1,0× — arus kas tidak cukup membayar utang</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p><em>Reverse stress test:</em> berapa penurunan CFO yang membuat DSCR tepat 1,0×? CFO impas = anuitas = Rp2,86 miliar → penurunan yang ditahan = (4,5 − 2,86) ÷ 4,5 = <strong>36,4%</strong>. Artinya Sinar Kemas tahan guncangan CFO sampai −36% sebelum benar-benar tidak bisa membayar — tapi covenant-nya sudah jebol di −22% (CFO Rp3,5 miliar → DSCR 1,22×). Covenant memang dirancang jebol <em>lebih dulu</em> daripada default: itulah fungsi peringatan dininya (K3).</p>
+  <h3>4b · Stress portofolio — 10 fasilitas (FIKTIF, ilustratif)</h3>
+  <p>Portofolio contoh: 10 fasilitas, total EAD Rp100 miliar. Shock diterapkan serentak — resesi menaikkan PD <em>dan</em> LGD <em>dan</em> EAD (debitur menarik limit undrawn) sekaligus:</p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Skenario</th><th>PD rata-rata</th><th>LGD</th><th>EAD</th><th class="num">Expected loss</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Base</strong></td><td class="num">2,0%</td><td class="num">40%</td><td class="num">Rp100 miliar</td><td class="num">Rp0,80 miliar</td></tr>
+      <tr><td><strong>Adverse</strong> (resesi ringan)</td><td class="num">3,0%</td><td class="num">50%</td><td class="num">Rp102 miliar</td><td class="num">Rp1,53 miliar</td></tr>
+      <tr><td><strong>Severe</strong> (resesi dalam)</td><td class="num">4,0%</td><td class="num">55%</td><td class="num">Rp105 miliar</td><td class="num">Rp2,31 miliar</td></tr>
+    </tbody>
+  </table></div>
+  <p>Expected loss severe = 105 × 4,0% × 55% = <strong>Rp2,31 miliar</strong> — <strong>2,89×</strong> dari base (Rp0,80 miliar). Tiga tuas bergerak bersamaan, jadi kerugian naik hampir tiga kali lipat meski tiap tuas hanya naik 1,5–2×. Itulah mengapa stress test tidak boleh men-shock satu variabel saja. Dampak lanjutannya: 2 dari 10 fasilitas bermigrasi Stage 1 → Stage 2 (K4) — CKPN-nya berubah dari 12-bulan menjadi lifetime, dan beban provisi kuartal itu naik sebelum satu pun NPL muncul.</p>
+  <div class="honest"><strong>Aturan meja stress test:</strong> stress test yang tidak mengubah keputusan adalah hiasan. Setiap skenario harus berujung pada aksi: turunkan limit, naikkan pricing, perketat covenant, atau tambah monitoring. Kalau hasil severe tidak mengubah apa pun, skenarionya terlalu ringan — atau analisnya tidak berani.</div>
+</section>
+
+<section class="cd-sec">
+  <h2>5 · Character — red flag &amp; cara mengujinya</h2>
+  <p>Di Indonesia, Character paling sering membunuh kredit (K6 Q3): laporan bisa direkayasa, tapi pemilik yang mengalihkan kas grup atau berutang ke banyak bank tanpa transparansi tidak bisa diperbaiki covenant. Character tidak dinilai dari kesan — dinilai dari <strong>uji yang bisa diverifikasi</strong>. Satu red flag = pertanyaan. Pola red flag = keputusan.</p>
+  <div class="tblwrap"><table class="stmt">
+    <thead><tr><th>Red flag</th><th>Cara menguji</th><th>Yang membuktikan / membantah</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Laba naik, CFO turun / negatif</strong></td><td>Bandingkan laba vs CFO 3 tahun (K2)</td><td>CFO yang ikut naik = sehat; CFO yang makin negatif = laba di atas kertas</td></tr>
+      <tr><td><strong>Piutang tumbuh jauh lebih cepat dari penjualan</strong></td><td>Hitung receivable days; minta aging piutang</td><td>Aging lancar = wajar; aging menumpuk di &gt;90 hari = penjualan fiktif / koleksi rusak</td></tr>
+      <tr><td><strong>Sering ganti auditor / auditor tanpa reputasi</strong></td><td>Baca opini audit 3 tahun + alasan pergantian</td><td>Opini WTP konsisten = baik; disclaimer / pergantian tanpa alasan = kabur</td></tr>
+      <tr><td><strong>Transaksi related-party besar, pengungkapan tipis</strong></td><td>Baca catatan LK + struktur grup; tanya harga transfer</td><td>Pengungkapan lengkap + harga wajar = bisa diterima; tidak ada jejak = kas bisa keluar diam-diam</td></tr>
+      <tr><td><strong>Dividen besar saat utang naik</strong></td><td>Bandingkan dividen vs CFO dan vs tambahan utang</td><td>Dividen dari laba tertahan = normal; dividen dari utang baru = pemilik menguras perusahaan</td></tr>
+      <tr><td><strong>Menunggak ke supplier / pajak</strong></td><td>Cek aging utang usaha; konfirmasi tunggakan pajak</td><td>Semua lancar = baik; tunggakan pajak = borrower meminjam dari negara karena bank menolak</td></tr>
+      <tr><td><strong>Agunan sama dijaminkan ke banyak kreditur</strong></td><td>Cek sertifikat + peringkat jaminan + baki debet kreditur lain (§2)</td><td>First ranking bersih = aman; second ranking tanpa diungkap = LGD melonjak (10% → 81%)</td></tr>
+      <tr><td><strong>Data tidak bisa diverifikasi</strong></td><td>Site visit + konfirmasi pihak ketiga (pelanggan, supplier, bank lain)</td><td>Alamat, kontrak, dan stok cocok = baik; tidak ada yang bisa dikonfirmasi = jangan percaya angkanya</td></tr>
+      <tr><td><strong>Manajemen menolak / menunda memberi data</strong></td><td>Catat permintaan &amp; tenggat secara tertulis</td><td>Data akhirnya lengkap = bisa jadi wajar; penundaan berulang = yang disembunyikan lebih penting dari yang diminta</td></tr>
+      <tr><td><strong>Pinjam baru untuk bayar utang lama</strong></td><td>Lacak penggunaan dana fasilitas sebelumnya</td><td>Dana dipakai sesuai tujuan = baik; dana dipakai menutup cicilan lama = evergreening (K6 Q9)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="honest"><strong>Aturan keputusan Character:</strong> satu red flag = pertanyaan yang <strong>wajib dijawab sebelum komite</strong> — bukan alasan menolak, dan bukan alasan mengabaikan. Dua red flag independen yang tidak terjawab = pola, bukan kebetulan — <strong>tolak, atau approve hanya dengan struktur keras</strong> (agunan first-ranking + covenant ketat + monitoring bulanan). Ingat doktrin FSA Lab: <em>"A red flag is a question. Not a conviction."</em> — tapi pertanyaan yang tidak dijawab adalah jawaban.</div>
+  <p>Untuk latihan menulis temuan seperti ini sebagai berkas: <a href="https://fsa-lab.pages.dev/redflag-memo/">Red-Flag Memo Builder FSA Lab</a>.</p>
+</section>
+
+<section class="cd-sec">
+  <div class="decision">
+    <h3>Keputusan K7 — Memo Mini PT Sinar Kemas</h3>
+    <p><strong>Kasus (FIKTIF — PT Sinar Kemas,</strong> lanjutan K1 &amp; K4): setelah update Q1 (DSCR 1,3×, piutang +Rp2,1 miliar, utilisasi revolving 92%, CFO kuartal −30%, direktur keuangan mengundurkan diri), borrower mengajukan <strong>perpanjangan tenor 1 tahun + revolving tambahan Rp2 miliar</strong>. Tulis memo mini sebagai analis:</p>
+    <ul>
+      <li>Rekomendasi: approve / reject / approve dengan struktur — dan 1 kalimat alasannya.</li>
+      <li>Grade internal baru (pakai scorecard §1) + expected loss barunya.</li>
+      <li>Satu red flag Character (§5) yang paling mengkhawatirkan + ujinya.</li>
+      <li>Struktur yang kamu minta bila approve (agunan / covenant / pricing / monitoring).</li>
+    </ul>
+    <div class="verdict-row">
+      <button class="verdict" data-v="approve">APPROVE</button>
+      <button class="verdict" data-v="reject">REJECT</button>
+      <button class="verdict" data-v="restructure">APPROVE DENGAN STRUKTUR</button>
+    </div>
+    <label>Memo minimu:</label>
+    <textarea id="k7-memo" placeholder="Rekomendasi + grade baru + red flag + struktur yang diminta…"></textarea>
+    <div class="btnrow"><button class="btn" id="k7-save">Simpan memo mini →</button><span class="okmsg" id="k7-ok"></span></div>
+    <p style="font-size:.85rem;color:#B9C2D6;margin-top:.8rem">Kunci: <strong>REJECT, atau APPROVE DENGAN STRUKTUR keras</strong>. Scorecard pasca-K4: DSCR 1,3× → skor 2; Character turun ke 3 (CFO resign + transparansi dipertanyakan); total 12 → <strong>Grade 4</strong> (PD ilustratif 1,00%) → expected loss baru = 1,00% × 10% × Rp7 miliar = <strong>Rp7 juta</strong> (dua kali lipat dari Rp3,5 juta). Approve polos = analis yang tidur: DSCR 1,3× hanya 0,05 di atas covenant 1,25×, lima gejala K4 serentak, konsentrasi 70%. Bila approve dengan struktur: agunan first-ranking terverifikasi + covenant DSCR dengan reporting bulanan + pricing mencerminkan Grade 4 + revolving tambahan DITAHAN sampai DSCR kembali ≥ 1,5×.</p>
+  </div>
+</section>
+
+<section class="cd-sec">
+  <h2>Quiz &amp; Gerbang</h2>
+  <p>Butuh ≥80% untuk lulus modul ini — dan modul penutup kurikulum Credit Desk.</p>
+  <div id="quiz-wrap"></div>
+  <div class="btnrow"><button class="btn" id="quiz-submit">Kumpulkan Jawaban</button></div>
+  <div id="gate-box"></div>
+  <p style="margin-top:1.5rem"><a href="/k6/">← K6</a> · <a href="/">Beranda</a> · <a href="/simulator/">Credit Decision Simulator →</a></p>
+</section>
+
+</main>
+
+<footer class="cd-foot">
+  <div class="wrap">
+    <div><strong style="color:#fff">Credit Desk</strong> · <span style="color:var(--amber)">Ukur. Nilai. Putuskan.</span></div>
+    <div><a href="https://fsa-lab.pages.dev/">FSA Lab</a> · <a href="https://fmva-sprint.pages.dev/">FMVA Sprint</a></div>
+  </div>
+</footer>
+
+<script src="/js/parse-id.js"></script>
+<script src="/js/quiz.js"></script>
+<script src="/js/k7.js"></script>
+</body>
+</html>
