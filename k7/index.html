@@ -80,13 +80,14 @@
       <tr><td><strong>Total</strong></td><td>Band: 17–20 → Grade 2 · 13–16 → Grade 3 · 9–12 → Grade 4 · 5–8 → Grade 5</td><td class="num"><strong>14 → Grade 3</strong></td></tr>
     </tbody>
   </table></div>
-  <p>Grade 3 berarti PD ilustratif 0,50%. Rating ini <strong>mengikat ke harga</strong> (K6 Q8): harga = cost of funds + expected loss + biaya operasional &amp; modal + margin. Dengan asumsi ilustratif — cost of funds 6,0%; expected loss = PD × LGD = 0,50% × 40% = 0,20% (LGD 40% asumsi ilustratif; perhitungannya di §2); biaya operasional &amp; modal 1,5%; margin target 1,0% — maka <strong>floor harga = 6,0 + 0,20 + 1,5 + 1,0 = 8,7%</strong>. Bunga 11% yang dikenakan ke Sinar Kemas = floor 8,7% + <strong>premi risiko 2,3 poin persentase</strong> (konsentrasi pelanggan + tenor 3 tahun). Bila grade turun ke Grade 4 (PD 1,00%), expected loss naik ke 0,40% dan floor naik ke 8,9% — harga atau struktur harus menyesuaikan, tidak bisa diam.</p>
+  <p>Band di atas hanya memetakan skor ke <strong>Grade 2–5</strong>. Grade 1, 6, dan 7 tidak terjangkau dari skor 5–20 dan ditentukan di luar scorecard: <strong>Grade 1</strong> hanya lewat override komite (borrower luar biasa kuat — skor tetap dicatat, grade dinaikkan manual dengan justifikasi tertulis); <strong>Grade 6</strong> lewat penurunan manual ke watchlist saat trigger monitoring (K4) terpicu; <strong>Grade 7</strong> otomatis saat default (Kol-5 / Stage 3).</p>
+  <p>Grade 3 berarti PD ilustratif 0,50%. Rating ini <strong>mengikat ke harga</strong> (K6 Q8): harga = cost of funds + expected loss + biaya operasional &amp; modal + margin. Dengan asumsi ilustratif — cost of funds 6,0%; expected loss = PD × LGD = 0,50% × 40% = 0,20% (LGD 40% di sini adalah asumsi pricing yang konservatif — seolah tanpa agunan; §2 menunjukkan agunan menekan LGD Sinar Kemas ke 10%, yang bila dipakai di pricing akan memberi EL 0,05% dan floor 8,55%); biaya operasional &amp; modal 1,5%; margin target 1,0% — maka <strong>floor harga = 6,0 + 0,20 + 1,5 + 1,0 = 8,7%</strong>. Floor 8,7% ini sengaja memakai LGD 40%: harga tidak boleh bergantung pada agunan yang belum tentu bisa dieksekusi — §2 mengukur efek agunan (EL Rp3,5 juta dengan LGD 10%), §1b memberi harga dengan asumsi tanpa agunan. Bunga 11% yang dikenakan ke Sinar Kemas = floor 8,7% + <strong>premi risiko 2,3 poin persentase</strong> (konsentrasi pelanggan + tenor 3 tahun). Bila grade turun ke Grade 4 (PD 1,00%), expected loss naik ke 0,40% dan floor naik ke 8,9% — harga atau struktur harus menyesuaikan, tidak bisa diam.</p>
 </section>
 
 <section class="cd-sec">
   <h2>2 · Recovery, LGD &amp; valuasi agunan</h2>
   <p>Expected loss = PD × LGD × EAD (K6 Q5). PD adalah "seberapa mungkin gagal bayar". <strong>LGD adalah "seberapa besar kerugian bila sudah gagal bayar"</strong> — dan ini satu-satunya komponen yang paling bisa dipengaruhi analis, lewat collateral, senioritas, dan covenant (K6 Q5). LGD = 1 − recovery rate.</p>
-  <p><strong>Contoh terhitung — PT Sinar Kemas (FIKTIF, EAD = fasilitas Rp7 miliar, asumsi fasilitas ditarik penuh).</strong> Agunan gudang + mesin, nilai pasar menurut appraisal Rp10 miliar (K1: nilai likuidasi estimasi Rp10 miliar — di sini dihitung langkah demi langkah dari nilai pasar):</p>
+  <p><strong>Contoh terhitung — PT Sinar Kemas (FIKTIF, EAD = fasilitas Rp7 miliar, asumsi fasilitas ditarik penuh).</strong> Agunan gudang + mesin, nilai pasar menurut appraisal Rp10 miliar. (K1 menyebut Rp10 miliar sebagai estimasi <em>likuidasi</em> — angka itu tidak dipakai ulang di sini: di bawah ini Rp10 miliar adalah nilai <em>pasar</em> menurut appraisal, kebetulan sama besarnya, dan haircut forced sale 30% diterapkan sekali saja atas nilai pasar ini — bukan double-haircut.)</p>
   <div class="tblwrap"><table class="stmt">
     <thead><tr><th>Langkah</th><th>Hitungan</th><th class="num">Rp miliar</th></tr></thead>
     <tbody>
@@ -98,6 +99,7 @@
       <tr><td><strong>LGD</strong></td><td>1 − 90,0%</td><td class="num"><strong>10,0%</strong></td></tr>
     </tbody>
   </table></div>
+  <p>Catatan haircut: 30% di atas adalah angka <em>blended</em> untuk agunan gabungan — gudang (bangunan, 25–35%) mendominasi nilai, mesin (40–50%) porsinya lebih kecil; bila mesin mendominasi, haircut harus naik mendekati 40–50% dan LGD ikut naik.</p>
   <p>Maka expected loss = 0,50% (PD Grade 3) × 10,0% (LGD) × Rp7 miliar = <strong>Rp3,5 juta</strong>. Kecil — karena agunan menutup hampir seluruh eksposur. Tapi angka ini rapuh pada satu asumsi: <strong>senioritas</strong>. Bila agunan yang sama ternyata sudah dijaminkan ke kreditur lain (second ranking) dengan utang senior Rp5 miliar, recovery untuk fasilitas ini = 6,3 − 5,0 = <strong>Rp1,3 miliar</strong> → recovery rate 1,3 ÷ 7 = <strong>18,6%</strong> → LGD = <strong>81,4%</strong> → expected loss = 0,50% × 81,4% × Rp7 miliar = <strong>Rp28,5 juta</strong> — delapan kali lipat. Satu pertanyaan ("apakah agunan ini sudah dijaminkan ke pihak lain?") mengubah LGD dari 10% menjadi 81%. Itulah mengapa K6 Q10 menuntut analis menanyakan prioritas kreditor, bukan sekadar coverage.</p>
   <h3>Menilai agunan — tiga pendekatan, satu disiplin</h3>
   <ul>
@@ -154,7 +156,7 @@
       <tr><td>1 kelompok peminjam, bukan pihak terkait</td><td class="num">25%</td><td class="num">Rp2.500 miliar</td></tr>
     </tbody>
   </table></div>
-  <p>Fasilitas Rp7 miliar untuk Sinar Kemas jauh di bawah BMPK mana pun — BMPK tidak mengikat satu pinjaman kecil. BMPK mengikat di <strong>level portofolio</strong>: 10 borrower grup yang sama, masing-masing Rp2.000 miliar, sudah menyentuh batas kelompok. Analis yang hanya melihat satu file tidak melihat BMPK; analis yang melihat portofolio melihatnya. Catatan: angka di atas untuk <strong>Bank Umum</strong> — BPR diatur terpisah (POJK 23/2022: 20% satu peminjam, 30% satu kelompok, 10% pihak terkait). Jangan campur keduanya.</p>
+  <p>Fasilitas Rp7 miliar untuk Sinar Kemas jauh di bawah BMPK mana pun — BMPK tidak mengikat satu pinjaman kecil. BMPK mengikat di <strong>level portofolio</strong>: 10 borrower grup yang sama, masing-masing Rp250 miliar, sudah menyentuh batas kelompok (10 × 250 = Rp2.500 miliar = batas 25%). Analis yang hanya melihat satu file tidak melihat BMPK; analis yang melihat portofolio melihatnya. Catatan: angka di atas untuk <strong>Bank Umum</strong> — BPR diatur terpisah (POJK 23/2022: 20% satu peminjam, 30% satu kelompok, 10% pihak terkait). Jangan campur keduanya.</p>
   <div class="honest"><strong>Yang sering salah dipahami:</strong> kategori regulator (Kol-1 s.d. Kol-5) <strong>bukan</strong> rating internal (Grade 1–7 di §1). Keduanya mengukur hal yang sama — kualitas borrower — dari dua sudut yang berbeda. Bila rating internalmu bilang Grade 3 sementara kolektibilitasnya sudah Kol-3, salah satu dari keduanya salah. Rekonsiliasi keduanya adalah pekerjaan analis, bukan pekerjaan auditor.</div>
 </section>
 
@@ -166,12 +168,12 @@
   <div class="tblwrap"><table class="stmt">
     <thead><tr><th>Skenario</th><th>CFO</th><th>DSCR</th><th>Bacaan</th></tr></thead>
     <tbody>
-      <tr><td><strong>Base</strong></td><td class="num">Rp4,5 miliar</td><td class="num">1,6×</td><td>Sehat; headroom 0,35 di atas covenant</td></tr>
+      <tr><td><strong>Base</strong></td><td class="num">Rp4,5 miliar</td><td class="num">1,6×</td><td>Sehat; headroom 0,32 di atas covenant</td></tr>
       <tr><td><strong>CFO −25%</strong> (pelanggan besar menunda bayar)</td><td class="num">Rp3,375 miliar</td><td class="num">1,18×</td><td><strong>Breach covenant 1,25×</strong> — waiver / renegosiasi</td></tr>
       <tr><td><strong>CFO −40%</strong> (dua pelanggan menunda + margin turun)</td><td class="num">Rp2,7 miliar</td><td class="num">0,94×</td><td><strong>Di bawah 1,0× — arus kas tidak cukup membayar utang</strong></td></tr>
     </tbody>
   </table></div>
-  <p><em>Reverse stress test:</em> berapa penurunan CFO yang membuat DSCR tepat 1,0×? CFO impas = anuitas = Rp2,86 miliar → penurunan yang ditahan = (4,5 − 2,86) ÷ 4,5 = <strong>36,4%</strong>. Artinya Sinar Kemas tahan guncangan CFO sampai −36% sebelum benar-benar tidak bisa membayar — tapi covenant-nya sudah jebol di −22% (CFO Rp3,5 miliar → DSCR 1,22×). Covenant memang dirancang jebol <em>lebih dulu</em> daripada default: itulah fungsi peringatan dininya (K3).</p>
+  <p><em>Reverse stress test:</em> berapa penurunan CFO yang membuat DSCR tepat 1,0×? CFO impas = anuitas = Rp2,86 miliar → penurunan yang ditahan = (4,5 − 2,86) ÷ 4,5 = <strong>36,4%</strong>. Artinya Sinar Kemas tahan guncangan CFO sampai −36% sebelum benar-benar tidak bisa membayar — tapi covenant-nya sudah jebol di ≈ −21% (CFO Rp3,575 miliar → DSCR tepat 1,25×). Covenant memang dirancang jebol <em>lebih dulu</em> daripada default: itulah fungsi peringatan dininya (K3).</p>
   <h3>4b · Stress portofolio — 10 fasilitas (FIKTIF, ilustratif)</h3>
   <p>Portofolio contoh: 10 fasilitas, total EAD Rp100 miliar. Shock diterapkan serentak — resesi menaikkan PD <em>dan</em> LGD <em>dan</em> EAD (debitur menarik limit undrawn) sekaligus:</p>
   <div class="tblwrap"><table class="stmt">
@@ -182,7 +184,7 @@
       <tr><td><strong>Severe</strong> (resesi dalam)</td><td class="num">4,0%</td><td class="num">55%</td><td class="num">Rp105 miliar</td><td class="num">Rp2,31 miliar</td></tr>
     </tbody>
   </table></div>
-  <p>Expected loss severe = 105 × 4,0% × 55% = <strong>Rp2,31 miliar</strong> — <strong>2,89×</strong> dari base (Rp0,80 miliar). Tiga tuas bergerak bersamaan, jadi kerugian naik hampir tiga kali lipat meski tiap tuas hanya naik 1,5–2×. Itulah mengapa stress test tidak boleh men-shock satu variabel saja. Dampak lanjutannya: 2 dari 10 fasilitas bermigrasi Stage 1 → Stage 2 (K4) — CKPN-nya berubah dari 12-bulan menjadi lifetime, dan beban provisi kuartal itu naik sebelum satu pun NPL muncul.</p>
+  <p>Expected loss severe = 105 × 4,0% × 55% = <strong>Rp2,31 miliar</strong> — <strong>2,89×</strong> dari base (Rp0,80 miliar). Tiga tuas bergerak bersamaan, jadi kerugian naik hampir tiga kali lipat meski tiap tuas naik dengan besaran berbeda — PD 2,0×, LGD 1,375×, EAD 1,05× — dan perkalian ketiganya (2,0 × 1,375 × 1,05 = 2,89×) yang mendorong EL dari Rp0,80 miliar ke Rp2,31 miliar. Itulah mengapa stress test tidak boleh men-shock satu variabel saja. Dampak lanjutannya: 2 dari 10 fasilitas bermigrasi Stage 1 → Stage 2 (K4) — CKPN-nya berubah dari 12-bulan menjadi lifetime, dan beban provisi kuartal itu naik sebelum satu pun NPL muncul. PPKA (§3a) dan CKPN adalah dua jalur menuju angka penyisihan yang sama: PPKA mengukurnya dari kolektibilitas (sisi regulator), CKPN dari staging (sisi akuntansi PSAK 71).</p>
   <div class="honest"><strong>Aturan meja stress test:</strong> stress test yang tidak mengubah keputusan adalah hiasan. Setiap skenario harus berujung pada aksi: turunkan limit, naikkan pricing, perketat covenant, atau tambah monitoring. Kalau hasil severe tidak mengubah apa pun, skenarionya terlalu ringan — atau analisnya tidak berani.</div>
 </section>
 
