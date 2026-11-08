@@ -141,9 +141,9 @@ check("6c MF-1 ruang bunga 10 -> 16/thn, bunga 20 -> 24/thn", "16/thn" in k2 and
 check("6d MF-1 vonis tak dapat dibuktikan + gap note", "TIDAK dapat dibuktikan dari data yang diberikan" in k2
       and "Catatan gap" in k2 and "TIDAK DAPAT DIPUTUSKAN" in k2)
 check("6e MF-2 horizon TTM didefinisikan", "trailing-12-bulan (TTM)" in k4 and "bukan angka kuartal mentah" in k4)
-check("6f MF-2 CFO -30% lama hilang, -17% hadir",
-      "Arus kas operasi kuartal ini turun 30%" not in k4 and "turun <strong>17%</strong>" in k4
-      and "CFO kuartal −30%" not in read("k7/index.html") and "CFO trailing-12-bulan −17%" in read("k7/index.html"))
+check("6f MF-2 CFO -30% lama hilang, -17,3% hadir",
+      "Arus kas operasi kuartal ini turun 30%" not in k4 and "turun <strong>17,3%</strong>" in k4
+      and "CFO kuartal −30%" not in read("k7/index.html") and "CFO trailing-12-bulan −17,3%" in read("k7/index.html"))
 check("6g SF-1 frasa 'ke arah bahaya' (bukan menjauhi)",
       "menjauhi arah bahaya" not in BLOB and "ke arah bahaya" in read("k3/index.html")
       and "threshold digeser ke arah bahaya" in read("js/k3.js"))
@@ -170,6 +170,48 @@ check("6p hitung ulang: CFO TTM -17,3%; DSCR TTM 1,57x",
 check("6q do-not-flag: NIM 7,74% tak disentuh (ROE KLBF 14,66% tidak ada di repo ini — angka FSA, bukan Credit)",
       "7,74%" in read("k5/index.html"))
 check("6r definisi kanonik kas tersedia bertahan", "(CFO + bunga kas − capex maintenance)" in k2)
+
+# --- 7. Fix ronde 7 (Terra, 0 must + 2 should + 4 nit) ---
+k1 = read("k1/index.html")
+k3 = read("k3/index.html")
+k5 = read("k5/index.html")
+check("7a SF-1 K1 DSCR 1,84x berlabel sebelum capex maintenance",
+      "sebelum capex maintenance" in k1 and "1,84×" in k1
+      and "capex maintenance belum diberikan" in k1)
+check("7b SF-2 formula rate tanpa fees; fee di luar suku bunga",
+      "All-in lending rate = cost of funds + risk premium" in k3
+      and "Fees (di luar suku bunga)" in k3
+      and "tidak dijumlahkan" in k3)
+check("7c SF-2 formula lama hilang repo-wide (HTML+JS)",
+      "Pricing = cost of funds + risk premium + fees" not in BLOB)
+check("7d SF-2 kuis K3 opsi benar = rate saja, fee terpisah",
+      "dihitung terpisah, bukan dijumlah ke rate" in read("js/k3.js"))
+check("7e N-1 K4 17,3% konsisten, tak ada 17% bulat tersisa",
+      "turun <strong>17%</strong>" not in k4 and "turun 17% " not in k4
+      and k4.count("17,3%") >= 3 and "−17,3%" in k4)
+check("7f N-2 K5 coverage 59,0x mengulang basis EBIT di Q1 + alasan",
+      "coverage 59,0× (basis EBIT)" in k5 and "coverage 59,0× basis EBIT" in k5)
+check("7g N-3 monitoring: label DSCR basis EBITDA di baris hasil + narasi",
+      "DSCR — basis EBITDA (covenant" in read("js/monitoring.js")
+      and "DSCR (basis EBITDA) 1,76" in read("js/monitoring.js")
+      and "DSCR (basis EBITDA) 0,72" in read("js/monitoring.js"))
+check("7h N-3 covenant-designer: label basis EBITDA di baris hasil DSCR/IC",
+      '(id==="dscr"||id==="ic") ? " (basis EBITDA)" : ""' in read("js/covenant-designer.js")
+      and "basis EBITDA ÷ debt service" in read("covenant-designer/index.html"))
+check("7i N-3 simulator: kunci A/C menyebut basis EBITDA",
+      "DSCR (basis EBITDA) 3,04" in read("js/simulator.js")
+      and "DSCR (basis EBITDA) 0,30" in read("js/simulator.js"))
+check("7j N-4 headroom = persen relatif vs base, bukan selisih absolut",
+      "Headroom relatif vs base" in read("js/covenant-designer.js")
+      and "persen relatif vs base" in read("covenant-designer/index.html")
+      and "bukan selisih rasio absolut" in read("covenant-designer/index.html"))
+check("7k K2 vonis kanonis TIDAK DAPAT DIPUTUSKAN bertahan; batas atas/robust hanya negasi",
+      "TIDAK DAPAT DIPUTUSKAN" in k2 and "BUKAN batas atas" in k2
+      and "tidak robust" in k2 and "batas atas" not in read("js/k2.js")
+      and "robust" not in read("js/k2.js"))
+check("7l hitung ulang: DSCR 1,84x; CFO -17,3%; KLBF 59,0x",
+      close((4.5 + 0.77) / 2.86, 1.84, 0.01) and close((4.5 - 3.72) / 4.5 * 100, 17.3, 0.1)
+      and close(4080 / 69.2, 59.0, 0.05))
 
 print(f"PASS {len(passes)}/{len(passes) + len(fails)}")
 for f in fails:

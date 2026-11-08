@@ -13,7 +13,7 @@ var BORROWERS = {
       "Industri defensif (makanan pokok) — permintaan stabil.",
       "Manajemen: pendiri masih aktif, suksesi jelas."],
     calc: { dscr: 3.04, debtEbitda: 1.18, ic: 10.63 },
-    key: { decision: "approve", why: "DSCR 3,04x, Debt/EBITDA 1,18x, CFO kuat 140 vs debt service 56. Kapasitas utang masih besar." },
+    key: { decision: "approve", why: "DSCR (basis EBITDA) 3,04×, Debt/EBITDA 1,18×, CFO kuat 140 vs debt service 56. Kapasitas utang masih besar." },
     term: { plafonMax: 310, pricingMin: 1.0, covNeed: ["dscr"] },
     comm: [
       { q: "Berapa DSCR (basis EBITDA)? (x)", ans: 3.04, tol: 0.1, why: "170 ÷ 56 = 3,04x (basis EBITDA, konvensi covenant). Basis CFO: 140 ÷ 56 = 2,50x — tetap kuat." },
@@ -55,7 +55,7 @@ var BORROWERS = {
       "Proyek macet 2 lokasi; pendapatan turun 30% YoY.",
       "Modal kerja negatif — liabilitas lancar > aset lancar."],
     calc: { dscr: 0.30, debtEbitda: 12.5, ic: 0.67 },
-    key: { decision: "reject", why: "DSCR 0,30x — EBITDA tidak menutup sepertiga cicilan. CFO negatif. Debt/EBITDA 12,5x. Ini bukan underwriting, ini donasi." },
+    key: { decision: "reject", why: "DSCR (basis EBITDA) 0,30× — EBITDA tidak menutup sepertiga cicilan. CFO negatif. Debt/EBITDA 12,5×. Ini bukan underwriting, ini donasi." },
     term: null,
     comm: [
       { q: "Berapa DSCR (basis EBITDA)? (x)", ans: 0.30, tol: 0.05, why: "36 ÷ 120 = 0,30x (basis EBITDA). Basis CFO: −20 ÷ 120 = negatif — kas operasi pun tidak ada." },

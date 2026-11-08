@@ -79,16 +79,19 @@ $("#run-stress").addEventListener("click", function(){
   }
   var scenNames = Object.keys(SCEN);
   var h = "<tr><th>Covenant</th><th class='num'>Threshold</th>";
-  scenNames.forEach(function(s){ h += "<th class='num'>"+s+" (aktual)</th><th class='num'>Headroom</th>"; });
+  scenNames.forEach(function(s){ h += "<th class='num'>"+s+" (aktual)</th><th class='num'>Headroom relatif vs base</th>"; });
   h += "</tr>";
   var breachCount = {}, firstBreach = {};
   sel.forEach(function(id){
     var c = COVENANTS.filter(function(x){return x.id===id;})[0];
-    h += "<tr><td>"+c.label+"</td><td class='num'>"+fmtID(th[id],2)+c.unit+"</td>";
+    var basis = (id==="dscr"||id==="ic") ? " (basis EBITDA)" : "";
+    h += "<tr><td>"+c.label+basis+"</td><td class='num'>"+fmtID(th[id],2)+c.unit+"</td>";
     scenNames.forEach(function(s){
       var a = c.fn(SCEN[s]);
-      /* Headroom vs angka BASE (K3 §2) — bukan vs threshold: minimum = (aktual − threshold) ÷ base;
-         maksimum = (threshold − aktual) ÷ base. Penyebut yang sama di semua covenant. */
+      /* Headroom RELATIF vs angka BASE (K3 §2) — bukan vs threshold dan bukan
+         selisih absolut (aktual − threshold): minimum = (aktual − threshold) ÷ base;
+         maksimum = (threshold − aktual) ÷ base. Penyebut yang sama di semua covenant.
+         Kolom hasil memakai persen relatif, bukan selisih rasio absolut. */
       var base = c.fn(SCEN.Base);
       var hr = c.type==="min" ? (a-th[id])/base : (th[id]-a)/base;
       var breach = hr < 0;
