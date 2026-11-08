@@ -9,10 +9,18 @@
      severe 2,89x, NIM BBRI 7,74% [DIUNGKAP BANK])
   4. Angka baru ronde 5 terhitung ulang independen
   5. Sintaks JS valid (node --check) + struktur kunci Simulator B = reject
+  8. Fix ronde 8 — GG-10 parser numerik dua arah (tolak malformed + terima
+     valid, dieksekusi node dari KEDUA salinan) + kunci dedup SF-1
+     (parseIDNumber byte-identik common.js vs parse-id.js) + label NIT-1.
+     §8 mengunci KELAS, bukan hanya contoh: tabel tetap 38 kasus + uji
+     properti generatif (seed tetap) yang membangkitkan ribuan/malformed
+     dari aturan umum parser. Keterbatasan: format valid di luar pola umum
+     (mis. pemisah selain titik/koma/spasi) tidak tercakup — tambah ke
+     generator bila muncul.
 Jalankan: python3 qa/qa_credit_r5.py  (dari root repo credit-desk)
 Exit 0 = semua PASS.
 """
-import re, subprocess, sys
+import json, math, os, re, subprocess, sys, tempfile
 from pathlib import Path
 
 ROOT = Path.home() / "workspace" / "credit-desk"
@@ -212,6 +220,168 @@ check("7k K2 vonis kanonis TIDAK DAPAT DIPUTUSKAN bertahan; batas atas/robust ha
 check("7l hitung ulang: DSCR 1,84x; CFO -17,3%; KLBF 59,0x",
       close((4.5 + 0.77) / 2.86, 1.84, 0.01) and close((4.5 - 3.72) / 4.5 * 100, 17.3, 0.1)
       and close(4080 / 69.2, 59.0, 0.05))
+
+# --- 8. Fix ronde 8 — GG-10 parser numerik dua arah + dedup SF-1 + NIT-1 ---
+# GG-10: guard lama hanya menguji penolakan (R7 Investment F1 mengetatkan parser
+# ke arah tolak-malformed). R8 MF-1 membuktikan sisi penerimaan bolong:
+# "10.000.000"/"1.234.567" valid ditolak jadi NaN. Guard ini mengeksekusi
+# parseIDNumber ASLI (verbatim dari file) di node, dari KEDUA salinan, untuk
+# KEDUA arah — terima valid + tolak malformed — plus kunci dedup SF-1.
+def _extract_parser(src):
+    m = re.search(r"function parseIDNumber[\s\S]*?\n\}", src)
+    return m.group(0) if m else None
+
+def _run_parser(fn_src, cases):
+    payload = json.dumps([[s, d] for (s, d, _e) in cases])
+    js = (fn_src + "\nconst CASES=" + payload + ";\n"
+          "const OUT=CASES.map(function(c){var v=parseIDNumber(c[0],c[1]);"
+          "return Number.isNaN(v)?null:v;});\nconsole.log(JSON.stringify(OUT));\n")
+    fd, tmp = tempfile.mkstemp(suffix=".js", dir="/tmp")
+    try:
+        with os.fdopen(fd, "w") as f:
+            f.write(js)
+        r = subprocess.run(["node", tmp], capture_output=True, text=True)
+        if r.returncode != 0:
+            return None, r.stderr.strip()[:200]
+        return json.loads(r.stdout.strip()), ""
+    finally:
+        os.unlink(tmp)
+
+_fn_common = _extract_parser(read("js/common.js"))
+_fn_parseid = _extract_parser(read("js/parse-id.js"))
+check("8a parseIDNumber ada di js/common.js", _fn_common is not None)
+check("8b parseIDNumber ada di js/parse-id.js", _fn_parseid is not None)
+check("8c SF-1 dedup: fungsi parseIDNumber byte-identik common.js vs parse-id.js",
+      _fn_common is not None and _fn_common == _fn_parseid)
+
+# Tabel kasus: (input, isDecimal, expected) — expected None = NaN
+_PARSER_CASES = [
+    # TERIMA — angka Indonesia valid (MF-1 + regresi format yang sudah benar)
+    ("10.000.000", False, 10000000),   # MF-1: ribuan bertingkat tanpa koma
+    ("1.234.567", False, 1234567),     # MF-1
+    ("10.000.000", True, 10000000),    # MF-1, mode desimal
+    ("1.234.567", True, 1234567),      # MF-1, mode desimal
+    ("1.234.567.890", False, 1234567890),
+    ("1.234.567.890", True, 1234567890),
+    ("-10.000.000", False, -10000000),
+    ("-1.234.567", False, -1234567),
+    ("+10.000.000", False, 10000000),
+    ("1.234.567,89", False, 1234567.89),
+    ("1.234.567,89", True, 1234567.89),
+    ("1.234,56", False, 1234.56),
+    ("1.234,56", True, 1234.56),
+    ("1.000", False, 1000),
+    ("2.26", False, 2.26),
+    ("1.234", True, 1.234),   # mode desimal: satu titik = desimal, BUKAN ribuan
+    ("10.000", True, 10),     # idem — jangan sampai fix MF-1 mengubahnya
+    ("0.000", False, 0),      # MF-2 REFUTED R8: 0.xxx selalu desimal -> 0, bukan NaN
+    ("0.000", True, 0),       # idem
+    (" 1.234,56 ", False, 1234.56),  # trim luar tetap jalan
+    ("123,45", False, 123.45),
+    ("123,45", True, 123.45),
+    # TOLAK — malformed -> NaN
+    ("1.2.3", False, None),   # F3: kelompok bukan 3 digit
+    ("1.2.3", True, None),
+    ("1.234.56", False, None),
+    ("1234.567.890", False, None),  # kelompok pertama 4 digit
+    ("1,2,3", False, None),   # koma ganda (dulu lolos diam-diam jadi 1.2 via parseFloat)
+    ("1,2,3", True, None),
+    ("1 234,56", False, None),  # N-1: spasi internal kini ditolak
+    ("1 000", False, None),     # N-1
+    ("1 234,56", True, None),   # N-1, mode desimal
+    ("abc", False, None),
+    ("", False, None),
+    ("1.2.3.4", False, None),
+    ("0.000.000", False, None),  # aturan lama "0.xxx selalu desimal" (2 titik -> NaN)
+    ("1..234", False, None),
+    ("--1", False, None),
+    ("1-2", False, None),
+]
+_results = {}
+_run_err = ""
+for _label, _fn in (("common.js", _fn_common), ("parse-id.js", _fn_parseid)):
+    if _fn is None:
+        continue
+    _out, _err = _run_parser(_fn, _PARSER_CASES)
+    if _out is None:
+        _run_err += f"{_label}: {_err}; "
+    else:
+        _results[_label] = _out
+if not _results:
+    check("8d node eksekusi parseIDNumber dari kedua file", False, _run_err)
+else:
+    for _i, (_s, _d, _exp) in enumerate(_PARSER_CASES):
+        _want = "NaN" if _exp is None else _exp
+        _bad = []
+        for _label, _out in _results.items():
+            _got = _out[_i]
+            _ok = (_got is None and _exp is None) or (
+                _got is not None and _exp is not None and abs(_got - _exp) < 1e-9)
+            if not _ok:
+                _bad.append(f"{_label}={_got}")
+        check(f"8e parser {(_s, 'des' if _d else 'int')} -> {_want}", not _bad, "; ".join(_bad))
+
+# 8k/8l — kunci KELAS (bukan hanya contoh ronde ini): bangkitkan kasus secara
+# programatik dari ATURAN UMUM parser, seed tetap (deterministik). Aturan umum:
+# (a) ribuan bertingkat valid = kelompok pertama 1-3 digit + tiap kelompok
+# berikut tepat 3 digit, tanpa koma desimal; (b) satu titik di mode desimal =
+# desimal, bukan ribuan; (c) malformed apa pun (kelompok bukan 3 digit, koma
+# ganda, spasi internal) -> NaN. Bila format valid baru muncul di luar pola
+# ini, tambah ke generator — bukan hanya ke tabel tetap di atas.
+import random as _random
+_rng = _random.Random(20261108)
+_gen_valid, _gen_bad = [], []
+for _ in range(20):
+    _head = str(_rng.randint(1, 999))  # 1-3 digit, bukan 0 (aturan 0.xxx)
+    _ng = _rng.randint(2, 4)
+    _gr = ["%03d" % _rng.randint(0, 999) for _ in range(_ng)]
+    _s = _head + "." + ".".join(_gr)
+    _val = int(_head + "".join(_gr))
+    _gen_valid += [(_s, False, _val), (_s, True, _val)]
+    if _rng.random() < 0.5:  # varian berkoma desimal
+        _dec = "%02d" % _rng.randint(0, 99)
+        _fv = _val + float("0." + _dec)
+        _gen_valid += [(_s + "," + _dec, False, _fv), (_s + "," + _dec, True, _fv)]
+for _ in range(20):
+    _head = str(_rng.randint(1, 999))
+    _ng = _rng.randint(2, 3)
+    _gr = ["%03d" % _rng.randint(0, 999) for _ in range(_ng)]
+    _bi = _rng.randrange(_ng)
+    _gr[_bi] = "".join(str(_rng.randint(0, 9)) for _ in range(_rng.choice([1, 2, 4, 5])))
+    _s = _head + "." + ".".join(_gr)
+    _gen_bad += [(_s, False, None), (_s, _rng.choice([True, False]), None)]
+for _ in range(10):
+    _a, _b, _c = str(_rng.randint(1, 999)), str(_rng.randint(1, 999)), str(_rng.randint(1, 99))
+    _gen_bad += [(f"{_a},{_b},{_c}", False, None), (f"{_a} {_b},{_c}", False, None)]
+for _tag, _cases in (("8k gen-valid", _gen_valid), ("8l gen-malformed", _gen_bad)):
+    _bad = []
+    for _label, _fn in (("common.js", _fn_common), ("parse-id.js", _fn_parseid)):
+        if _fn is None:
+            continue
+        _out, _err = _run_parser(_fn, _cases)
+        if _out is None:
+            _bad.append(f"{_label} node-gagal: {_err}")
+            continue
+        for _i, (_s, _d, _exp) in enumerate(_cases):
+            _got = _out[_i]
+            _ok = (_got is None and _exp is None) or (
+                _got is not None and _exp is not None and abs(_got - _exp) < 1e-6)
+            if not _ok:
+                _bad.append(f"{_label} {(_s, 'des' if _d else 'int')} mau "
+                            f"{'NaN' if _exp is None else _exp} dapat {_got}")
+    check(f"{_tag}: {_cases and len(_cases)} kasus generatif lolos di kedua salinan",
+          not _bad, "; ".join(_bad[:3]))
+
+# NIT-1 — label ambang Monitoring Drill: 75% adalah akibat pembulatan, bukan ambang kedua
+_mon = read("monitoring/index.html")
+check("8f NIT-1 frasa lama '(75% efektif)' hilang repo-wide", "(75% efektif)" not in BLOB)
+check("8g NIT-1 label baru: 75% dijelaskan sebagai akibat pembulatan, bukan ambang",
+      "bukan ambang 75%" in _mon and "pembulatan" in _mon)
+check("8h NIT-1 ambang tetap ≥70% + lulus ≥9", "≥70%" in _mon and "lulus ≥9" in _mon)
+check("8i NIT-1 hitung ulang: ceil(12×0,7)=9; 9/12=75%",
+      math.ceil(12 * 0.7) == 9 and abs(9 / 12 - 0.75) < 1e-9)
+check("8j monitoring.js tetap pakai Math.ceil(max*0.7)",
+      "Math.ceil(max*0.7)" in read("js/monitoring.js"))
 
 print(f"PASS {len(passes)}/{len(passes) + len(fails)}")
 for f in fails:
