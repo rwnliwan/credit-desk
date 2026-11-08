@@ -58,6 +58,7 @@
         var labels = box.querySelectorAll(".opt");
         for(var j=0;j<labels.length;j++){
           var o = +labels[j].getAttribute("data-o");
+          labels[j].classList.remove("right","wrong");
           if(o === Q[i].ans) labels[j].classList.add("right");
           else if(o === picked) labels[j].classList.add("wrong");
         }

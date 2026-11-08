@@ -7,7 +7,7 @@
      ans:1,
      why:"Covenant yang baik = early warning system. Pelanggaran technical breach membuka negosiasi (waiver/cure), bukan langsung krisis."},
     {q:"Threshold covenant yang BENAR ditetapkan dengan cara:",
-     opts:["Proyeksi wajar − headroom untuk semua covenant","Proyeksi wajar + headroom untuk semua covenant","Covenant minimum: proyeksi − headroom; covenant maksimum: proyeksi + headroom (threshold digeser menjauhi arah bahaya)","Menyalin threshold bank kompetitor"],
+     opts:["Proyeksi wajar − headroom untuk semua covenant","Proyeksi wajar + headroom untuk semua covenant","Covenant minimum: proyeksi − headroom; covenant maksimum: proyeksi + headroom (threshold digeser ke arah bahaya sejauh headroom)","Menyalin threshold bank kompetitor"],
      ans:2,
      why:"DSCR 1,25 dari proyeksi 1,84 = headroom 32% ke bawah; D/E 1,8 dari proyeksi 1,5 = +20% ke atas; current ratio 1,4 dari 1,8 = 22% ke bawah. Aturan lama 'proyeksi − headroom' hanya benar untuk covenant minimum — untuk covenant maksimum arahnya terbalik."},
     {q:"Perbedaan technical breach vs payment default:",

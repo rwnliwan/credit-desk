@@ -11,17 +11,17 @@
      ans:1,
      why:"Laba kertas tanpa kas = capacity yang dilaporkan melebih-lebihkan capacity sebenarnya. Bukan vonis gagal bayar — tapi wajib diinvestigasi."},
     {q:"Debt capacity dihitung dengan cara:",
-     opts:["Total aset dikurangi total utang existing","CFO normalisasi ÷ DSCR minimum, dikurangi debt service existing","EBITDA dikali 5 (aturan praktis)","Ekuitas dikali 2"],
+     opts:["Total aset dikurangi total utang existing","(CFO normalisasi + bunga kas − capex maintenance) ÷ DSCR minimum, dikurangi debt service existing","EBITDA dikali 5 (aturan praktis)","Ekuitas dikali 2"],
      ans:1,
-     why:"Kapasitas utang = level utang maksimum di mana borrower tetap memenuhi DSCR minimum. Ini pagar, bukan valuasi. Rumus lengkapnya memakai (CFO + bunga kas − capex maintenance) ÷ DSCR minimum — pajak kas tidak ditambah atau dikurang lagi (sudah neto di CFO); bila rincian itu tak tersedia, CFO ÷ DSCR minimum adalah pendekatan sementara, bukan batas bawah yang terbukti (DSCR sejati bisa lebih rendah bila capex > bunga kas)."},
+     why:"Kapasitas utang = level utang maksimum di mana borrower tetap memenuhi DSCR minimum. Ini pagar, bukan valuasi. Rumus lengkapnya memakai (CFO + bunga kas − capex maintenance) ÷ DSCR minimum — pajak kas tidak ditambah atau dikurang lagi (sudah neto di CFO); bila rincian itu tak tersedia, CFO ÷ DSCR minimum hanyalah pendekatan sementara, bukan batas bawah yang terbukti (DSCR sejati bisa lebih rendah bila capex > bunga kas). Perhatikan: hasil rumus ini adalah ruang debt service TAHUNAN, bukan langsung saldo pinjaman maksimum — konversi ke saldo pinjaman masih butuh tenor dan bunga (anuitas), seperti di K2 §2 langkah 4–5."},
     {q:"Mengapa analis kredit curiga pada EBITDA mentah untuk mengukur kemampuan bayar?",
      opts:["EBITDA terlalu sulit dihitung","EBITDA mengabaikan modal kerja, pajak, dan bunga — komponen yang justru menentukan kas tersedia","EBITDA selalu negatif untuk perusahaan sehat","EBITDA hanya berlaku untuk bank"],
      ans:1,
      why:"EBITDA = laba sebelum banyak hal yang justru harus dibayar. Lender yang memakai EBITDA mentah untuk DSCR menipu dirinya sendiri."},
     {q:"CFO normalisasi memakai rata-rata 3 tahun (bukan tahun terakhir saja) karena:",
-     opts:["Agar angkanya terlihat lebih besar","Untuk membuang one-off dan melihat kas yang berkelanjutan","Regulator mewajibkan tepat 3 tahun","Tahun terakhir selalu salah"],
+     opts:["Agar angkanya terlihat lebih besar","Untuk melihat kas yang berkelanjutan — rata-rata 3 tahun menyebarkan dampak one-off, tetapi one-off tetap harus diidentifikasi dan dikeluarkan secara eksplisit","Regulator mewajibkan tepat 3 tahun","Tahun terakhir selalu salah"],
      ans:1,
-     why:"Satu tahun bisa mengandung one-off (penjualan aset, restitusi pajak). Kapasitas utang harus berdiri di atas kas yang berulang, bukan kebetulan."}
+     why:"Satu tahun bisa mengandung one-off (mis. restitusi pajak satu kali). Rata-rata 3 tahun hanya menyebarkan dampak one-off ke tiga tahun — ia TIDAK membuangnya; normalisasi tetap menuntut identifikasi dan penyesuaian item nonberulang secara eksplisit. Catatan: hasil penjualan aset bukan contoh one-off CFO — itu arus kas investasi (CFI), bukan komponen CFO. Kapasitas utang harus berdiri di atas kas yang berulang, bukan kebetulan."}
   ];
   window.CD_GATE = "cd_gate_k2";
   window.CDQuiz.init();

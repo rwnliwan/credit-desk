@@ -21,7 +21,7 @@ var COVENANTS = [
   { id: "de", label: "Debt / Equity maksimum", type: "max", unit: "x", sug: 0.9,
     fn: function(s){ return s.debt / s.equity; },
     desc: "Total utang ÷ ekuitas." },
-  { id: "nw", label: "Net worth minimum", type: "min", unit: "Rp M", sug: 340,
+  { id: "nw", label: "Net worth minimum", type: "min", unit: "Rp miliar", sug: 340,
     fn: function(s){ return s.equity; },
     desc: "Ekuitas minimum — pagar agar pemilik tidak menguras modal." }
 ];
