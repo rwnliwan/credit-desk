@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>K7 · Memo, Rating &amp; Regulasi · Credit Desk</title>
-<meta name="description" content="K7 Credit Desk: menulis credit memo, skala rating internal, matematika recovery/LGD dan valuasi agunan, kerangka regulasi Indonesia (POJK 40/2019, PSAK 71, BMPK), stress testing portofolio, dan kerangka Character/red flag.">
+<meta name="description" content="K7 Credit Desk: menulis credit memo, skala rating internal, matematika recovery/LGD dan valuasi agunan, kerangka regulasi Indonesia (POJK 40/2019, PSAK 109 (IFRS 9), BMPK), stress testing portofolio, dan kerangka Character/red flag.">
 <link rel="canonical" href="https://credit-desk-afy.pages.dev/k7/">
 <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -28,9 +28,9 @@
     <h3>Prasyarat &amp; rujukan (tidak diulang di sini)</h3>
     <ul>
       <li><strong>Kerangka 5C+1 &amp; kasus PT Sinar Kemas:</strong> <a href="/k1/">K1</a> — semua contoh di modul ini memakai borrower fiktif yang sama.</li>
-      <li><strong>DSCR &amp; debt capacity:</strong> <a href="/k2/">K2</a> — angka DSCR 1,6× dan anuitas ≈Rp2,9 miliar/tahun dipakai lagi di §1 dan §4.</li>
+      <li><strong>DSCR &amp; debt capacity:</strong> <a href="/k2/">K2</a> — angka DSCR 1,6× dan anuitas Rp2,86 miliar/tahun (≈Rp2,9 miliar) dipakai lagi di §1 dan §4.</li>
       <li><strong>Covenant &amp; headroom:</strong> <a href="/k3/">K3</a> — threshold DSCR ≥ 1,25×, D/E ≤ 1,8×, CR ≥ 1,4×.</li>
-      <li><strong>Staging PSAK 71 &amp; monitoring:</strong> <a href="/k4/">K4</a> — update Q1 Sinar Kemas (DSCR 1,3×) menjadi bahan §1 dan Keputusan K7.</li>
+      <li><strong>Staging PSAK 109 (IFRS 9, dahulu PSAK 71) &amp; monitoring:</strong> <a href="/k4/">K4</a> — update Q1 Sinar Kemas (DSCR 1,3×) menjadi bahan §1 dan Keputusan K7.</li>
       <li><strong>PD, LGD, EAD &amp; pricing:</strong> <a href="/k6/">K6</a> Q5 &amp; Q8 — rumus expected loss dan komponen harga pinjaman.</li>
     </ul>
   </div>
@@ -122,13 +122,13 @@
 </section>
 
 <section class="cd-sec">
-  <h2>3 · Kerangka regulasi Indonesia — POJK, PSAK 71 &amp; BMPK</h2>
+  <h2>3 · Kerangka regulasi Indonesia — POJK, PSAK 109 (IFRS 9) &amp; BMPK</h2>
   <p>Analis kredit di Indonesia bekerja di dalam tiga kerangka regulator yang saling mengunci. Bukan untuk dihafal pasalnya — tapi untuk dipahami logikanya, karena ketiganya menentukan apa yang boleh kamu putuskan dan bagaimana keputusanmu diaudit.</p>
   <div class="tblwrap"><table class="stmt">
     <thead><tr><th>Kerangka</th><th>Yang diatur</th><th>Yang harus dipahami analis</th></tr></thead>
     <tbody>
       <tr><td><strong>POJK 40/POJK.03/2019</strong> — Penilaian Kualitas Aset Bank Umum</td><td>5 kategori kualitas kredit + PPKA (penyisihan penilaian kualitas aset)</td><td>Kolektibilitas borrower &amp; cadangan minimum per kategori</td></tr>
-      <tr><td><strong>PSAK 71</strong> — instrumen keuangan (ECL)</td><td>Staging 1/2/3 + CKPN 12-bulan vs lifetime</td><td>Staging sebagai radar dini (K4)</td></tr>
+      <tr><td><strong>PSAK 109 (IFRS 9)</strong> — instrumen keuangan (ECL)</td><td>Staging 1/2/3 + CKPN 12-bulan vs lifetime</td><td>Staging sebagai radar dini (K4)</td></tr>
       <tr><td><strong>PBI 7/3/PBI/2005</strong> — BMPK Bank Umum</td><td>Batas maksimum pemberian kredit sebagai % modal bank</td><td>Seberapa besar satu borrower/grup boleh menerima</td></tr>
     </tbody>
   </table></div>
@@ -147,7 +147,7 @@
   <p class="src">*PPKA khusus dihitung dari (nilai aset − nilai agunan), per POJK 40/2019 Pasal 44. Angka di atas adalah minimum regulator — bank boleh (dan sering) mencadangkan lebih.</p>
   <p><strong>Contoh terhitung — PT Sinar Kemas (FIKTIF).</strong> Pakai nilai agunan bersih §2 (Rp6,3 miliar) dan eksposur Rp7 miliar — selisih yang tidak tertutup agunan = 7,0 − 6,3 = Rp0,7 miliar. Bila kolektibilitasnya turun ke DPK: PPKA khusus minimum = 5% × Rp0,7 miliar = <strong>Rp35 juta</strong>. Bila jatuh ke Macet: 100% × Rp0,7 miliar = <strong>Rp0,7 miliar</strong>. Dua pelajaran: (1) agunan yang kuat menekan cadangan — itulah insentif ekonomi di balik collateral; (2) begitu agunan tidak menutup eksposur, cadangannya melonjak 20× lipat dari DPK ke Macet. Dan ingat batas headline regulator (K6 Q11): <strong>NPL net bank &lt; 5%</strong> — portofolio yang NPL-nya merayap ke batas itu membuat komite menolak fasilitas baru, betapapun bagusnya satu borrower.</p>
   <h3>3b · BMPK: rem konsentrasi di level bank</h3>
-  <p>BMPK (Batas Maksimum Pemberian Kredit) adalah <strong>batas persentase penyediaan dana terhadap modal bank</strong> — rem agar satu borrower atau satu grup tidak bisa menenggelamkan bank. Dihitung dari baki debet. Untuk Bank Umum (PBI 7/3/PBI/2005):</p>
+  <p>BMPK (Batas Maksimum Pemberian Kredit) adalah <strong>batas persentase penyediaan dana terhadap modal bank</strong> — rem agar satu borrower atau satu grup tidak bisa menenggelamkan bank. Dihitung dari baki debet. Untuk Bank Umum (PBI 7/3/PBI/2005, kemudian diubah dengan PBI 8/13/PBI/2006; batas 10%/20%/25% pada tabel di bawah tetap berlaku):</p>
   <div class="tblwrap"><table class="stmt">
     <thead><tr><th>Penerima</th><th>BMPK maks. (% modal bank)</th><th>Contoh: bank bermodal Rp10.000 miliar</th></tr></thead>
     <tbody>
@@ -164,7 +164,7 @@
   <h2>4 · Stress testing portofolio</h2>
   <p>Proyeksi base case menjawab "apa yang kami harapkan". Stress test menjawab <strong>"apa yang membunuh kami, dan seberapa jauh kami dari sana"</strong>. Kerangkanya sederhana: tentukan skenario → terapkan shock ke PD, LGD, dan EAD → hitung expected loss baru → putuskan aksi. Tiga skenario sudah cukup untuk latihan; bank besar memakai puluhan.</p>
   <h3>4a · Stress satu nama — PT Sinar Kemas (FIKTIF)</h3>
-  <p>Base: CFO Rp4,5 miliar, anuitas ≈Rp2,9 miliar/tahun (Rp2,86 miliar), DSCR 1,6×, covenant DSCR ≥ 1,25× (K3).</p>
+  <p>Base: CFO Rp4,5 miliar, anuitas Rp2,86 miliar/tahun (≈Rp2,9 miliar), DSCR 1,6×, covenant DSCR ≥ 1,25× (K3).</p>
   <div class="tblwrap"><table class="stmt">
     <thead><tr><th>Skenario</th><th>CFO</th><th>DSCR</th><th>Bacaan</th></tr></thead>
     <tbody>
@@ -184,7 +184,7 @@
       <tr><td><strong>Severe</strong> (resesi dalam)</td><td class="num">4,0%</td><td class="num">55%</td><td class="num">Rp105 miliar</td><td class="num">Rp2,31 miliar</td></tr>
     </tbody>
   </table></div>
-  <p>Expected loss severe = 105 × 4,0% × 55% = <strong>Rp2,31 miliar</strong> — <strong>2,89×</strong> dari base (Rp0,80 miliar). Tiga tuas bergerak bersamaan, jadi kerugian naik hampir tiga kali lipat meski tiap tuas naik dengan besaran berbeda — PD 2,0×, LGD 1,375×, EAD 1,05× — dan perkalian ketiganya (2,0 × 1,375 × 1,05 = 2,89×) yang mendorong EL dari Rp0,80 miliar ke Rp2,31 miliar. Itulah mengapa stress test tidak boleh men-shock satu variabel saja. Dampak lanjutannya: 2 dari 10 fasilitas bermigrasi Stage 1 → Stage 2 (K4) — CKPN-nya berubah dari 12-bulan menjadi lifetime, dan beban provisi kuartal itu naik sebelum satu pun NPL muncul. PPKA (§3a) dan CKPN adalah dua jalur menuju angka penyisihan yang sama: PPKA mengukurnya dari kolektibilitas (sisi regulator), CKPN dari staging (sisi akuntansi PSAK 71).</p>
+  <p>Expected loss severe = 105 × 4,0% × 55% = <strong>Rp2,31 miliar</strong> — <strong>2,89×</strong> dari base (Rp0,80 miliar). Tiga tuas bergerak bersamaan, jadi kerugian naik hampir tiga kali lipat meski tiap tuas naik dengan besaran berbeda — PD 2,0×, LGD 1,375×, EAD 1,05× — dan perkalian ketiganya (2,0 × 1,375 × 1,05 = 2,89×) yang mendorong EL dari Rp0,80 miliar ke Rp2,31 miliar. Itulah mengapa stress test tidak boleh men-shock satu variabel saja. Dampak lanjutannya: 2 dari 10 fasilitas bermigrasi Stage 1 → Stage 2 (K4) — CKPN-nya berubah dari 12-bulan menjadi lifetime, dan beban provisi kuartal itu naik sebelum satu pun NPL muncul. PPKA (§3a) dan CKPN adalah dua jalur menuju angka penyisihan yang sama: PPKA mengukurnya dari kolektibilitas (sisi regulator), CKPN dari staging (sisi akuntansi PSAK 109 (IFRS 9)).</p>
   <div class="honest"><strong>Aturan meja stress test:</strong> stress test yang tidak mengubah keputusan adalah hiasan. Setiap skenario harus berujung pada aksi: turunkan limit, naikkan pricing, perketat covenant, atau tambah monitoring. Kalau hasil severe tidak mengubah apa pun, skenarionya terlalu ringan — atau analisnya tidak berani.</div>
 </section>
 

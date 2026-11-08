@@ -2,7 +2,7 @@
 (function(){
   "use strict";
   window.CD_QUIZ = [
-    {q:"Dari sudut pandang analis kredit, yang PALING penting dari staging PSAK 71 adalah…",
+    {q:"Dari sudut pandang analis kredit, yang PALING penting dari staging PSAK 109 (IFRS 9) adalah…",
      opts:["Besarnya beban CKPN di laporan laba rugi","Migrasi antar stage — kenaikan Stage 2 = portofolio memburuk sebelum NPL naik","Kepatuhan terhadap standar akuntansi","Perbandingan dengan bank kompetitor"],
      ans:1,
      why:"Analis memantau migrasi, bukan angka statis. Stage 2 yang membengkak = lampu kuning menyala sebelum NPL bergerak. Menunggu NPL = terlambat satu kuartal."},
