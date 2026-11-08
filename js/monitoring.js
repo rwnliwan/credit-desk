@@ -9,13 +9,13 @@ var QUARTERS = [
     key: { rating: "maintain", stage: "2", act: "enhanced" },
     why: "DSCR 1,32x — headroom tinggal 0,07x di atas covenant. DPD 15 hari + persediaan menumpuk + permintaan melemah = kombinasi fakta SICR → Stage 2. (Catatan: 30 hari adalah backstop rebuttable IFRS 9 untuk SICR — di sini indikator kualitatifnya sudah cukup.) Rating dipertahankan, monitoring ditingkatkan." },
   { q: "Q3", ebitda: 25, ds: 25, dpd: 45, npl: 2,
-    note: "DSCR tepat 1,00x — BREACH covenant 1,25x. Tunggakan 45 hari. NPL mulai terbentuk (2%).",
+    note: "DSCR tepat 1,00x — BREACH covenant 1,25x. Tunggakan 45 hari. NPL portofolio bank 2% (konteks portofolio — lihat definisi di bawah tabel, bukan ukuran fasilitas ini).",
     key: { rating: "downgrade", stage: "2", act: "restructure" },
-    why: "Breach covenant + DPD 45 hari + NPL 2% → downgrade, Stage 2 (SICR terkonfirmasi). 90 hari adalah backstop rebuttable untuk presumsi default — BUKAN 'aman sebelum 90 hari'. Saatnya restrukturisasi, bukan menunggu." },
+    why: "Breach covenant + DPD 45 hari → downgrade, Stage 2 (SICR terkonfirmasi). NPL portofolio 2% adalah konteks kualitas portofolio, bukan bukti staging fasilitas ini. 90 hari adalah backstop rebuttable untuk presumsi default — BUKAN 'aman sebelum 90 hari'. Saatnya restrukturisasi, bukan menunggu." },
   { q: "Q4", ebitda: 18, ds: 25, dpd: 120, npl: 9,
-    note: "DSCR 0,72x. Tunggakan 120 hari. NPL 9%. Manajemen tidak kooperatif.",
+    note: "DSCR 0,72x. Tunggakan 120 hari. NPL portofolio bank 9% (konteks portofolio). Manajemen tidak kooperatif.",
     key: { rating: "downgrade", stage: "3", act: "tarik" },
-    why: "DPD 120 hari melewati backstop 90 hari — presumsi default yang <em>rebuttable</em> (di sini tidak terbantahkan: DSCR 0,72×, NPL 9%, manajemen tidak kooperatif) → Stage 3 (credit-impaired). Lindungi bank: tarik fasilitas / workout." }
+    why: "DPD 120 hari melewati backstop 90 hari — presumsi default yang <em>rebuttable</em> (di sini tidak terbantahkan: DSCR 0,72×, DPD 120 hari, manajemen tidak kooperatif; NPL portofolio 9% hanya konteks) → Stage 3 (credit-impaired). Lindungi bank: tarik fasilitas / workout." }
 ];
 var RATINGS = [["upgrade","Upgrade"],["maintain","Maintain"],["downgrade","Downgrade"]];
 var STAGES = [["1","Stage 1 — performing"],["2","Stage 2 — SICR"],["3","Stage 3 — credit-impaired"]];
@@ -34,9 +34,10 @@ function renderQuarter(){
     + '<div class="tblwrap"><table class="cd-tbl"><tr><th>Indikator</th><th class="num">Nilai</th><th>Status</th></tr>'
     + '<tr><td>EBITDA</td><td class="num">'+fmtID(q.ebitda)+'</td><td></td></tr>'
     + '<tr><td>DSCR (covenant ≥ 1,25x)</td><td class="num">'+fmtID(d,2)+'x</td><td>'+(breach?'<span class="badge reject">BREACH</span>':'<span class="badge approve">AMAN</span>')+'</td></tr>'
-    + '<tr><td>Hari tunggakan (DPD)</td><td class="num">'+q.dpd+'</td><td>'+(q.dpd>=90?'<span class="badge reject">DEFAULT</span>':q.dpd>0?'<span class="badge cond">WASPADA</span>':'<span class="badge approve">LANCAR</span>')+'</td></tr>'
-    + '<tr><td>NPL</td><td class="num">'+fmtID(q.npl,1)+'%</td><td></td></tr>'
+    + '<tr><td>Hari tunggakan (DPD)</td><td class="num">'+q.dpd+'</td><td>'+(q.dpd>=90?'<span class="badge cond">PRESUMSI DEFAULT</span>':q.dpd>0?'<span class="badge cond">WASPADA</span>':'<span class="badge approve">LANCAR</span>')+'</td></tr>'
+    + '<tr><td>NPL portofolio bank*</td><td class="num">'+fmtID(q.npl,1)+'%</td><td></td></tr>'
     + '</table></div><p style="font-size:.88rem"><i>'+q.note+'</i></p>'
+    + '<p style="font-size:.8rem;color:var(--ink-soft)">* NPL = kredit bermasalah ÷ total kredit pada <b>portofolio kredit korporasi bank</b> (populasi: seluruh fasilitas korporasi bank, bukan fasilitas PT Wira Karya saja). Angka ini konteks kualitas portofolio — staging satu debitur diputuskan dari fakta debitur itu (DSCR, DPD, kooperatif), bukan dari rasio portofolio. DPD ≥ 90 hari menampilkan "PRESUMSI DEFAULT" (bukan vonis otomatis): presumsi yang bisa dibantah fakta — di Q4 tidak terbantahkan karena DSCR 0,72×, DPD 120 hari, dan manajemen tidak kooperatif.</p>'
     + '<h3>Keputusan Anda</h3>'
     + '<div class="cd-field"><label>Rating internal</label><div class="cd-btnrow" id="r-rating">'
     + RATINGS.map(function(r){return '<button class="cd-opt" data-v="'+r[0]+'" style="width:auto">'+r[1]+'</button>';}).join("")

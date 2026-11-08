@@ -17,7 +17,7 @@
     {q:"CFO Sinar Kemas turun 25% dari Rp4,5 miliar. Berapa DSCR barunya, dan apa artinya?",
      opts:["1,84× — tidak berubah, DSCR memakai laba bukan kas","1,45× — masih di atas covenant DSCR ≥ 1,25×, headroom tinggal 0,20","1,18× — breach covenant (hitungan lama tanpa koreksi bunga)","1,21× — breach covenant DSCR ≥ 1,25×"],
      ans:1,
-     why:"CFO baru = 4,5 × 0,75 = Rp3,375 miliar; numerator terkoreksi = 3,375 + bunga kas 0,77 = 4,145; 4,145 ÷ 2,86 = 1,45× > 1,25× → belum breach. 1,18× adalah hitungan lama (3,375 ÷ 2,86) yang menghitung bunga dua kali. Baru pada CFO −40% DSCR jatuh ke 1,21× (breach), dan pada −53,5% ke 1,0×."},
+     why:"CFO baru = 4,5 × 0,75 = Rp3,375 miliar; numerator terkoreksi = 3,375 + bunga kas 0,77 = 4,145; 4,145 ÷ 2,86 = 1,45× > 1,25× → belum breach. 1,18× adalah hitungan lama (3,375 ÷ 2,86) yang menghitung bunga dua kali. Baru pada CFO −40% DSCR jatuh ke 1,21× (breach), dan pada −53,6% ke 1,0×."},
     {q:"Dua red flag Character yang independen dan belum terjawab pada satu borrower. Respons yang tepat menurut kerangka K7?",
      opts:["Abaikan — red flag hanya opini, angka yang menentukan","Tunda keputusan sampai keduanya dijawab; bila tak terjawab = tolak atau struktur keras","Approve dengan bunga lebih tinggi — harga menutup segalanya","Minta agunan tambahan lalu approve tanpa menjawab flag-nya"],
      ans:1,

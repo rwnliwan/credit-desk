@@ -9,19 +9,19 @@ var COVENANTS = [
   { id: "dscr", label: "DSCR minimum", type: "min", unit: "x", sug: 1.2,
     fn: function(s){ return s.ebitda / s.ds; },
     desc: "EBITDA ÷ debt service. Ukuran kemampuan bayar cicilan." },
-  { id: "debtEbitda", label: "Debt / EBITDA maksimum", type: "max", unit: "x", sug: 3.5,
+  { id: "debtEbitda", label: "Debt / EBITDA maksimum", type: "max", unit: "x", sug: 3.0,
     fn: function(s){ return s.debt / s.ebitda; },
     desc: "Total utang ÷ EBITDA. Ukuran leverage." },
-  { id: "ic", label: "Interest coverage minimum", type: "min", unit: "x", sug: 3.0,
+  { id: "ic", label: "Interest coverage minimum", type: "min", unit: "x", sug: 4.0,
     fn: function(s){ return s.ebitda / s.interest; },
     desc: "EBITDA ÷ beban bunga." },
   { id: "cr", label: "Current ratio minimum", type: "min", unit: "x", sug: 1.2,
     fn: function(s){ return s.ca / s.cl; },
     desc: "Aset lancar ÷ liabilitas lancar. Likuiditas jangka pendek." },
-  { id: "de", label: "Debt / Equity maksimum", type: "max", unit: "x", sug: 1.0,
+  { id: "de", label: "Debt / Equity maksimum", type: "max", unit: "x", sug: 0.9,
     fn: function(s){ return s.debt / s.equity; },
     desc: "Total utang ÷ ekuitas." },
-  { id: "nw", label: "Net worth minimum", type: "min", unit: "Rp M", sug: 350,
+  { id: "nw", label: "Net worth minimum", type: "min", unit: "Rp M", sug: 340,
     fn: function(s){ return s.equity; },
     desc: "Ekuitas minimum — pagar agar pemilik tidak menguras modal." }
 ];
@@ -87,7 +87,10 @@ $("#run-stress").addEventListener("click", function(){
     h += "<tr><td>"+c.label+"</td><td class='num'>"+fmtID(th[id],2)+c.unit+"</td>";
     scenNames.forEach(function(s){
       var a = c.fn(SCEN[s]);
-      var hr = c.type==="min" ? (a-th[id])/th[id] : (th[id]-a)/th[id];
+      /* Headroom vs angka BASE (K3 §2) — bukan vs threshold: minimum = (aktual − threshold) ÷ base;
+         maksimum = (threshold − aktual) ÷ base. Penyebut yang sama di semua covenant. */
+      var base = c.fn(SCEN.Base);
+      var hr = c.type==="min" ? (a-th[id])/base : (th[id]-a)/base;
       var breach = hr < 0;
       if(breach){ breachCount[s]=(breachCount[s]||0)+1; if(!firstBreach[id]) firstBreach[id]=s; }
       h += "<td class='num'>"+fmtID(a,2)+"</td><td class='num' style='font-weight:700;color:"+(breach?"var(--reject)":"var(--approve)")+"'>"
@@ -99,7 +102,7 @@ $("#run-stress").addEventListener("click", function(){
   var v = "<div class='cd-result show info'><b>Vonis paket:</b><br>";
   scenNames.forEach(function(s){
     var n = breachCount[s]||0;
-    v += "• <b>"+s+"</b>: "+(n===0?"tidak ada breach — paket memberi sinyal tepat waktu."+ (s==="Severe"?" <i>Catatan: bila severe pun tidak breach, threshold mungkin terlalu longgar.</i>":"") : n+" covenant breach")+"<br>";
+    v += "• <b>"+s+"</b>: "+(n===0?"tidak ada breach pada skenario ini — itu hanya menunjukkan kepatuhan pada skenario itu, bukan bukti covenant memberi sinyal tepat waktu. Efektivitas sinyal dinilai terpisah: apakah threshold cukup dekat dengan base sehingga penurunan wajar memicunya sebelum borrower benar-benar tidak bisa membayar?"+ (s==="Severe"?" <i>Catatan: bila severe pun tidak breach, threshold mungkin terlalu longgar.</i>":"") : n+" covenant breach")+"<br>";
   });
   var binders = sel.filter(function(id){return firstBreach[id];});
   if(binders.length) v += "• Covenant yang mengikat lebih dulu: "+binders.map(function(id){return id.toUpperCase()+" ("+firstBreach[id]+")";}).join(", ")+".";

@@ -34,8 +34,8 @@ var BORROWERS = {
       "Industri siklikal — margin tertekan promo e-commerce.",
       "CFO melemah karena modal kerja memburuk (persediaan menumpuk)."],
     calc: { dscr: 1.14, debtEbitda: 2.92, ic: 3.43 },
-    key: { decision: "conditional", why: "DSCR 1,14x — tipis di atas 1,0x. CFO 60 < debt service 84. Layak didanai HANYA dengan struktur ketat: plafon terbatas, pricing tinggi, covenant ketat + monitoring intensif. Plafon baru maks Rp8 miliar — aturan kapasitas simulator sendiri: 3,0 × EBITDA 96 − utang existing 280 = 8 (plafon Rp100 miliar lama melanggar Debt/EBITDA ≤ 3,0× menjadi 3,96×, dan DSCR jatuh ke 96 ÷ 116 = 0,83×)." },
-    term: { plafonMax: 8, pricingMin: 3.0, covNeed: ["dscr", "debtEbitda"] },
+    key: { decision: "reject", why: "REJECT: DSCR basis EBITDA 1,14x terlihat cukup, tapi DSCR basis CFO = 60 ÷ 84 = 0,71x — arus kas operasi tidak menutup debt service existing (CFO − debt service = −24). Fasilitas baru apa pun, betapapun kecil plafonnya, menambah cicilan di atas arus kas yang sudah defisit. Batas stok 3,0 × EBITDA (plafon maks Rp8 miliar = 3,0 × 96 − 280) menguji leverage, bukan kemampuan bayar — plafon Rp100 miliar lama memang melanggar Debt/EBITDA ≤ 3,0× menjadi 3,96× dan DSCR jatuh ke 96 ÷ 116 = 0,83×, tetapi plafon Rp8 miliar pun tidak memperbaiki arus kas yang defisit. Struktur ketat (pricing tinggi, covenant ketat, monitoring intensif) tidak menciptakan kas — tolak sampai arus kas terbukti pulih (restrukturisasi arus kas / perbaikan modal kerja), bukan di sini." },
+    term: null,
     comm: [
       { q: "Berapa DSCR (basis EBITDA)? (x)", ans: 1.14, tol: 0.1, why: "96 ÷ 84 = 1,14x (basis EBITDA). Basis CFO: 60 ÷ 84 = 0,71x — JAUH lebih ketat. Inilah jebakan K2: EBITDA terlihat cukup, kas tidak." },
       { q: "Berapa interest coverage? (x)", ans: 3.43, tol: 0.2, why: "96 ÷ 28 = 3,43x." },
@@ -86,6 +86,35 @@ function threshOk(b, id, th){
   if(a===null || isNaN(th) || th<=0) return false;
   return c.type==="min" ? th < a : th > a;
 }
+/* Proyeksi pasca-pencairan (G-3): jadwal debt service + DSCR pasca-fasilitas dari
+   term sheet learner sendiri. Anuitas plafon @ base 8% + margin yang diisi learner.
+   Batas 3x EBITDA menguji leverage (stok), bukan cicilan — DSCR pasca-fasilitas
+   di sinilah yang menguji cicilan. */
+function annuity(p, r, n){ return p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1); }
+function postDS(){
+  var b = BORROWERS[cur]; if(!b) return null;
+  var plafon = parseIDNumber($("#t-plafon").value, false),
+      tenor = parseIDNumber($("#t-tenor").value, true),
+      margin = parseIDNumber($("#t-pricing").value, true);
+  if(isNaN(plafon)||plafon<=0||isNaN(tenor)||tenor<=0||isNaN(margin)||margin<0) return null;
+  var rate = (8+margin)/100;
+  var ann = annuity(plafon, rate, tenor);
+  var ds0 = numVal(b, "Debt service (pokok+bunga)");
+  var ebitda = numVal(b, "EBITDA"), cfo = numVal(b, "CFO");
+  return { ann: ann, dsTot: ds0+ann, dscrE: ebitda/(ds0+ann), dscrC: cfo/(ds0+ann), margin: margin, tenor: tenor };
+}
+function postDSLine(p){
+  return "<strong>Proyeksi pasca-pencairan (term sheet Anda):</strong> cicilan baru ≈ Rp"+fmtID(p.ann,1)+" miliar/tahun (anuitas plafon @ base 8% + margin "+fmtID(p.margin,1)+"pp, tenor "+fmtID(p.tenor,1)+" thn) → debt service total ≈ Rp"+fmtID(p.dsTot,1)+" miliar/tahun → DSCR basis EBITDA pasca ≈ "+fmtID(p.dscrE,2)+"×; DSCR basis CFO pasca ≈ "+fmtID(p.dscrC,2)+"×. Batas 3× EBITDA menguji leverage (stok), bukan cicilan — yang menguji cicilan adalah DSCR pasca-fasilitas ini.";
+}
+function renderPostDS(){
+  var el = document.getElementById("post-ds"); if(!el) return;
+  var p = postDS();
+  el.innerHTML = p ? postDSLine(p) : "Isi plafon, tenor &amp; pricing untuk melihat proyeksi debt service + DSCR pasca-fasilitas dari term sheet Anda sendiri.";
+}
+["t-plafon","t-tenor","t-pricing"].forEach(function(id){
+  var el = document.getElementById(id);
+  if(el) el.addEventListener("input", renderPostDS);
+});
 function renderCovThresh(){
   var b = BORROWERS[cur], h = "";
   /* Simpan threshold yang sudah diketik sebelum render ulang. */
@@ -98,7 +127,7 @@ function renderCovThresh(){
     h += '<div class="cd-field" style="margin-bottom:.8rem"><label>Threshold ' + c.label + ' (' + (id==="nw" ? "Rp miliar" : "×") + ')</label>'
       + '<input id="th_' + id + '" inputmode="decimal" placeholder="mis. ' + fmtID(a, 2) + '" value="' + (covThresh[id]!==undefined ? String(covThresh[id]).replace(".", ",") : "") + '">'
       + '<div class="cd-hint">Angka aktual borrower ini: ' + fmtID(a, 2) + (id==="nw" ? " Rp miliar" : "×") + '. '
-      + (c.type==="min" ? "Threshold minimum harus DI BAWAH aktual — kalau tidak, covenant sudah breach sejak awal." : "Threshold maksimum harus DI ATAS aktual — kalau tidak, covenant sudah breach sejak awal.") + '</div></div>';
+      + (c.type==="min" ? "Threshold minimum harus di bawah aktual agar ada headroom — nilai tepat sama dengan aktual berarti headroom nol (bukan breach: covenant tepat pada batas masih dipenuhi). Latihan ini mewajibkan headroom positif supaya covenant memberi sinyal dini." : "Threshold maksimum harus di atas aktual agar ada headroom — nilai tepat sama dengan aktual berarti headroom nol (bukan breach: covenant tepat pada batas masih dipenuhi). Latihan ini mewajibkan headroom positif supaya covenant memberi sinyal dini.") + '</div></div>';
   });
   $("#cov-thresh").innerHTML = h;
 }
@@ -134,6 +163,7 @@ function openBorrower(k){
   $("#pkg-qual").innerHTML = b.qual.map(function(q){return "<li>"+q+"</li>";}).join("");
   ["step-package","step-decision","step-committee","step-verdict"].forEach(function(id){$("#"+id).style.display="none";});
   show("step-package");
+  renderPostDS();
 }
 
 $("#to-decision").addEventListener("click", function(){
@@ -160,6 +190,7 @@ $$("#decision-btns .cd-opt").forEach(function(btn){
     $$("#decision-btns .cd-opt").forEach(function(b){b.classList.remove("sel");});
     btn.classList.add("sel"); decision = btn.dataset.dec;
     $("#term-wrap").style.display = (decision==="reject") ? "none" : "block";
+    renderPostDS();
   });
 });
 
@@ -173,8 +204,8 @@ $("#to-committee").addEventListener("click", function(){
       var thV = cEl ? parseIDNumber(cEl.value, true) : NaN;
       if(isNaN(thV) || thV<=0){ alert("Isi threshold numerik untuk covenant " + cid.toUpperCase() + "."); return; }
       var cDef = COVS.filter(function(x){ return x.id===cid; })[0], aV = covActual(bb, cid);
-      if(cDef.type==="min" && thV>=aV){ alert("Threshold " + cDef.label + " (" + fmtID(thV,2) + ") harus di bawah angka aktual borrower (" + fmtID(aV,2) + ") — kalau tidak, covenant sudah breach sejak awal."); return; }
-      if(cDef.type==="max" && thV<=aV){ alert("Threshold " + cDef.label + " (" + fmtID(thV,2) + ") harus di atas angka aktual borrower (" + fmtID(aV,2) + ") — kalau tidak, covenant sudah breach sejak awal."); return; }
+      if(cDef.type==="min" && thV>=aV){ alert("Threshold " + cDef.label + " (" + fmtID(thV,2) + ") harus di bawah angka aktual borrower (" + fmtID(aV,2) + ") agar ada headroom positif. Nilai tepat sama dengan aktual bukan breach — covenant tepat pada batas masih dipenuhi — tapi latihan ini mewajibkan headroom > 0 supaya covenant memberi sinyal dini."); return; }
+      if(cDef.type==="max" && thV<=aV){ alert("Threshold " + cDef.label + " (" + fmtID(thV,2) + ") harus di atas angka aktual borrower (" + fmtID(aV,2) + ") agar ada headroom positif. Nilai tepat sama dengan aktual bukan breach — covenant tepat pada batas masih dipenuhi — tapi latihan ini mewajibkan headroom > 0 supaya covenant memberi sinyal dini."); return; }
       covThresh[cid] = thV;
     }
     if($("#t-plafon").value===""||$("#t-pricing").value===""){ alert("Isi plafon dan pricing."); return; }
@@ -202,7 +233,7 @@ $("#to-verdict").addEventListener("click", function(){
   max += 3;
   var dScore = 0;
   if(decision === b.key.decision) dScore = 3;
-  else if(cur==="B" && decision==="reject") dScore = 1;
+  else if(cur==="B" && decision==="conditional") dScore = 1;
   else if(cur==="C" && decision==="conditional") dScore = 1;
   score += dScore;
   var dLabel = {approve:"APPROVE",conditional:"APPROVE DENGAN SYARAT",reject:"REJECT"}[decision];
@@ -221,7 +252,7 @@ $("#to-verdict").addEventListener("click", function(){
     var covOk = b.term.covNeed.every(function(c){return covSel.indexOf(c)>=0;});
     var covThOk = covOk && b.term.covNeed.every(function(c){ return threshOk(b, c, covThresh[c]); });
     if(covThOk){ tScore++; tFb.push("covenant mencakup yang kunci + threshold numerik masuk akal ✓ ("+b.term.covNeed.map(function(c){ return c.toUpperCase()+" "+fmtID(covThresh[c],2); }).join(", ")+")"); }
-    else if(covOk) tFb.push("covenant kunci lengkap jenisnya, tapi threshold numeriknya tidak masuk akal ✗ (minimum harus di bawah aktual, maksimum di atas aktual)");
+    else if(covOk) tFb.push("covenant kunci lengkap jenisnya, tapi threshold numeriknya tidak masuk akal ✗ (minimum harus di bawah aktual, maksimum di atas aktual — nilai tepat sama dengan aktual = headroom nol, bukan breach, tapi latihan ini mewajibkan headroom positif)");
     else tFb.push("covenant kunci belum lengkap ✗ (butuh: "+b.term.covNeed.join(", ")+")");
     score += tScore;
     var tenorV = $("#t-tenor").value, collLbl = {high:"≥150%", mid:"100–150%", low:"<100%"}[coll]||"—";
@@ -229,6 +260,12 @@ $("#to-verdict").addEventListener("click", function(){
       + "<br>• tenor "+fmtID(parseIDNumber(tenorV,true),1)+" thn & agunan "+collLbl+" — wajib diisi, tidak dinilai otomatis (bahan debrief).");
   } else if(decision==="reject"){
     fb.push("Term sheet tidak diperlukan untuk keputusan REJECT — tepat.");
+  }
+  /* Proyeksi pasca-fasilitas (G-3) — dari term sheet learner sendiri. */
+  if(decision!=="reject"){
+    var pd = postDS();
+    if(pd) fb.push(postDSLine(pd));
+    if(!b.term) fb.push("Term sheet tidak dinilai untuk borrower ini — kuncinya REJECT (fasilitas baru apa pun menambah cicilan di atas arus kas yang sudah defisit). Angka proyeksi di atas hanya debrief: lihat bagaimana DSCR pasca-fasilitas memburuk dari term sheet Anda sendiri.");
   }
   /* 3. komite (3) */
   max += 3;

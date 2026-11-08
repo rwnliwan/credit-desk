@@ -33,7 +33,7 @@
     <h2>Langkah 2 — Paket borrower: <span id="pkg-name"></span></h2>
     <div class="ilus">ILUSTRATIF — ANGKA FIKTIF</div>
     <div class="tblwrap"><table class="cd-tbl" id="pkg-tbl"></table></div>
-    <div class="honest" style="margin-top:.8rem"><strong>Konvensi DSCR di simulator ini:</strong> EBITDA ÷ debt service — konvensi yang umum di <em>covenant</em> pinjaman korporasi. K2 mengajarkan (CFO + bunga kas + pajak kas − capex maintenance) ÷ debt service sebagai standar emas (Sinar Kemas 1,84×; rumus CFO÷DS tanpa koreksi menghitung bunga dua kali). Keduanya valid <em>bila dideklarasikan</em>; yang berbahaya adalah campur aduk tanpa sadar. Jembatan: DSCR basis CFO = <span id="pkg-dscr-cfo"></span> — bandingkan dengan DSCR basis EBITDA di pertanyaan komite.</div>
+    <div class="honest" style="margin-top:.8rem"><strong>Konvensi DSCR di simulator ini:</strong> EBITDA ÷ debt service — konvensi yang umum di <em>covenant</em> pinjaman korporasi. K2 mengajarkan (CFO + bunga kas − capex maintenance) ÷ debt service sebagai standar emas (Sinar Kemas 1,84×; pajak kas tidak ditambah atau dikurang lagi — sudah neto di dalam CFO; rumus CFO÷DS tanpa koreksi menghitung bunga dua kali). Keduanya valid <em>bila dideklarasikan</em>; yang berbahaya adalah campur aduk tanpa sadar. Jembatan: DSCR basis CFO = <span id="pkg-dscr-cfo"></span> — bandingkan dengan DSCR basis EBITDA di pertanyaan komite.</div>
     <h3>Informasi kualitatif</h3>
     <ul id="pkg-qual" style="font-size:.9rem"></ul>
     <div class="cd-btnrow"><button class="cd-btn" id="to-decision">Lanjut ke keputusan →</button></div>
@@ -49,7 +49,7 @@
     </div>
     <div id="term-wrap" style="display:none">
       <h3>Term sheet (wajib bila approve / conditional)</h3>
-      <p class="cd-sub">Yang dinilai otomatis: plafon, pricing, covenant (3 poin — jenis covenant yang dipilih <em>dan</em> threshold numerik yang kamu tetapkan; threshold minimum harus di bawah angka aktual borrower, maksimum di atasnya — kalau tidak, covenant sudah breach sejak awal). Tenor &amp; agunan wajib diisi — tidak dinilai otomatis, jadi bahan debrief. <strong>Ambang lulus ≥70% dari skor maksimum</strong> (dibulatkan ke atas): approve/conditional maks 9 → lulus ≥7 (78%); reject maks 6 (tanpa term sheet) → lulus ≥5 (83%). Persentase efektifnya berbeda karena maksimumnya berbeda — ambangnya sama (70%), penyebutnya berbeda.</p>
+      <p class="cd-sub">Yang dinilai otomatis: plafon, pricing, covenant (3 poin — jenis covenant yang dipilih <em>dan</em> threshold numerik yang kamu tetapkan; threshold minimum harus di bawah angka aktual borrower, maksimum di atasnya — nilai tepat sama dengan aktual berarti headroom nol, bukan breach, dan latihan ini mewajibkan headroom positif supaya covenant memberi sinyal dini). Tenor &amp; agunan wajib diisi — tidak dinilai otomatis, jadi bahan debrief. <strong>Ambang lulus ≥70% dari skor maksimum</strong> (dibulatkan ke atas): approve/conditional maks 9 → lulus ≥7 (78%); reject maks 6 (tanpa term sheet) → lulus ≥5 (83%). Persentase efektifnya berbeda karena maksimumnya berbeda — ambangnya sama (70%), penyebutnya berbeda. Borrower B dan C: kunci REJECT — term sheet tidak dinilai (maks 6).</p>
       <div class="cd-grid">
         <div class="cd-field"><label>Plafon (Rp miliar)</label>
           <input id="t-plafon" inputmode="decimal" placeholder="mis. 150">
@@ -68,6 +68,7 @@
       <div class="cd-field" style="margin-top:.8rem"><label>Covenant kunci (pilih tepat 2, lalu isi threshold numerik tiap covenant)</label>
         <div class="cd-btnrow" id="cov-picks"></div>
         <div id="cov-thresh" style="margin-top:.8rem"></div></div>
+      <div class="honest" id="post-ds" style="margin-top:.8rem">Isi plafon, tenor &amp; pricing untuk melihat proyeksi debt service + DSCR pasca-fasilitas dari term sheet Anda sendiri.</div>
     </div>
     <div class="cd-btnrow"><button class="cd-btn" id="to-committee">Hadapi komite →</button></div>
   </div>
@@ -82,11 +83,11 @@
   <div class="cd-card">
     <h2>Konvensi lintas-modul &amp; aturan scoring</h2>
     <ul style="font-size:.9rem">
-      <li><strong>DSCR:</strong> simulator ini memakai basis EBITDA ÷ debt service. K2 memakai basis CFO terkoreksi — (CFO + bunga kas + pajak kas − capex maintenance) ÷ debt service (Sinar Kemas 1,84×). Jembatan CFO ditampilkan di Langkah 2 tiap paket.</li>
+      <li><strong>DSCR:</strong> simulator ini memakai basis EBITDA ÷ debt service. K2 memakai basis CFO terkoreksi — (CFO + bunga kas − capex maintenance) ÷ debt service; pajak kas tidak ditambah atau dikurang lagi (sudah neto di CFO). Sinar Kemas 1,84×. Jembatan CFO ditampilkan di Langkah 2 tiap paket.</li>
       <li><strong>Threshold:</strong> angka kasus K3 (DSCR ≥ 1,25×; D/E ≤ 1,8×; CR ≥ 1,4×) adalah threshold keputusan Sinar Kemas; angka generik K6 (mis. DSCR 1,2×) adalah patokan umum, bukan threshold kasus. Di simulator, <em>kamu</em> yang menetapkan threshold — dan threshold itu dinilai.</li>
       <li><strong>Headroom:</strong> covenant minimum = proyeksi − headroom; covenant maksimum = proyeksi + headroom (K3 §2).</li>
-      <li><strong>Scoring:</strong> keputusan 3 + term sheet 3 (plafon, pricing, covenant jenis + threshold) + komite 3. Approve/conditional maks 9 → lulus ≥7; reject maks 6 (tanpa term sheet) → lulus ≥5; borrower C selalu maks 6. Ambang lulus ≥70% dari maksimum (dibulatkan ke atas). Tenor &amp; agunan wajib diisi tapi tidak dinilai otomatis.</li>
-      <li><strong>Kapasitas:</strong> plafon baru maks = 3,0 × EBITDA − utang existing (borrower A: 310; borrower B: 8 — plafon di atas itu melanggar Debt/EBITDA ≤ 3,0×).</li>
+      <li><strong>Scoring:</strong> keputusan 3 + term sheet 3 (plafon, pricing, covenant jenis + threshold) + komite 3. Approve/conditional maks 9 → lulus ≥7; reject maks 6 (tanpa term sheet) → lulus ≥5; borrower B dan C selalu maks 6 (kunci keduanya REJECT). Ambang lulus ≥70% dari maksimum (dibulatkan ke atas). Tenor &amp; agunan wajib diisi tapi tidak dinilai otomatis.</li>
+      <li><strong>Kapasitas:</strong> plafon baru maks = 3,0 × EBITDA − utang existing (borrower A: 310; borrower B: 8 — plafon di atas itu melanggar Debt/EBITDA ≤ 3,0×). Catatan B: plafon Rp8 miliar hanya batas <em>leverage</em> (stok), bukan kemampuan bayar — kunci B tetap REJECT karena CFO 60 &lt; debt service 84; proyeksi DSCR pasca-fasilitas di Langkah 3 menunjukkan fasilitas baru apa pun memperburuk DSCR.</li>
     </ul>
   </div>
 

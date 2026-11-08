@@ -7,7 +7,7 @@
     var termsBox=document.querySelector('[data-terms="'+c+'"]');
     function paint(v){
       box.querySelectorAll('.cbtn').forEach(function(b){b.classList.toggle('sel',b.getAttribute('data-v')===v);});
-      if(termsBox)termsBox.classList.toggle('hidden',!(v==='conditional'||v==='restructure'));
+      if(termsBox)termsBox.classList.toggle('hidden',!(v==='conditional'||v==='restructure'||v==='exit'));
     }
     if(saved&&saved.v){paint(saved.v);
       var w=document.getElementById('why-'+c); if(w&&saved.w)w.value=saved.w;

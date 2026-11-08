@@ -149,9 +149,10 @@
           <h4>Kunci builder <span class="badge cond">CONDITIONAL APPROVE</span></h4>
           <p class="verdict-block">"Interbank: approve. Subdebt: approve dengan trigger — bank kuat, tapi arah kualitas asetnya yang kamu beli, bukan levelnya."</p>
           <p><strong>Alasan:</strong> Level-nya fortress: CAR 26,63%, coverage 215%, CASA 67,3%. Tapi <em>arahnya</em> melemah: CoC 3,35% dan naik, CKPN +41,4% memakan PPoP yang sebenarnya tumbuh 9,6%.
-          Untuk interbank jangka pendek, risiko gagal bayar praktis nol — approve. Untuk subdebt (tenor panjang, posisi junior),
+          Untuk interbank jangka pendek, risiko gagal bayar relatif rendah berdasarkan informasi yang tersedia — approve (dengan limit dan tenor pendek + monitoring). Untuk subdebt (tenor panjang, posisi junior),
           pasang trigger: review bila NPL gross &gt; 3,5% atau CoC &gt; 4,0%, dan minta kupon yang menghargai tren, bukan level.
           DPR 92,7% bukan masalah hari ini (CAR 26,63% = buffer tebal), tapi catat sebagai pertanyaan monitoring.</p>
+          <p><strong>Hitungan Q3 (stress CoC 4,5% — estimasi bersyarat dari data paket):</strong> basis kredit tersirat = beban CKPN Rp41,76 T ÷ CoC 3,35% ≈ <strong>Rp1.246,6 T</strong>; pada CoC 4,5% CKPN ≈ 4,5% × 1.246,6 ≈ <strong>Rp56,1 T</strong> (naik ≈ Rp14,3 T dari Rp41,76 T); laba tersisa ≈ 60,15 − 14,3 ≈ <strong>Rp45,8 T</strong> (penyederhanaan: kredit &amp; pendapatan lain tetap, sebelum pajak — CoC di sini = beban CKPN ÷ total kredit, mengikuti definisi terhitung di paket). Apakah kupon subdebt masih aman? Paket tidak memberi angka kupon, jadi coverage kupon tidak dapat dihitung persis — tetapi laba tersisa Rp45,8 T masih orde besarnya jauh di atas kupon tahunan partisipasi Rp2 T (ratusan miliar), sehingga kupon aman dalam skenario stress ini <em>dengan asumsi di atas</em>. Bedakan estimasi bersyarat ini dari kesimpulan yang belum dapat dihitung: bila kupon, tenor, atau basis kredit berubah, hitung ulang.</p>
           <p><strong>Yang dinilai komite:</strong> apakah kamu membedakan risiko jangka pendek vs subordinasi jangka panjang? Analis kredit menilai <em>arah</em>, bukan cuma <em>level</em>.</p>
         </div>
       </div>
@@ -184,7 +185,7 @@
       <div class="committee">
         <h4>🏛️ Tiga pertanyaan komite</h4>
         <ol>
-          <li>D/E 7,71× dengan kas Rp2,5 T vs liabilitas Rp68,3 T. Hitung kasar: liabilitas = 6,4× pendapatan tahunan (Rp10,7 T) — dan ingat pendapatan bukan kas: rugi Rp2,58 T artinya tidak ada kas operasi untuk melunasi. Apa artinya untuk keputusanmu?</li>
+          <li>D/E 7,71× dengan kas Rp2,5 T vs liabilitas Rp68,3 T. Hitung kasar: liabilitas = 6,4× pendapatan tahunan (Rp10,7 T) — dan ingat pendapatan bukan kas. <strong>Hati-hati:</strong> rugi Rp2,58 T adalah angka <em>akuntansi</em> — rugi tidak membuktikan tidak ada kas operasi (depresiasi, penurunan nilai, CKPN, dan perubahan modal kerja bisa membuat CFO positif di tengah rugi besar), dan paket ini <strong>tidak menyajikan CFO sama sekali</strong> — jadi kemampuan bayar dari kas operasi <em>tidak dapat dinilai</em> dari data yang ada. Yang dapat dinilai dari paket: leverage, posisi kas vs liabilitas, dan kerangka restrukturisasi. Apa artinya untuk keputusanmu?</li>
           <li>Skema MRA sudah efektif = ada kerangka restrukturisasi yang disepakati kreditur. Dalam kondisi apa kamu ikut skema, dan dalam kondisi apa kamu tarik fasilitas (exit) meski rugi?</li>
           <li>Kalau restructure: sebutkan minimal 2 term konkret (mis. tenor extension berapa tahun, haircut bunga/pokok, debt-to-equity swap, jaminan tambahan). Kalau exit: lewat jalur apa (jual di secondary? set-off?) dan berapa recovery yang kamu targetkan?</li>
         </ol>
@@ -228,7 +229,7 @@
   <div class="card">
     <h3>Konvensi lintas-modul &amp; aturan scoring (berlaku di seluruh Credit Desk)</h3>
     <ul>
-      <li><strong>DSCR:</strong> K2 memakai basis CFO terkoreksi — (CFO + bunga kas + pajak kas − capex maintenance) ÷ debt service (Sinar Kemas 1,84×). Simulator, Covenant Designer &amp; Monitoring Drill memakai basis EBITDA ÷ debt service (dideklarasikan di tiap tool). Basis berbeda ≠ rumus salah — yang wajib adalah mendeklarasikannya.</li>
+      <li><strong>DSCR:</strong> K2 memakai basis CFO terkoreksi — (CFO + bunga kas − capex maintenance) ÷ debt service; pajak kas tidak ditambah atau dikurang lagi (sudah neto di dalam CFO). Sinar Kemas 1,84×. Simulator, Covenant Designer &amp; Monitoring Drill memakai basis EBITDA ÷ debt service (dideklarasikan di tiap tool). Basis berbeda ≠ rumus salah — yang wajib adalah mendeklarasikannya.</li>
       <li><strong>Threshold:</strong> angka kasus K3 (DSCR ≥ 1,25×; D/E ≤ 1,8×; CR ≥ 1,4×) adalah threshold keputusan Sinar Kemas; angka generik K6 (mis. DSCR 1,2×) dan "Saran" Covenant Designer adalah default ilustratif, bukan threshold K3.</li>
       <li><strong>Headroom:</strong> covenant minimum = proyeksi − headroom; covenant maksimum = proyeksi + headroom (K3 §2).</li>
       <li><strong>Scoring:</strong> kuis K1–K4/K7 lulus ≥80% (4/5); Simulator &amp; Monitoring Drill lulus ≥70% dari skor maksimum (Simulator: approve/conditional maks 9 → lulus ≥7; reject maks 6 → lulus ≥5; Monitoring: maks 12 → lulus ≥9); <strong>modul ini (K5) tidak dinilai otomatis dan tidak punya ambang lulus</strong>; Covenant Designer juga tidak dinilai — outputnya paket covenant untuk debrief.</li>
