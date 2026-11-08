@@ -41,12 +41,13 @@
   <div class="tblwrap"><table class="stmt">
     <thead><tr><th>Ukuran</th><th>Rumus (mata lender)</th><th>Ambang sehat</th></tr></thead>
     <tbody>
-      <tr><td><strong>DSCR</strong> (Debt Service Coverage Ratio)</td><td class="num">CFO ÷ (cicilan pokok + bunga)</td><td class="num">≥ 1,25×</td></tr>
+      <tr><td><strong>DSCR</strong> (Debt Service Coverage Ratio)</td><td class="num">(CFO + bunga kas + pajak kas − capex maintenance) ÷ (cicilan pokok + bunga)</td><td class="num">≥ 1,25×</td></tr>
       <tr><td><strong>Interest coverage</strong></td><td class="num">EBITDA ÷ beban bunga</td><td class="num">≥ 3× (korporasi)</td></tr>
       <tr><td><strong>CFO / total utang</strong></td><td class="num">CFO ÷ total liabilitas berbunga</td><td class="num">≥ 20%</td></tr>
     </tbody>
   </table></div>
-  <div class="honest"><strong>Jebakan:</strong> DSCR dari <em>laba</em> bukan dari <em>kas</em> adalah ilusi. Laba bisa naik sementara kas operasi negatif (piutang menumpuk). Lender selalu mulai dari CFO — yang membayar utang adalah kas, bukan laba akuntansi.</div>
+  <div class="honest"><strong>Jebakan:</strong> DSCR dari <em>laba</em> bukan dari <em>kas</em> adalah ilusi. Laba bisa naik sementara kas operasi negatif (piutang menumpuk). Lender selalu mulai dari CFO — yang membayar utang adalah kas, bukan laba akuntansi. <strong>Tapi hati-hati arah sebaliknya:</strong> CFO (PSAK 2) sudah <em>setelah</em> bunga dibayar, jadi CFO ÷ (pokok + bunga) menghitung bunga <strong>dua kali</strong> — sekali dipotong di dalam CFO, sekali lagi di penyebut. Rumus yang benar menambahkan kembali bunga kas + pajak kas, lalu mengurangkan capex maintenance (definisi covenant K6 Q1). DSCR versi lama Sinar Kemas 4,5 ÷ 2,86 = 1,57× (≈1,6×) adalah angka yang <em>terlalu rendah</em>; yang benar (4,5 + 0,77) ÷ 2,86 ≈ <strong>1,84×</strong>.</div>
+  <div class="honest"><strong>Rekonsiliasi numerator–denominator (contoh Sinar Kemas, K1):</strong> pinjaman Rp7 miliar, 3 tahun, 11% → anuitas Rp2,86 miliar/tahun = pokok tahun-1 Rp2,09 miliar + bunga tahun-1 Rp0,77 miliar (11% × 7). CFO Rp4,5 miliar sudah setelah bunga Rp0,77 miliar dibayar. Numerator yang benar = 4,5 + 0,77 (bunga kas) + pajak kas (tidak diberikan dalam kasus ini, dipakai 0) − capex maintenance (tidak diberikan, belum dikurangkan — jadi 1,84× adalah sebelum capex maintenance) = Rp5,27 miliar. DSCR = 5,27 ÷ 2,86 ≈ <strong>1,84×</strong>. Aturan ceknya: setiap rupiah bunga hanya boleh muncul <em>sekali</em> — entah di numerator (ditambahkan kembali) atau di denominator, tidak di keduanya. Simulator &amp; Covenant Designer memakai basis EBITDA ÷ debt service (dideklarasikan di tiap tool) — basis yang berbeda, bukan rumus yang salah, selama dideklarasikan.</div>
 </section>
 
 <section class="cd-sec">
@@ -55,7 +56,7 @@
   <ol>
     <li>Ambil CFO yang <strong>dinormalisasi</strong> (rata-rata 3 tahun, buang one-off).</li>
     <li>Tentukan DSCR minimum yang kamu tuntut (mis. 1,25×).</li>
-    <li>Debt service maksimum = CFO normalisasi ÷ 1,25.</li>
+    <li>Debt service maksimum = (CFO normalisasi + bunga kas + pajak kas − capex maintenance) ÷ 1,25. Bila rincian bunga/pajak/capex tidak tersedia (seperti di Keputusan K2 di bawah), CFO normalisasi ÷ 1,25 adalah pendekatan <em>konservatif</em> — DSCR sejatinya lebih tinggi, karena bunga sudah dipotong di dalam CFO.</li>
     <li>Kurangi debt service dari utang <em>existing</em> → sisa = ruang untuk utang baru.</li>
     <li>Konversi ke limit pinjaman via tenor &amp; bunga (anuitas).</li>
   </ol>
@@ -100,7 +101,7 @@
     <label>Alasan 2 kalimat (perhatikan: laba 2025 melonjak tapi CFO datar — apa artinya?):</label>
     <textarea id="k2-alasan" placeholder="…"></textarea>
     <div class="btnrow"><button class="btn" id="k2-save">Simpan worksheet →</button><span class="okmsg" id="k2-ok"></span></div>
-    <p style="font-size:.85rem;color:#B9C2D6;margin-top:.8rem">Kunci (cek setelah mengerjakan): CFO norm = 45; DSCR = 45÷28 = 1,61×; debt service maks = 45÷1,25 = 36; ruang = 36−28 = 8/thn. Cicilan Rp40 miliar/4thn @11% ≈ Rp12,9 miliar/thn (anuitas = 40 × [0,11×1,11⁴ ÷ (1,11⁴−1)] ≈ Rp12,89 miliar/thn) &gt; 8 → <strong>tidak layak penuh</strong>; laba 2025 yang melonjak tanpa CFO = accruals — lampu kuning. Total utang existing Rp120 miliar tidak dipakai di hitungan DSCR (DSCR menguji arus, bukan stok) — konteks: 120 ÷ 28 ≈ 4,3 tahun tenor tersisa.</p>
+    <p style="font-size:.85rem;color:#B9C2D6;margin-top:.8rem">Kunci (cek setelah mengerjakan): CFO norm = 45; DSCR = 45÷28 = 1,61× — ini DSCR CFO÷DS <em>tanpa koreksi bunga</em> (batas bawah konservatif: rincian bunga kas di dalam debt service Rp28 miliar tidak diberikan, jadi koreksi §1 tidak dapat dihitung; DSCR sejati &gt; 1,61×); debt service maks = 45÷1,25 = 36; ruang = 36−28 = 8/thn. Cicilan Rp40 miliar/4thn @11% ≈ Rp12,9 miliar/thn (anuitas = 40 × [0,11×1,11⁴ ÷ (1,11⁴−1)] ≈ Rp12,89 miliar/thn) &gt; 8 → <strong>tidak layak penuh</strong>; laba 2025 yang melonjak tanpa CFO = <em>indikasi</em> accruals yang wajib diurai — accruals 2025 = 55−45 = +10, berbalik dari −12 (2023) dan −10 (2024), dan CFO/NI 2025 = 0,82 &lt; 1 — tetapi <em>penyebabnya belum diketahui</em> (piutang? one-off non-kas? perubahan kebijakan?) — lampu kuning, bukan diagnosis. Total utang existing Rp120 miliar tidak dipakai di hitungan DSCR (DSCR menguji arus, bukan stok); 120 ÷ 28 ≈ 4,3 <em>bukan</em> tenor tersisa — Rp28 miliar/tahun adalah pokok <em>+ bunga</em>, jadi pokok teramortisasi lebih lambat dan tenor sebenarnya <em>lebih panjang</em> dari 4,3 tahun; tenor hanya bisa dihitung dari jadwal amortisasi pokoknya.</p>
   </div>
 </section>
 

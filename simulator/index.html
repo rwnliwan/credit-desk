@@ -33,7 +33,7 @@
     <h2>Langkah 2 — Paket borrower: <span id="pkg-name"></span></h2>
     <div class="ilus">ILUSTRATIF — ANGKA FIKTIF</div>
     <div class="tblwrap"><table class="cd-tbl" id="pkg-tbl"></table></div>
-    <div class="honest" style="margin-top:.8rem"><strong>Konvensi DSCR di simulator ini:</strong> EBITDA ÷ debt service — konvensi yang umum di <em>covenant</em> pinjaman korporasi. K2 mengajarkan CFO ÷ debt service sebagai standar emas (kas yang benar-benar membayar utang). Keduanya valid <em>bila dideklarasikan</em>; yang berbahaya adalah campur aduk tanpa sadar. Jembatan: DSCR basis CFO = <span id="pkg-dscr-cfo"></span> — bandingkan dengan DSCR basis EBITDA di pertanyaan komite.</div>
+    <div class="honest" style="margin-top:.8rem"><strong>Konvensi DSCR di simulator ini:</strong> EBITDA ÷ debt service — konvensi yang umum di <em>covenant</em> pinjaman korporasi. K2 mengajarkan (CFO + bunga kas + pajak kas − capex maintenance) ÷ debt service sebagai standar emas (Sinar Kemas 1,84×; rumus CFO÷DS tanpa koreksi menghitung bunga dua kali). Keduanya valid <em>bila dideklarasikan</em>; yang berbahaya adalah campur aduk tanpa sadar. Jembatan: DSCR basis CFO = <span id="pkg-dscr-cfo"></span> — bandingkan dengan DSCR basis EBITDA di pertanyaan komite.</div>
     <h3>Informasi kualitatif</h3>
     <ul id="pkg-qual" style="font-size:.9rem"></ul>
     <div class="cd-btnrow"><button class="cd-btn" id="to-decision">Lanjut ke keputusan →</button></div>
@@ -49,7 +49,7 @@
     </div>
     <div id="term-wrap" style="display:none">
       <h3>Term sheet (wajib bila approve / conditional)</h3>
-      <p class="cd-sub">Yang dinilai otomatis: plafon, pricing, covenant (3 poin). Tenor &amp; agunan wajib diisi — tidak dinilai otomatis, jadi bahan debrief.</p>
+      <p class="cd-sub">Yang dinilai otomatis: plafon, pricing, covenant (3 poin — jenis covenant yang dipilih <em>dan</em> threshold numerik yang kamu tetapkan; threshold minimum harus di bawah angka aktual borrower, maksimum di atasnya — kalau tidak, covenant sudah breach sejak awal). Tenor &amp; agunan wajib diisi — tidak dinilai otomatis, jadi bahan debrief. <strong>Ambang lulus ≥70% dari skor maksimum</strong> (dibulatkan ke atas): approve/conditional maks 9 → lulus ≥7 (78%); reject maks 6 (tanpa term sheet) → lulus ≥5 (83%). Persentase efektifnya berbeda karena maksimumnya berbeda — ambangnya sama (70%), penyebutnya berbeda.</p>
       <div class="cd-grid">
         <div class="cd-field"><label>Plafon (Rp miliar)</label>
           <input id="t-plafon" inputmode="decimal" placeholder="mis. 150">
@@ -65,8 +65,9 @@
             <option value="mid">100–150% dari plafon</option>
             <option value="low">&lt; 100% dari plafon</option></select></div>
       </div>
-      <div class="cd-field" style="margin-top:.8rem"><label>Covenant kunci (pilih tepat 2)</label>
-        <div class="cd-btnrow" id="cov-picks"></div></div>
+      <div class="cd-field" style="margin-top:.8rem"><label>Covenant kunci (pilih tepat 2, lalu isi threshold numerik tiap covenant)</label>
+        <div class="cd-btnrow" id="cov-picks"></div>
+        <div id="cov-thresh" style="margin-top:.8rem"></div></div>
     </div>
     <div class="cd-btnrow"><button class="cd-btn" id="to-committee">Hadapi komite →</button></div>
   </div>
@@ -76,6 +77,17 @@
     <p class="cd-sub">Komite tidak percaya narasi — mereka minta angka. Jawab dengan format Indonesia (mis. 2,50).</p>
     <div id="comm-qs"></div>
     <div class="cd-btnrow"><button class="cd-btn amber" id="to-verdict">Minta vonis komite</button></div>
+  </div>
+
+  <div class="cd-card">
+    <h2>Konvensi lintas-modul &amp; aturan scoring</h2>
+    <ul style="font-size:.9rem">
+      <li><strong>DSCR:</strong> simulator ini memakai basis EBITDA ÷ debt service. K2 memakai basis CFO terkoreksi — (CFO + bunga kas + pajak kas − capex maintenance) ÷ debt service (Sinar Kemas 1,84×). Jembatan CFO ditampilkan di Langkah 2 tiap paket.</li>
+      <li><strong>Threshold:</strong> angka kasus K3 (DSCR ≥ 1,25×; D/E ≤ 1,8×; CR ≥ 1,4×) adalah threshold keputusan Sinar Kemas; angka generik K6 (mis. DSCR 1,2×) adalah patokan umum, bukan threshold kasus. Di simulator, <em>kamu</em> yang menetapkan threshold — dan threshold itu dinilai.</li>
+      <li><strong>Headroom:</strong> covenant minimum = proyeksi − headroom; covenant maksimum = proyeksi + headroom (K3 §2).</li>
+      <li><strong>Scoring:</strong> keputusan 3 + term sheet 3 (plafon, pricing, covenant jenis + threshold) + komite 3. Approve/conditional maks 9 → lulus ≥7; reject maks 6 (tanpa term sheet) → lulus ≥5; borrower C selalu maks 6. Ambang lulus ≥70% dari maksimum (dibulatkan ke atas). Tenor &amp; agunan wajib diisi tapi tidak dinilai otomatis.</li>
+      <li><strong>Kapasitas:</strong> plafon baru maks = 3,0 × EBITDA − utang existing (borrower A: 310; borrower B: 8 — plafon di atas itu melanggar Debt/EBITDA ≤ 3,0×).</li>
+    </ul>
   </div>
 
   <div class="cd-card" id="step-verdict" style="display:none">

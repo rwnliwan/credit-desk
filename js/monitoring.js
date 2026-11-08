@@ -15,7 +15,7 @@ var QUARTERS = [
   { q: "Q4", ebitda: 18, ds: 25, dpd: 120, npl: 9,
     note: "DSCR 0,72x. Tunggakan 120 hari. NPL 9%. Manajemen tidak kooperatif.",
     key: { rating: "downgrade", stage: "3", act: "tarik" },
-    why: "DPD > 90 hari = default → Stage 3 (credit-impaired). NPL 9%. Lindungi bank: tarik fasilitas / workout." }
+    why: "DPD 120 hari melewati backstop 90 hari — presumsi default yang <em>rebuttable</em> (di sini tidak terbantahkan: DSCR 0,72×, NPL 9%, manajemen tidak kooperatif) → Stage 3 (credit-impaired). Lindungi bank: tarik fasilitas / workout." }
 ];
 var RATINGS = [["upgrade","Upgrade"],["maintain","Maintain"],["downgrade","Downgrade"]];
 var STAGES = [["1","Stage 1 — performing"],["2","Stage 2 — SICR"],["3","Stage 3 — credit-impaired"]];

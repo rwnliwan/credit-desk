@@ -11,20 +11,32 @@
      ans:1,
      why:"Watchlist = eskalasi pengawasan, bukan vonis. Tujuannya menyiapkan respons sebelum masalah menjadi krisis."},
     {q:"Restrukturisasi berulang pada debitur yang sama paling tepat dibaca sebagai…",
-     opts:["Bukti bank peduli pada nasabah","NPL yang tertunda, bukan kredit yang sehat kembali","Strategi pertumbuhan bank","Tidak ada implikasi analitis"],
+     opts:["Bukti bank peduli pada nasabah","Red flag kuat bahwa pengakuan NPL mungkin ditunda — perlu dibuktikan lewat proyeksi dan realisasi pembayaran","Strategi pertumbuhan bank","Tidak ada implikasi analitis"],
      ans:1,
-     why:"Pertanyaan kuncinya: apakah restrukturisasi memperbaiki capacity, atau hanya menunda pengakuan? Yang berulang = yang kedua."},
+     why:"Pertanyaan kuncinya: apakah restrukturisasi memperbaiki capacity, atau hanya menunda pengakuan? Pengulangan adalah red flag yang wajib dibuktikan — bukan vonis otomatis bahwa setiap kredit berulang pasti menjadi NPL."},
     {q:"Kombinasi CKPN turun + NPL naik menunjukkan…",
      opts:["Bank makin efisien","Provisi tidak mengejar risiko — lampu merah","Tidak ada masalah selama NPL < 5%","Bank sedang front-loading"],
      ans:1,
      why:"Bantalan (coverage) menipis sementara risiko naik = arah yang salah. Front-loading justru CKPN naik mendahului NPL."},
-    {q:"Pada kasus PT Sinar Kemas Q1 (DSCR 1,3×, piutang tertunda, utilisasi 92%, CFO resign), keputusan monitoring yang TEPAT:",
-     opts:["Maintain — semua covenant masih terpenuhi","Downgrade / watchlist ketat + migrasi Stage 2 — lima gejala serentak = SICR jelas","Upgrade — borrower masih membayar","Tunggu kuartal depan untuk memastikan tren"],
+    {q:"Pada kasus PT Sinar Kemas Q1 (DSCR 1,57×, piutang tertunda, utilisasi 92%, direktur keuangan resign), keputusan monitoring yang TEPAT:",
+     opts:["Maintain — semua covenant masih terpenuhi","Downgrade + watchlist ketat + investigasi Stage 2 — lima gejala serentak mengindikasikan SICR (dengan asumsi baseline origination rendah)","Upgrade — borrower masih membayar","Tunggu kuartal depan untuk memastikan tren"],
      ans:1,
-     why:"Covenant terpenuhi ≠ sehat. Lima gejala serentak (DSCR menipis, piutang, CFO, utilisasi, resignasi) adalah definisi textbook significant increase in credit risk."}
+     why:"Covenant terpenuhi ≠ sehat. Lima gejala serentak adalah indikasi kuat SICR — tetapi SICR mengukur perubahan risiko vs saat origination + informasi forward-looking, jadi Stage 2 di sini adalah keputusan ilustratif dengan asumsi baseline rendah, bukan 'definisi textbook' yang terbukti tanpa baseline."}
   ];
   window.CD_GATE = "cd_gate_k4";
   window.CDQuiz.init();
   window.CDDecision.init("cd_k4");
   window.CDDecision.saveText("k4", ["k4-stage","k4-tindakan"]);
+  /* SF-3: watchlist adalah toggle terpisah dari rating (bukan tombol verdict). */
+  (function(){
+    var wl = document.getElementById("k4-watchlist");
+    if(!wl) return;
+    var on = false;
+    try{ on = localStorage.getItem("cd_k4_watchlist")==="1"; }catch(e){}
+    if(on) wl.classList.add("sel");
+    wl.addEventListener("click", function(){
+      wl.classList.toggle("sel");
+      try{ localStorage.setItem("cd_k4_watchlist", wl.classList.contains("sel")?"1":"0"); }catch(e){}
+    });
+  })();
 })();

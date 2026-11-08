@@ -60,7 +60,7 @@
       <tr><td><strong>Financial</strong></td><td>Angka yang <em>wajib dijaga</em></td><td>DSCR ≥ 1,25×; D/E ≤ 2×; current ratio ≥ 1,2×</td></tr>
     </tbody>
   </table></div>
-  <div class="honest"><strong>Prinsip penetapan threshold:</strong> covenant yang tidak pernah bisa dilanggar = tidak berguna; covenant yang dilanggar dalam skenario normal = menghukum borrower yang sehat. Threshold yang benar = <strong>proyeksi wajar − headroom</strong> (ruang napas 15–25%), sehingga pelanggaran = sinyal dini yang valid, bukan noise.</div>
+  <div class="honest"><strong>Prinsip penetapan threshold:</strong> covenant yang tidak pernah bisa dilanggar = tidak berguna; covenant yang dilanggar dalam skenario normal = menghukum borrower yang sehat. Threshold digeser <strong>menjauhi arah bahaya</strong> dengan headroom (ruang napas 15–25%), sehingga pelanggaran = sinyal dini yang valid, bukan noise. Arahnya tergantung jenis covenant — <strong>jangan pakai satu rumus untuk semua:</strong><br>• <strong>Covenant minimum</strong> (DSCR, current ratio — bahaya di bawah): threshold = proyeksi wajar <em>−</em> headroom. DSCR: (1,84 − 1,25) ÷ 1,84 = 32,1% ≈ 32% di bawah proyeksi 1,84×. Current ratio: (1,8 − 1,4) ÷ 1,8 = 22,2% ≈ 22% di bawah proyeksi 1,8×.<br>• <strong>Covenant maksimum</strong> (D/E — bahaya di atas): threshold = proyeksi wajar <em>+</em> headroom. D/E: (1,8 − 1,5) ÷ 1,5 = +20% di <em>atas</em> proyeksi 1,5×. Aturan lama "proyeksi − headroom" untuk semua covenant adalah salah arah untuk rasio batas maksimum.</div>
 </section>
 
 <section class="cd-sec">
@@ -88,10 +88,10 @@
 <section class="cd-sec">
   <div class="decision">
     <h3>Keputusan K3 — Rancang Paket Covenant</h3>
-    <p><strong>Kasus (FIKTIF — PT Sinar Kemas,</strong> lanjutan K1; disetujui dengan struktur): DSCR proyeksi 1,6× · D/E 1,5× · current ratio 1,8× · konsentrasi pelanggan 70% ke 3 buyer.</p>
+    <p><strong>Kasus (FIKTIF — PT Sinar Kemas,</strong> lanjutan K1; disetujui dengan struktur): DSCR proyeksi 1,84× · D/E 1,5× · current ratio 1,8× · konsentrasi pelanggan 70% ke 3 buyer.</p>
     <p>Tugas: rancang <strong>3 financial covenant + 1 negative covenant</strong>. Untuk tiap financial covenant: tulis threshold + headroom yang kamu beri (dalam %) + alasan 1 kalimat. Lalu tulis vonis struktur: tenor &amp; pricing yang kamu usulkan.</p>
     <label>Covenant 1 (threshold + headroom + alasan):</label>
-    <input type="text" id="k3-c1" placeholder="mis. DSCR ≥ 1,25× — headroom 22% dari proyeksi 1,6× karena…">
+    <input type="text" id="k3-c1" placeholder="mis. DSCR ≥ 1,25× — headroom 32% dari proyeksi 1,84× karena…">
     <label>Covenant 2:</label>
     <input type="text" id="k3-c2" placeholder="mis. D/E ≤ 1,8× — …">
     <label>Covenant 3:</label>
@@ -101,7 +101,7 @@
     <label>Usulan tenor + pricing + 1 kalimat alasan:</label>
     <textarea id="k3-struktur" placeholder="…"></textarea>
     <div class="btnrow"><button class="btn" id="k3-save">Simpan rancangan →</button><span class="okmsg" id="k3-ok"></span></div>
-    <p style="font-size:.85rem;color:#B9C2D6;margin-top:.8rem">Contoh kunci (bukan satu-satunya jawaban benar): DSCR ≥ 1,25× (headroom ~22%); D/E ≤ 1,8× (headroom 20%); current ratio ≥ 1,4× (headroom ~22%); negative: dividen dilarang bila DSCR &lt; 1,5× + belanja modal &gt; Rp3 miliar/tahun wajib izin (konsentrasi pelanggan = risiko kas).</p>
+    <p style="font-size:.85rem;color:#B9C2D6;margin-top:.8rem">Contoh kunci (bukan satu-satunya jawaban benar): DSCR ≥ 1,25× (headroom (1,84−1,25)÷1,84 ≈ 32% di bawah proyeksi 1,84× — di atas rentang panduan 15–25%: pagar DSCR ini longgar, diterima karena risiko konsentrasi sudah dipagari negative covenant); D/E ≤ 1,8× (headroom +20% di ATAS proyeksi 1,5× — covenant maksimum, arah berlawanan dengan covenant minimum); current ratio ≥ 1,4× (headroom (1,8−1,4)÷1,8 ≈ 22%); negative: dividen dilarang bila DSCR &lt; 1,5× + belanja modal &gt; Rp3 miliar/tahun wajib izin (konsentrasi pelanggan = risiko kas). Tenor &amp; pricing contoh: tenor 3 tahun (sesuai fasilitas K1), bunga 11% + provisi 1% — anatomi harga K7 §1b: floor 8,7% (cost of funds 6,0% + expected loss 0,20% + biaya 1,5% + margin 1,0%) + premi risiko 2,3 pp (konsentrasi pelanggan + tenor 3 tahun). Tenor lebih panjang dari 3 tahun hanya bila covenant diperketat.</p>
   </div>
 </section>
 

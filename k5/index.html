@@ -20,9 +20,11 @@
   <p class="lede">Di meja kredit, unit belajarnya bukan pemahaman — melainkan <strong>keputusan</strong>.
   Tiga case di bawah memakai angka dari filing real yang sudah diverifikasi builder (bukan ilustrasi). Angka bertanda ± adalah pembulatan dari pemberitaan atas LK — lihat catatan kaki di bawah tabel.
   Baca paket borrower, jawab tiga pertanyaan komite, buat keputusanmu, baru buka kunci.</p>
+  <p style="font-size:.9rem"><strong>Legenda satuan:</strong> T = triliun; M = miliar (mis. Rp69,2 M = Rp69,2 miliar; Rp32,63 T = Rp32,63 triliun). Satuan yang sama dipakai konsisten di ketiga case.</p>
 
   <div class="rule"><strong>Aturan main:</strong> Tulis keputusan + alasanmu <em>sebelum</em> membuka kunci.
-  Kunci builder adalah satu interpretasi profesional, bukan vonis. Kalau keputusanmu beda tapi alasannya kuat — itu sah.</div>
+  Kunci builder adalah satu interpretasi profesional, bukan vonis. Kalau keputusanmu beda tapi alasannya kuat — itu sah.
+  Modul ini <strong>tidak dinilai otomatis dan tidak memiliki ambang lulus</strong> — tidak seperti kuis K1–K4/K7 (≥80%) atau Simulator/Monitoring Drill (≥70%): keputusanmu dinilai oleh dirimu sendiri lewat kunci builder.</div>
 
   <div class="prasyarat"><strong>Prasyarat &amp; rujukan.</strong> Mekanik laporan:
   <a href="https://fsa-lab.pages.dev/modul-1/">FSA M1–M18</a> ·
@@ -46,7 +48,7 @@
         <tr><td>Penjualan neto</td><td class="num">Rp32,63 T</td><td class="src">LK hal. 4</td></tr>
         <tr><td>Laba usaha (terhitung builder)</td><td class="num">Rp4,08 T</td><td class="src">LK hal. 4</td></tr>
         <tr><td>Beban bunga &amp; keuangan</td><td class="num">Rp69,2 M</td><td class="src">LK hal. 4</td></tr>
-        <tr><td>Interest coverage (EBIT ÷ beban bunga)</td><td class="num">58,9×</td><td class="src">Terhitung — basis EBIT (K2: EBITDA)</td></tr>
+        <tr><td>Interest coverage (EBIT ÷ beban bunga)</td><td class="num">59,0×</td><td class="src">Terhitung — basis EBIT (K2: EBITDA)</td></tr>
         <tr><td>Arus kas operasi</td><td class="num">Rp4,79 T</td><td class="src">LK hal. 7</td></tr>
         <tr><td>Kas dan setara kas</td><td class="num">Rp4,72 T</td><td class="src">LK hal. 1</td></tr>
         <tr><td>Total utang bank (pendek + bagian lancar + panjang)</td><td class="num">Rp387,6 M</td><td class="src">LK hal. 2</td></tr>
@@ -59,7 +61,7 @@
       <div class="committee">
         <h4>🏛️ Tiga pertanyaan komite</h4>
         <ol>
-          <li>Dengan coverage 58,9× dan kas Rp4,7 T, untuk apa sebenarnya borrower butuh Rp500 miliar? Apa risiko <em>use of proceeds</em> yang tidak tertulis?</li>
+          <li>Dengan coverage 59,0× dan kas Rp4,7 T, untuk apa sebenarnya borrower butuh Rp500 miliar? Apa risiko <em>use of proceeds</em> yang tidak tertulis?</li>
           <li>Dividen + buyback Rp1,89 T di tahun yang sama muncul pinjaman konversi Rp129,5 M — covenant apa yang kamu pasang untuk melindungi arus kas kreditur?</li>
           <li>Kalau penjualan turun 20% (skenario stress), apakah debt service Rp500 miliar + bunga masih tertutup CFO? Tunjukkan hitungan kasarmu.</li>
         </ol>
@@ -83,10 +85,11 @@
         <div class="reveal hidden" id="key-klbf">
           <h4>Kunci builder <span class="badge cond">CONDITIONAL APPROVE</span></h4>
           <p class="verdict-block">"Kredit termudah pun butuh struktur: approve Rp500 miliar dengan covenant dividen dan negative pledge atas pinjaman konversi."</p>
-          <p><strong>Alasan:</strong> Kapasitas bayar tidak diragukan (coverage 58,9×; utang bank existing hanya Rp388 miliar vs CFO Rp4,79 T — fasilitas baru 0,1× CFO).
+          <p><strong>Alasan:</strong> Kapasitas bayar tidak diragukan (coverage 59,0×; utang bank existing hanya Rp388 miliar vs CFO Rp4,79 T — fasilitas baru 0,1× CFO).
           Tapi pola 2024 — mengembalikan Rp1,89 T ke pemegang saham sambil membuka pinjaman konversi — adalah <em>leakage</em> kas yang harus dikunci lewat covenant:
           (1) dividend covenant ≤ 60% laba bersih; (2) negative pledge; (3) D/E ≤ 1,0× (headroom besar dari 0,20×, tapi ada); (4) reporting kuartalan.
           Pricing: borrower sekuat ini layak spread tipis — JIBOR + 175–225 bps.</p>
+          <p><strong>Hitungan kasar Q3 (stress penjualan −20%):</strong> anuitas fasilitas Rp500 miliar/3 tahun @~11% ≈ Rp205 miliar/tahun. Penjualan −20% tidak dapat diterjemahkan persis ke CFO dari paket ini (sensitivitas CFO terhadap penjualan tidak diberikan) — tetapi orde besarnya: bahkan bila CFO −50% menjadi ~Rp2,4 T, coverage atas debt service baru ≈ 2.400 ÷ 205 ≈ 11,7× — tetap tertutup jauh. Jadi Q3 bukan soal mampu/tidak, melainkan soal <em>use of proceeds</em> (Q1) dan <em>leakage</em> (Q2).</p>
           <p><strong>Yang dinilai komite:</strong> apakah kamu tergoda approve polos karena angkanya "terlalu bagus"? Analis kredit yang baik justru paling waspada pada kredit yang terlihat mudah.</p>
         </div>
       </div>
@@ -220,6 +223,17 @@
     <p>Keputusanmu tersimpan di browser (localStorage <span class="mono">cd_k5_*</span>). Jadikan satu case sebagai
     <strong>credit memo portofolio</strong> via <a href="https://fsa-lab.pages.dev/memo-kredit/">Credit Memo Builder FSA Lab</a> —
     panduan paket lamaran ada di <a href="../k6/">K6</a>.</p>
+  </div>
+
+  <div class="card">
+    <h3>Konvensi lintas-modul &amp; aturan scoring (berlaku di seluruh Credit Desk)</h3>
+    <ul>
+      <li><strong>DSCR:</strong> K2 memakai basis CFO terkoreksi — (CFO + bunga kas + pajak kas − capex maintenance) ÷ debt service (Sinar Kemas 1,84×). Simulator, Covenant Designer &amp; Monitoring Drill memakai basis EBITDA ÷ debt service (dideklarasikan di tiap tool). Basis berbeda ≠ rumus salah — yang wajib adalah mendeklarasikannya.</li>
+      <li><strong>Threshold:</strong> angka kasus K3 (DSCR ≥ 1,25×; D/E ≤ 1,8×; CR ≥ 1,4×) adalah threshold keputusan Sinar Kemas; angka generik K6 (mis. DSCR 1,2×) dan "Saran" Covenant Designer adalah default ilustratif, bukan threshold K3.</li>
+      <li><strong>Headroom:</strong> covenant minimum = proyeksi − headroom; covenant maksimum = proyeksi + headroom (K3 §2).</li>
+      <li><strong>Scoring:</strong> kuis K1–K4/K7 lulus ≥80% (4/5); Simulator &amp; Monitoring Drill lulus ≥70% dari skor maksimum (Simulator: approve/conditional maks 9 → lulus ≥7; reject maks 6 → lulus ≥5; Monitoring: maks 12 → lulus ≥9); <strong>modul ini (K5) tidak dinilai otomatis dan tidak punya ambang lulus</strong>; Covenant Designer juga tidak dinilai — outputnya paket covenant untuk debrief.</li>
+      <li><strong>Satuan:</strong> T = triliun; M = miliar (legenda di atas).</li>
+    </ul>
   </div>
 </main>
 

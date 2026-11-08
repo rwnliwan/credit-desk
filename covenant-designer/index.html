@@ -25,20 +25,31 @@
     <h2>Langkah 1 — Profil borrower</h2>
     <div class="ilus">ILUSTRATIF — PT CAHAYA PERKASA (LOGISTIK), ANGKA FIKTIF Rp MILIAR</div>
     <div class="tblwrap"><table class="cd-tbl" id="prof-tbl"></table></div>
-    <p class="cd-sub">Skenario stress: <b>Base</b> (angka di atas) · <b>Downturn</b> (EBITDA −20%) ·
-    <b>Severe</b> (EBITDA −35%, bunga +200bps, modal kerja memburuk).</p>
+    <p class="cd-sub">Skenario stress: <b>Base</b> (angka di atas) · <b>Downturn</b> (EBITDA −20%, utang naik Rp20 miliar, ekuitas turun Rp30 miliar) ·
+    <b>Severe</b> (EBITDA −35%, bunga +200bps, modal kerja memburuk, utang naik Rp50 miliar karena penarikan darurat, ekuitas turun Rp70 miliar karena rugi) — utang &amp; ekuitas sengaja digerakkan agar covenant D/E dan Net Worth benar-benar teruji (dulu keduanya konstan sehingga tak pernah breach).</p>
+  </div>
+
+  <div class="cd-card">
+    <h2>Konvensi lintas-modul &amp; aturan scoring</h2>
+    <ul style="font-size:.9rem">
+      <li><strong>DSCR:</strong> tool ini memakai basis EBITDA ÷ debt service (Base 120 ÷ 84 = 1,43×). K2 memakai basis CFO terkoreksi — (CFO + bunga kas + pajak kas − capex maintenance) ÷ debt service (Sinar Kemas 1,84×).</li>
+      <li><strong>Threshold "Saran":</strong> default <strong>generik ilustratif</strong> untuk PT Cahaya Perkasa — bukan threshold kasus K3 (DSCR ≥ 1,25×; CR ≥ 1,4×; D/E ≤ 1,8×). Saran di sini memberi headroom dari angka base Cahaya Perkasa (mis. DSCR 1,2× dari base 1,43× = 19%; CR 1,2× dari 1,50× = 25%; D/E 1,0× dari 0,75× = 25%). Ubah thresholdnya dan jelaskan alasanmu.</li>
+      <li><strong>Headroom:</strong> covenant minimum = proyeksi − headroom; covenant maksimum = proyeksi + headroom (K3 §2). Headroom di tabel hasil dihitung vs threshold yang kamu tetapkan.</li>
+      <li><strong>Scoring:</strong> tool ini <strong>tidak dinilai dan tidak punya ambang lulus</strong> — outputnya paket covenant untuk debrief. Covenant D/E dan Net Worth kini benar-benar teruji: Severe menggerakkan utang (300 → 350) dan ekuitas (400 → 330), jadi D/E Severe 1,06× dan Net Worth Rp330 miliar bisa breach threshold saran (1,0× / Rp350 miliar).</li>
+    </ul>
   </div>
 
   <div class="cd-card">
     <h2>Langkah 2 — Pilih 3–5 covenant</h2>
     <div class="cd-btnrow" id="cov-list" style="flex-direction:column;align-items:stretch"></div>
     <p class="cd-hint" id="cov-count">0 dipilih (pilih 3–5).</p>
+    <p class="cd-hint">Angka "Saran" adalah <strong>default generik ilustratif</strong> untuk PT Cahaya Perkasa — bukan threshold kasus K3 (DSCR ≥ 1,25×; CR ≥ 1,4×; D/E ≤ 1,8×). Ubah thresholdnya dan jelaskan alasanmu; saran yang baik punya headroom 15–25% dari angka base (K3 §2: minimum = proyeksi − headroom; maksimum = proyeksi + headroom).</p>
   </div>
 
   <div class="cd-card" id="thresh-card" style="display:none">
     <h2>Langkah 3 — Tetapkan threshold</h2>
     <p class="cd-sub">Threshold = batas yang memicu breach. Beri headroom dari angka base —
-    terlalu ketat = breach teknis terus; terlalu longgar = tidak memberi sinyal.</p>
+    terlalu ketat = breach teknis terus; terlalu longgar = tidak memberi sinyal. Headroom: covenant minimum di bawah angka base; maksimum di atas angka base (K3 §2).</p>
     <div id="thresh-inputs"></div>
     <div class="cd-btnrow"><button class="cd-btn amber" id="run-stress">▶ Jalankan uji stress</button></div>
   </div>

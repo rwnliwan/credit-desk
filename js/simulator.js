@@ -12,7 +12,7 @@ var BORROWERS = {
     qual: ["15 tahun operasi, tidak pernah gagal bayar.",
       "Industri defensif (makanan pokok) — permintaan stabil.",
       "Manajemen: pendiri masih aktif, suksesi jelas."],
-    calc: { dscr: 3.04, der: 1.18, ic: 10.63 },
+    calc: { dscr: 3.04, debtEbitda: 1.18, ic: 10.63 },
     key: { decision: "approve", why: "DSCR 3,04x, Debt/EBITDA 1,18x, CFO kuat 140 vs debt service 56. Kapasitas utang masih besar." },
     term: { plafonMax: 310, pricingMin: 1.0, covNeed: ["dscr"] },
     comm: [
@@ -33,9 +33,9 @@ var BORROWERS = {
     qual: ["8 tahun operasi; 1x restrukturisasi ringan tahun 2022 (lunas).",
       "Industri siklikal — margin tertekan promo e-commerce.",
       "CFO melemah karena modal kerja memburuk (persediaan menumpuk)."],
-    calc: { dscr: 1.14, der: 2.92, ic: 3.43 },
-    key: { decision: "conditional", why: "DSCR 1,14x — tipis di atas 1,0x. CFO 60 < debt service 84. Layak didanai HANYA dengan struktur ketat: plafon terbatas, pricing tinggi, covenant ketat + monitoring intensif." },
-    term: { plafonMax: 100, pricingMin: 3.0, covNeed: ["dscr", "der"] },
+    calc: { dscr: 1.14, debtEbitda: 2.92, ic: 3.43 },
+    key: { decision: "conditional", why: "DSCR 1,14x — tipis di atas 1,0x. CFO 60 < debt service 84. Layak didanai HANYA dengan struktur ketat: plafon terbatas, pricing tinggi, covenant ketat + monitoring intensif. Plafon baru maks Rp8 miliar — aturan kapasitas simulator sendiri: 3,0 × EBITDA 96 − utang existing 280 = 8 (plafon Rp100 miliar lama melanggar Debt/EBITDA ≤ 3,0× menjadi 3,96×, dan DSCR jatuh ke 96 ÷ 116 = 0,83×)." },
+    term: { plafonMax: 8, pricingMin: 3.0, covNeed: ["dscr", "debtEbitda"] },
     comm: [
       { q: "Berapa DSCR (basis EBITDA)? (x)", ans: 1.14, tol: 0.1, why: "96 ÷ 84 = 1,14x (basis EBITDA). Basis CFO: 60 ÷ 84 = 0,71x — JAUH lebih ketat. Inilah jebakan K2: EBITDA terlihat cukup, kas tidak." },
       { q: "Berapa interest coverage? (x)", ans: 3.43, tol: 0.2, why: "96 ÷ 28 = 3,43x." },
@@ -54,7 +54,7 @@ var BORROWERS = {
     qual: ["Gagal bayar bunga 1x tahun lalu (sudah di-cure, tapi tercatat).",
       "Proyek macet 2 lokasi; pendapatan turun 30% YoY.",
       "Modal kerja negatif — liabilitas lancar > aset lancar."],
-    calc: { dscr: 0.30, der: 12.5, ic: 0.67 },
+    calc: { dscr: 0.30, debtEbitda: 12.5, ic: 0.67 },
     key: { decision: "reject", why: "DSCR 0,30x — EBITDA tidak menutup sepertiga cicilan. CFO negatif. Debt/EBITDA 12,5x. Ini bukan underwriting, ini donasi." },
     term: null,
     comm: [
@@ -65,11 +65,43 @@ var BORROWERS = {
   }
 };
 var COVS = [
-  { id: "dscr", label: "DSCR minimum" }, { id: "der", label: "Debt/EBITDA maksimum" },
-  { id: "ic", label: "Interest coverage minimum" }, { id: "cr", label: "Current ratio minimum" },
-  { id: "nw", label: "Net worth minimum" }
+  { id: "dscr", label: "DSCR minimum", type: "min" }, { id: "debtEbitda", label: "Debt/EBITDA maksimum", type: "max" },
+  { id: "ic", label: "Interest coverage minimum", type: "min" }, { id: "cr", label: "Current ratio minimum", type: "min" },
+  { id: "nw", label: "Net worth minimum", type: "min" }
 ];
-var cur = null, decision = null, covSel = [];
+var cur = null, decision = null, covSel = [], covThresh = {};
+/* Nilai aktual covenant per borrower (untuk menilai threshold numerik SF-10). */
+function numVal(b, name){ var v = null; b.nums.forEach(function(n){ if(n[0]===name) v = n[1]; }); return v; }
+function covActual(b, id){
+  if(id==="dscr") return b.calc.dscr;
+  if(id==="debtEbitda") return b.calc.debtEbitda;
+  if(id==="ic") return b.calc.ic;
+  if(id==="cr") return numVal(b, "Aset lancar") / numVal(b, "Liabilitas lancar");
+  if(id==="nw") return numVal(b, "Ekuitas");
+  return null;
+}
+/* Threshold masuk akal: minimum harus di bawah aktual, maksimum di atas aktual. */
+function threshOk(b, id, th){
+  var a = covActual(b, id), c = COVS.filter(function(x){ return x.id===id; })[0];
+  if(a===null || isNaN(th) || th<=0) return false;
+  return c.type==="min" ? th < a : th > a;
+}
+function renderCovThresh(){
+  var b = BORROWERS[cur], h = "";
+  /* Simpan threshold yang sudah diketik sebelum render ulang. */
+  covSel.forEach(function(id){
+    var el = document.getElementById("th_"+id);
+    if(el && el.value!==""){ var v = parseIDNumber(el.value, true); if(!isNaN(v)) covThresh[id] = v; }
+  });
+  covSel.forEach(function(id){
+    var c = COVS.filter(function(x){ return x.id===id; })[0], a = covActual(b, id);
+    h += '<div class="cd-field" style="margin-bottom:.8rem"><label>Threshold ' + c.label + ' (' + (id==="nw" ? "Rp miliar" : "×") + ')</label>'
+      + '<input id="th_' + id + '" inputmode="decimal" placeholder="mis. ' + fmtID(a, 2) + '" value="' + (covThresh[id]!==undefined ? String(covThresh[id]).replace(".", ",") : "") + '">'
+      + '<div class="cd-hint">Angka aktual borrower ini: ' + fmtID(a, 2) + (id==="nw" ? " Rp miliar" : "×") + '. '
+      + (c.type==="min" ? "Threshold minimum harus DI BAWAH aktual — kalau tidak, covenant sudah breach sejak awal." : "Threshold maksimum harus DI ATAS aktual — kalau tidak, covenant sudah breach sejak awal.") + '</div></div>';
+  });
+  $("#cov-thresh").innerHTML = h;
+}
 
 function show(id){ $("#"+id).style.display="block"; $("#"+id).scrollIntoView({behavior:"smooth",block:"start"}); }
 
@@ -88,7 +120,7 @@ function show(id){ $("#"+id).style.display="block"; $("#"+id).scrollIntoView({be
 })();
 
 function openBorrower(k){
-  cur = k; decision = null; covSel = [];
+  cur = k; decision = null; covSel = []; covThresh = {};
   var b = BORROWERS[k];
   $("#pkg-name").textContent = b.name;
   var h = "<tr><th>Pos</th><th class='num'>Nilai</th><th>Satuan</th></tr>";
@@ -115,8 +147,10 @@ $("#to-decision").addEventListener("click", function(){
       var id = btn.dataset.cov;
       if(covSel.indexOf(id)>=0){ covSel = covSel.filter(function(x){return x!==id;}); btn.classList.remove("sel"); }
       else { covSel.push(id); btn.classList.add("sel"); }
+      renderCovThresh();
     });
   });
+  renderCovThresh();
   $$("#decision-btns .cd-opt").forEach(function(b){ b.classList.remove("sel"); });
   $("#term-wrap").style.display = "none";
   show("step-decision");
@@ -133,6 +167,16 @@ $("#to-committee").addEventListener("click", function(){
   if(!decision){ alert("Pilih keputusan dulu."); return; }
   if(decision!=="reject"){
     if(covSel.length!==2){ alert("Pilih tepat 2 covenant kunci."); return; }
+    var bb = BORROWERS[cur];
+    for(var ci=0; ci<covSel.length; ci++){
+      var cid = covSel[ci], cEl = document.getElementById("th_"+cid);
+      var thV = cEl ? parseIDNumber(cEl.value, true) : NaN;
+      if(isNaN(thV) || thV<=0){ alert("Isi threshold numerik untuk covenant " + cid.toUpperCase() + "."); return; }
+      var cDef = COVS.filter(function(x){ return x.id===cid; })[0], aV = covActual(bb, cid);
+      if(cDef.type==="min" && thV>=aV){ alert("Threshold " + cDef.label + " (" + fmtID(thV,2) + ") harus di bawah angka aktual borrower (" + fmtID(aV,2) + ") — kalau tidak, covenant sudah breach sejak awal."); return; }
+      if(cDef.type==="max" && thV<=aV){ alert("Threshold " + cDef.label + " (" + fmtID(thV,2) + ") harus di atas angka aktual borrower (" + fmtID(aV,2) + ") — kalau tidak, covenant sudah breach sejak awal."); return; }
+      covThresh[cid] = thV;
+    }
     if($("#t-plafon").value===""||$("#t-pricing").value===""){ alert("Isi plafon dan pricing."); return; }
     var plafonNum = parseIDNumber($("#t-plafon").value, false),
         pricingNum = parseIDNumber($("#t-pricing").value, true);
@@ -175,7 +219,9 @@ $("#to-verdict").addEventListener("click", function(){
     if(!isNaN(pricing) && pricing>=b.term.pricingMin){ tScore++; tFb.push("pricing +"+fmtID(pricing,2)+"pp ≥ minimum +"+fmtID(b.term.pricingMin,2)+"pp ✓"); }
     else tFb.push("pricing terlalu murah untuk risikonya ✗ (minimum +"+fmtID(b.term.pricingMin,2)+"pp)");
     var covOk = b.term.covNeed.every(function(c){return covSel.indexOf(c)>=0;});
-    if(covOk){ tScore++; tFb.push("covenant mencakup yang kunci ✓"); }
+    var covThOk = covOk && b.term.covNeed.every(function(c){ return threshOk(b, c, covThresh[c]); });
+    if(covThOk){ tScore++; tFb.push("covenant mencakup yang kunci + threshold numerik masuk akal ✓ ("+b.term.covNeed.map(function(c){ return c.toUpperCase()+" "+fmtID(covThresh[c],2); }).join(", ")+")"); }
+    else if(covOk) tFb.push("covenant kunci lengkap jenisnya, tapi threshold numeriknya tidak masuk akal ✗ (minimum harus di bawah aktual, maksimum di atas aktual)");
     else tFb.push("covenant kunci belum lengkap ✗ (butuh: "+b.term.covNeed.join(", ")+")");
     score += tScore;
     var tenorV = $("#t-tenor").value, collLbl = {high:"≥150%", mid:"100–150%", low:"<100%"}[coll]||"—";

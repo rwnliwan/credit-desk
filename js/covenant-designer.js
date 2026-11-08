@@ -2,14 +2,14 @@
 var PROF = { ebitda: 120, debt: 300, interest: 24, ds: 84, ca: 180, cl: 120, equity: 400 };
 var SCEN = {
   "Base":     { ebitda: 120, interest: 24, ds: 84, ca: 180, cl: 120, debt: 300, equity: 400 },
-  "Downturn": { ebitda: 96,  interest: 24, ds: 84, ca: 170, cl: 125, debt: 300, equity: 400 },
-  "Severe":   { ebitda: 78,  interest: 30, ds: 90, ca: 162, cl: 130, debt: 300, equity: 400 }
+  "Downturn": { ebitda: 96,  interest: 24, ds: 84, ca: 170, cl: 125, debt: 320, equity: 370 },
+  "Severe":   { ebitda: 78,  interest: 30, ds: 90, ca: 162, cl: 130, debt: 350, equity: 330 }
 };
 var COVENANTS = [
   { id: "dscr", label: "DSCR minimum", type: "min", unit: "x", sug: 1.2,
     fn: function(s){ return s.ebitda / s.ds; },
     desc: "EBITDA ÷ debt service. Ukuran kemampuan bayar cicilan." },
-  { id: "der", label: "Debt / EBITDA maksimum", type: "max", unit: "x", sug: 3.5,
+  { id: "debtEbitda", label: "Debt / EBITDA maksimum", type: "max", unit: "x", sug: 3.5,
     fn: function(s){ return s.debt / s.ebitda; },
     desc: "Total utang ÷ EBITDA. Ukuran leverage." },
   { id: "ic", label: "Interest coverage minimum", type: "min", unit: "x", sug: 3.0,
@@ -39,7 +39,7 @@ var sel = [];
   var h = "";
   COVENANTS.forEach(function(c){
     h += '<button class="cd-opt" data-cov="'+c.id+'"><b>'+c.label+'</b><br>'
-      + '<span style="font-size:.8rem;color:var(--ink-soft)">'+c.desc+' Saran: '+fmtID(c.sug,2)+c.unit+'</span></button>';
+      + '<span style="font-size:.8rem;color:var(--ink-soft)">'+c.desc+' Saran generik (ilustratif): '+fmtID(c.sug,2)+c.unit+'</span></button>';
   });
   $("#cov-list").innerHTML = h;
   $$("#cov-list button").forEach(function(b){
@@ -63,7 +63,7 @@ function renderThresh(){
     var base = c.fn(SCEN.Base);
     h += '<div class="cd-field" style="margin-bottom:.8rem"><label>'+c.label+' ('+c.unit+')</label>'
       + '<input id="th_'+id+'" inputmode="decimal" value="'+String(c.sug).replace(".",",")+'">'
-      + '<div class="cd-hint">Angka base: '+fmtID(base,2)+c.unit+'. Saran: '+fmtID(c.sug,2)+c.unit+'.</div></div>';
+      + '<div class="cd-hint">Angka base: '+fmtID(base,2)+c.unit+'. Saran generik (ilustratif — bukan threshold kasus K3): '+fmtID(c.sug,2)+c.unit+'.</div></div>';
   });
   $("#thresh-inputs").innerHTML = h;
   $("#result-card").style.display = "none";
@@ -117,6 +117,6 @@ $("#copy-pkg").addEventListener("click", function(){
     var c = COVENANTS.filter(function(x){return x.id===id;})[0];
     t += "• "+c.label+": "+fmtID(st.th[id],2)+c.unit+"\n";
   });
-  t += "Diuji: Base / Downturn (EBITDA −20%) / Severe (EBITDA −35%, +200bps).\nCredit Desk — angka ilustratif.";
+  t += "Diuji: Base / Downturn (EBITDA −20%, utang +20, ekuitas −30) / Severe (EBITDA −35%, +200bps, utang +50, ekuitas −70).\nSaran threshold = default generik ilustratif (bukan threshold kasus K3: DSCR 1,25× / CR 1,4× / D/E 1,8×).\nCredit Desk — angka ilustratif.";
   if(navigator.clipboard) navigator.clipboard.writeText(t).then(function(){ alert("Paket disalin."); });
 });

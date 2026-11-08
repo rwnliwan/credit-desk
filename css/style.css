@@ -81,6 +81,9 @@ a:hover{color:var(--reject)}
 .verdict.sel-approve{background:var(--approve);border-color:var(--approve)}
 .verdict.sel-reject{background:var(--reject);border-color:var(--reject)}
 .verdict.sel-restructure{background:var(--amber);border-color:var(--amber);color:var(--navy)}
+.verdict.sel-upgrade{background:var(--approve);border-color:var(--approve)}
+.verdict.sel-maintain{background:var(--amber);border-color:var(--amber);color:var(--navy)}
+.verdict.sel-downgrade{background:var(--reject);border-color:var(--reject)}
 
 /* quiz */
 .quiz-q{background:var(--paper-card);border:2px solid var(--line);border-radius:var(--radius);
