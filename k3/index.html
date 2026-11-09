@@ -42,7 +42,7 @@
       <tr><td><strong>Limit &amp; tenor</strong></td><td>Plafon + jangka waktu</td><td class="num">Rp10 miliar, 4 tahun</td></tr>
       <tr><td><strong>Pricing</strong></td><td>Bunga + fee</td><td class="num">11% + provisi 1%</td></tr>
       <tr><td><strong>Repayment</strong></td><td>Pola pembayaran</td><td>Kuartalan, anuitas</td></tr>
-      <tr><td><strong>Covenants</strong></td><td>Janji borrower (lihat §2)</td><td>DSCR ≥ 1,25×; D/E ≤ 2×</td></tr>
+      <tr><td><strong>Covenants</strong></td><td>Janji borrower (lihat §2)</td><td>DSCR ≥ 1,25×; D/E ≤ 2× (contoh generik)</td></tr>
       <tr><td><strong>Security</strong></td><td>Agunan</td><td>Gudang + fidusia piutang</td></tr>
       <tr><td><strong>Conditions precedent</strong></td><td>Syarat sebelum pencairan</td><td>Laporan audit, asuransi agunan</td></tr>
       <tr><td><strong>Events of default</strong></td><td>Pemicu penarikan fasilitas</td><td>Breach covenant 2 kuartal berturut-turut</td></tr>
@@ -57,17 +57,17 @@
     <tbody>
       <tr><td><strong>Affirmative</strong></td><td>Yang <em>wajib dilakukan</em> borrower</td><td>Laporan keuangan kuartalan ≤45 hari; asuransi agunan aktif</td></tr>
       <tr><td><strong>Negative</strong></td><td>Yang <em>dilarang</em> tanpa izin</td><td>Tidak boleh akuisisi &gt; Rp2 miliar; tidak boleh dividen bila DSCR &lt; 1,5×</td></tr>
-      <tr><td><strong>Financial</strong></td><td>Angka yang <em>wajib dijaga</em></td><td>DSCR ≥ 1,25×; D/E ≤ 2×; current ratio ≥ 1,2×</td></tr>
+      <tr><td><strong>Financial</strong></td><td>Angka yang <em>wajib dijaga</em></td><td>DSCR ≥ 1,25×; D/E ≤ 2×; current ratio ≥ 1,2× (contoh generik)</td></tr>
     </tbody>
   </table></div>
-  <div class="honest"><strong>Prinsip penetapan threshold:</strong> covenant yang tidak pernah bisa dilanggar = tidak berguna; covenant yang dilanggar dalam skenario normal = menghukum borrower yang sehat. Threshold digeser <strong>ke arah bahaya</strong> sejauh headroom (ruang napas 15–25%), sehingga pelanggaran = sinyal dini yang valid, bukan noise: untuk covenant minimum, bahaya ada di bawah — threshold digeser ke bawah (mendekati bahaya); untuk covenant maksimum, bahaya ada di atas — threshold digeser ke atas (mendekati bahaya). Dalam kedua kasus threshold bergerak <em>menuju</em> arah bahaya, bukan menjauhinya — jarak antara proyeksi wajar dan threshold itulah ruang napasnya. Arahnya tergantung jenis covenant — <strong>jangan pakai satu rumus untuk semua:</strong><br>• <strong>Covenant minimum</strong> (DSCR, current ratio — bahaya di bawah): threshold = proyeksi wajar <em>−</em> headroom. DSCR: (1,84 − 1,25) ÷ 1,84 = 32,1% ≈ 32% di bawah proyeksi 1,84×. Current ratio: (1,8 − 1,4) ÷ 1,8 = 22,2% ≈ 22% di bawah proyeksi 1,8×.<br>• <strong>Covenant maksimum</strong> (D/E — bahaya di atas): threshold = proyeksi wajar <em>+</em> headroom. D/E: (1,8 − 1,5) ÷ 1,5 = +20% di <em>atas</em> proyeksi 1,5×. Aturan lama "proyeksi − headroom" untuk semua covenant adalah salah arah untuk rasio batas maksimum.</div>
+  <div class="honest"><strong>Prinsip penetapan threshold:</strong> covenant yang tidak pernah bisa dilanggar = tidak berguna; covenant yang dilanggar dalam skenario normal = menghukum borrower yang sehat. Threshold digeser <strong>ke arah bahaya</strong> sejauh headroom (ruang napas 15–25%), sehingga pelanggaran = sinyal dini yang valid, bukan noise: untuk covenant minimum, bahaya ada di bawah — threshold digeser ke bawah (mendekati bahaya); untuk covenant maksimum, bahaya ada di atas — threshold digeser ke atas (mendekati bahaya). Dalam kedua kasus threshold bergerak <em>menuju</em> arah bahaya, bukan menjauhinya — jarak antara proyeksi wajar dan threshold itulah ruang napasnya. Arahnya tergantung jenis covenant — <strong>jangan pakai satu rumus untuk semua:</strong><br>• <strong>Covenant minimum</strong> (DSCR, current ratio — bahaya di bawah): threshold = proyeksi wajar <em>−</em> headroom. DSCR (basis sebelum capex maintenance — contoh lengkap di K2 §1): (1,84 − 1,25) ÷ 1,84 = 32,1% ≈ 32% di bawah proyeksi 1,84× (basis sebelum capex maintenance). Current ratio: (1,8 − 1,4) ÷ 1,8 = 22,2% ≈ 22% di bawah proyeksi 1,8×.<br>• <strong>Covenant maksimum</strong> (D/E — bahaya di atas): threshold = proyeksi wajar <em>+</em> headroom. D/E: (1,8 − 1,5) ÷ 1,5 = +20% di <em>atas</em> proyeksi 1,5×. Aturan lama "proyeksi − headroom" untuk semua covenant adalah salah arah untuk rasio batas maksimum.</div>
 </section>
 
 <section class="cd-sec">
   <h2>3 · Pricing = harga risiko</h2>
   <p>Bunga kredit bukan angka negosiasi bebas — ia punya anatomi:</p>
   <p class="mono" style="font-size:1.05rem">All-in lending rate = cost of funds + risk premium</p>
-  <p>Hanya komponen <strong>rate tahunan</strong> yang dijumlahkan di sini. <strong>Fee bukan komponen rate</strong> — provisi dan commitment fee dihitung terpisah, dengan basis dan waktu pengenaan sendiri, dan <strong>tidak dijumlahkan</strong> ke dalam suku bunga. Formula di atas adalah kerangka ekonomi untuk suku bunga, bukan penjumlahan mekanis semua biaya kredit (bandingkan anatomi harga K7 §1b — floor 8,7% = 6,0 + 0,20 + 1,5 + 1,0 — yang juga tanpa komponen fee sebagai rate).</p>
+  <p>Hanya komponen <strong>rate tahunan</strong> yang dijumlahkan di sini. <strong>Fee bukan komponen rate</strong> — provisi dan commitment fee dihitung terpisah, dengan basis dan waktu pengenaan sendiri, dan <strong>tidak dijumlahkan</strong> ke dalam suku bunga. Formula di atas adalah kerangka ekonomi untuk suku bunga, bukan penjumlahan mekanis semua biaya kredit (bandingkan anatomi harga K7 §1b — floor 8,7% = 6,0 + 0,20 + 1,5 (biaya operasional &amp; modal) + 1,0 — yang juga tanpa komponen fee sebagai rate).</p>
   <ul>
     <li><strong>Cost of funds</strong> — biaya dana bank itu sendiri (mis. 6%).</li>
     <li><strong>Risk premium</strong> — harga atas risiko borrower ini (makin lemah 5C, makin mahal; mis. 3–5%).</li>
@@ -83,16 +83,18 @@
     <li><strong>Cure right:</strong> hak borrower memperbaiki dalam X hari (mis. injeksi modal pemilik).</li>
     <li><strong>Waiver:</strong> lender memaafkan pelanggaran dengan syarat (biasanya: fee + covenant lebih ketat).</li>
   </ul>
+  <p><strong>Contoh monitoring kuartalan (angka sama dengan <a href="../monitoring/">Monitoring Drill</a> — coba drill-nya setelah membaca tabel ini):</strong> covenant DSCR ≥ 1,25× (basis EBITDA), debt service Rp25 miliar/kuartal. Q1: EBITDA 44 → DSCR 1,76× AMAN; Q2: 33 → 1,32× AMAN; Q3: 25 → 1,00× <strong>BREACH</strong>; Q4: 18 → 0,72× <strong>BREACH</strong>. Pelanggaran Q3 bukan akhir cerita — di sinilah cure &amp; waiver bekerja.</p>
+  <p><strong>Latihan (kuartal breach Q3):</strong> tulis rencanamu sebelum membuka drill — (a) <em>cure:</em> injeksi modal pemilik berapa, dalam berapa hari, agar DSCR kembali ≥ 1,25×? (b) <em>waiver:</em> syarat apa yang kamu minta sebagai gantinya (fee + covenant lebih ketat)? Aksi di drill (normal / enhanced / restructure / tarik) belum mencakup cure/waiver eksplisit — tuliskan rencanamu, lalu bandingkan dengan kunci drill.</p>
   <p>Covenant yang baik memberi lender <strong>kursi di meja</strong> sebelum keadaan memburuk — bukan palu sesudahnya.</p>
 </section>
 
 <section class="cd-sec">
   <div class="decision">
     <h3>Keputusan K3 — Rancang Paket Covenant</h3>
-    <p><strong>Kasus (FIKTIF — PT Sinar Kemas,</strong> lanjutan K1; disetujui dengan struktur): DSCR proyeksi 1,84× · D/E 1,5× · current ratio 1,8× · konsentrasi pelanggan 70% ke 3 buyer.</p>
+    <p><strong>Kasus (FIKTIF — PT Sinar Kemas,</strong> lanjutan K1; disetujui dengan struktur): DSCR proyeksi 1,84× (basis sebelum capex maintenance; contoh lengkap di K2 §1) · D/E 1,5× · current ratio 1,8× · konsentrasi pelanggan 70% ke 3 buyer.</p>
     <p>Tugas: rancang <strong>3 financial covenant + 1 negative covenant</strong>. Untuk tiap financial covenant: tulis threshold + headroom yang kamu beri (dalam %) + alasan 1 kalimat. Lalu tulis vonis struktur: tenor &amp; pricing yang kamu usulkan.</p>
     <label>Covenant 1 (threshold + headroom + alasan):</label>
-    <input type="text" id="k3-c1" placeholder="mis. DSCR ≥ 1,25× — headroom 32% dari proyeksi 1,84× karena…">
+    <input type="text" id="k3-c1" placeholder="mis. DSCR ≥ 1,25× — headroom 32% dari proyeksi 1,84× (sebelum capex maintenance) karena…">
     <label>Covenant 2:</label>
     <input type="text" id="k3-c2" placeholder="mis. D/E ≤ 1,8× — …">
     <label>Covenant 3:</label>
@@ -102,7 +104,7 @@
     <label>Usulan tenor + pricing + 1 kalimat alasan:</label>
     <textarea id="k3-struktur" placeholder="…"></textarea>
     <div class="btnrow"><button class="btn" id="k3-save">Simpan rancangan →</button><span class="okmsg" id="k3-ok"></span></div>
-    <p style="font-size:.85rem;color:#B9C2D6;margin-top:.8rem">Contoh kunci (bukan satu-satunya jawaban benar): DSCR ≥ 1,25× (headroom (1,84−1,25)÷1,84 ≈ 32% di bawah proyeksi 1,84× — di atas rentang panduan 15–25%: pagar DSCR ini longgar, diterima karena risiko konsentrasi sudah dipagari negative covenant); D/E ≤ 1,8× (headroom +20% di ATAS proyeksi 1,5× — covenant maksimum, arah berlawanan dengan covenant minimum); current ratio ≥ 1,4× (headroom (1,8−1,4)÷1,8 ≈ 22%); negative: dividen dilarang bila DSCR &lt; 1,5× + belanja modal &gt; Rp3 miliar/tahun wajib izin (konsentrasi pelanggan = risiko kas). Tenor &amp; pricing contoh: tenor 3 tahun (sesuai fasilitas K1), bunga 11% + provisi 1% — anatomi harga K7 §1b: floor 8,7% (cost of funds 6,0% + expected loss 0,20% + biaya 1,5% + margin 1,0%) + premi risiko 2,3 pp (konsentrasi pelanggan + tenor 3 tahun). Tenor lebih panjang dari 3 tahun hanya bila covenant diperketat.</p>
+    <p style="font-size:.85rem;color:#B9C2D6;margin-top:.8rem">Contoh kunci (bukan satu-satunya jawaban benar): DSCR ≥ 1,25× (headroom (1,84−1,25)÷1,84 ≈ 32% di bawah proyeksi 1,84× (basis sebelum capex maintenance) — di atas rentang panduan 15–25%: pagar DSCR ini longgar, diterima karena risiko konsentrasi sudah dipagari negative covenant); D/E ≤ 1,8× (headroom +20% di ATAS proyeksi 1,5× — covenant maksimum, arah berlawanan dengan covenant minimum); current ratio ≥ 1,4× (headroom (1,8−1,4)÷1,8 ≈ 22%); negative: dividen dilarang bila DSCR &lt; 1,5× + belanja modal &gt; Rp3 miliar/tahun wajib izin (konsentrasi pelanggan = risiko kas). Tenor &amp; pricing contoh: tenor 3 tahun (sesuai fasilitas K1), bunga 11% + provisi 1% — anatomi harga K7 §1b: floor 8,7% (cost of funds 6,0% + expected loss 0,20% + biaya operasional &amp; modal 1,5% + margin 1,0%) + premi risiko 2,3 pp (konsentrasi pelanggan + tenor 3 tahun). Tenor lebih panjang dari 3 tahun hanya bila covenant diperketat.</p>
   </div>
 </section>
 

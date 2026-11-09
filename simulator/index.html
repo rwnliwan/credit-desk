@@ -33,7 +33,7 @@
     <h2>Langkah 2 — Paket borrower: <span id="pkg-name"></span></h2>
     <div class="ilus">ILUSTRATIF — ANGKA FIKTIF</div>
     <div class="tblwrap"><table class="cd-tbl" id="pkg-tbl"></table></div>
-    <div class="honest" style="margin-top:.8rem"><strong>Konvensi DSCR di simulator ini:</strong> EBITDA ÷ debt service — konvensi yang umum di <em>covenant</em> pinjaman korporasi. K2 mengajarkan (CFO + bunga kas − capex maintenance) ÷ debt service sebagai standar emas (Sinar Kemas 1,84×; pajak kas tidak ditambah atau dikurang lagi — sudah neto di dalam CFO; rumus CFO÷DS tanpa koreksi menghitung bunga dua kali). Keduanya valid <em>bila dideklarasikan</em>; yang berbahaya adalah campur aduk tanpa sadar. Jembatan: DSCR basis CFO = <span id="pkg-dscr-cfo"></span> — bandingkan dengan DSCR basis EBITDA di pertanyaan komite.</div>
+    <div class="honest" style="margin-top:.8rem"><strong>Konvensi DSCR di simulator ini:</strong> EBITDA ÷ debt service — konvensi yang umum di <em>covenant</em> pinjaman korporasi. K2 mengajarkan (CFO + bunga kas − capex maintenance) ÷ debt service sebagai standar emas (Sinar Kemas 1,84× (basis sebelum capex maintenance); pajak kas tidak ditambah atau dikurang lagi — sudah neto di dalam CFO; rumus CFO÷DS tanpa koreksi menghitung bunga dua kali). Keduanya valid <em>bila dideklarasikan</em>; yang berbahaya adalah campur aduk tanpa sadar. Jembatan: DSCR basis CFO = <span id="pkg-dscr-cfo"></span> — bandingkan dengan DSCR basis EBITDA di pertanyaan komite.</div>
     <h3>Informasi kualitatif</h3>
     <ul id="pkg-qual" style="font-size:.9rem"></ul>
     <div class="cd-btnrow"><button class="cd-btn" id="to-decision">Lanjut ke keputusan →</button></div>
@@ -83,7 +83,7 @@
   <div class="cd-card">
     <h2>Konvensi lintas-modul &amp; aturan scoring</h2>
     <ul style="font-size:.9rem">
-      <li><strong>DSCR:</strong> simulator ini memakai basis EBITDA ÷ debt service. K2 memakai basis CFO terkoreksi — (CFO + bunga kas − capex maintenance) ÷ debt service; pajak kas tidak ditambah atau dikurang lagi (sudah neto di CFO). Sinar Kemas 1,84×. Jembatan CFO ditampilkan di Langkah 2 tiap paket.</li>
+      <li><strong>DSCR:</strong> simulator ini memakai basis EBITDA ÷ debt service. K2 memakai basis CFO terkoreksi — (CFO + bunga kas − capex maintenance) ÷ debt service; pajak kas tidak ditambah atau dikurang lagi (sudah neto di CFO). Sinar Kemas 1,84× (basis sebelum capex maintenance). Jembatan CFO ditampilkan di Langkah 2 tiap paket.</li>
       <li><strong>Threshold:</strong> angka kasus K3 (DSCR ≥ 1,25×; D/E ≤ 1,8×; CR ≥ 1,4×) adalah threshold keputusan Sinar Kemas; angka generik K6 (mis. DSCR 1,2×) adalah patokan umum, bukan threshold kasus. Di simulator, <em>kamu</em> yang menetapkan threshold — dan threshold itu dinilai.</li>
       <li><strong>Headroom:</strong> covenant minimum = proyeksi − headroom; covenant maksimum = proyeksi + headroom (K3 §2).</li>
       <li><strong>Scoring:</strong> keputusan 3 + term sheet 3 (plafon, pricing, covenant jenis + threshold) + komite 3. Approve/conditional maks 9 → lulus ≥7; reject maks 6 (tanpa term sheet) → lulus ≥5; borrower B dan C selalu maks 6 (kunci keduanya REJECT). Ambang lulus ≥70% dari maksimum (dibulatkan ke atas). Tenor &amp; agunan wajib diisi tapi tidak dinilai otomatis.</li>

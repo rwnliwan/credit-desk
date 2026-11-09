@@ -13,7 +13,7 @@
     {q:"Borrower punya agunan Rp20 miliar (likuid) tapi DSCR proyeksi 0,9×. Keputusan yang TEPAT menurut prinsip meja kredit:",
      opts:["Approve — agunan lebih dari cukup menutup risiko","Approve dengan bunga lebih tinggi","Reject / restructure — capacity lemah tidak bisa ditutup agunan","Minta agunan tambahan Rp5 miliar lalu approve"],
      ans:2,
-     why:"DSCR < 1 = arus kas tidak cukup membayar utang. Collateral yang bagus tidak pernah menjadi alasan memberi pinjaman ke capacity yang lemah."},
+     why:"DSCR < 1 = arus kas tidak cukup membayar utang. Collateral yang bagus tidak pernah menjadi alasan utama memberi pinjaman ke capacity yang lemah."},
     {q:"Urutan alur kerja credit yang BENAR:",
      opts:["Committee → origination → analysis → documentation → monitoring → workout","Origination → analysis → committee → documentation → monitoring → workout","Analysis → origination → documentation → committee → workout → monitoring","Origination → committee → analysis → workout → documentation → monitoring"],
      ans:1,

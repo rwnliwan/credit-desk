@@ -1,9 +1,21 @@
 /* Credit Desk — common helpers. parseIDNumber: salinan fsa-web/js/modul37.js, DIVERGEN sejak fix R8-MF-1 (ribuan bertingkat). Kedua salinan Credit (common.js & parse-id.js) WAJIB tetap byte-identik — dikunci qa/qa_credit_r5.py §8. */
+/* Kontrak perilaku parseIDNumber(str, isDecimal) — R9 P2-G1 (tabel ini juga
+   di header js/parse-id.js; badan fungsi di kedua file byte-identik).
+   TERIMA kedua mode: "10.000.000"->10000000, "1.234,56"->1234.56,
+   "1234,56"->1234.56 (tanpa titik, head bebas), "+10.000.000"->10000000,
+   "-10.000.000"->-10000000, "0.000"->0. Mode desimal saja: "1.234"->1.234
+   (satu titik = desimal, bukan ribuan); mode non-desimal: "1.000"->1000.
+   TOLAK kedua mode (NaN): format campuran "12,345.67" (titik grup bukan
+   3 digit setelah koma), separator terminal "12," / "12." (angka tak
+   lengkap), koma ganda "1,2,3", spasi internal "1 234,56", grup bukan
+   3 digit "1.2.3". fmtID memakai minus ASCII "-" agar round-trip
+   fmtID->parseIDNumber utuh (termasuk negatif); U+2212 hanya untuk prose. */
 function $(s,r){return (r||document).querySelector(s);}
 function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
 function parseIDNumber(str, isDecimal){
   var s = String(str||"").trim();  // R8-N-1: spasi internal TIDAK lagi dihapus diam-diam — "1 234,56" ditolak (karakter ilegal)
   if(!s) return NaN;
+  if(/[.,]$/.test(s)) return NaN;  // R9 GG-25: separator terminal ("12,"/"12.") = angka tak lengkap, bukan 12
   /* F3: validasi token penuh */
   if(/[^0-9.,\-+]/.test(s)) return NaN;  // karakter ilegal
   if(/--/.test(s) || /\+\+/.test(s)) return NaN;  // tanda ganda
@@ -15,7 +27,7 @@ function parseIDNumber(str, isDecimal){
     s = s.replace(/\.(?=\d{3}(?:\.\d{3})*,)/g, "");
     /* R8-MF-1: ribuan bertingkat tanpa koma desimal — 10.000.000.
        Hanya bila >=2 kelompok titik (satu titik tetap dibaca desimal: 1.234 -> 1,234). */
-    if(s.indexOf(",") < 0 && /^-?\d{1,3}(\.\d{3}){2,}$/.test(s)) s = s.replace(/\./g, "");
+    if(s.indexOf(",") < 0 && /^[-+]?\d{1,3}(\.\d{3}){2,}$/.test(s)) s = s.replace(/\./g, "");
     var d2 = (s.match(/\./g)||[]).length, c2 = (s.match(/,/g)||[]).length;
     if(d2 + c2 > 1) return NaN;  // R1/F3: max 1 pemisah desimal
     s = s.replace(",",".");
@@ -23,6 +35,17 @@ function parseIDNumber(str, isDecimal){
     if(s.indexOf(",")>=0){
       /* format Indonesia: 1.234,56 */
       if(commas !== 1) return NaN;  // R8-GG10: koma ganda ("1,2,3") dulu lolos diam-diam jadi 1.2 via parseFloat
+      /* R9 GG-25: titik di sini hanya sah sebagai ribuan (head 1-3 digit +
+         tiap grup berikut tepat 3 digit) dan fraksi setelah koma tak boleh
+         mengandung titik — format campuran "12,345.67" ditolak (bukan 12.34567). */
+      var _cp = s.split(",");
+      if(_cp[1].indexOf(".") >= 0) return NaN;
+      if(_cp[0].indexOf(".") >= 0){
+        var _gp = _cp[0].replace(/^[+-]/, "").split(".");
+        var _okg = _gp[0].length >= 1 && _gp[0].length <= 3;
+        for(var _i = 1; _i < _gp.length && _okg; _i++) _okg = _gp[_i].length === 3;
+        if(!_okg) return NaN;
+      }
       s = s.replace(/\./g,"").replace(",",".");
     } else if(/^-?0\./.test(s)){
       /* 0.xxx selalu desimal */

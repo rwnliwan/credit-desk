@@ -15,7 +15,7 @@
      ans:1,
      why:"PBI 7/3/PBI/2005: 1 peminjam bukan pihak terkait = 20% dari modal bank (Rp2.000 miliar). 25% untuk satu kelompok peminjam; 10% untuk pihak terkait."},
     {q:"CFO Sinar Kemas turun 25% dari Rp4,5 miliar. Berapa DSCR barunya, dan apa artinya?",
-     opts:["1,84× — tidak berubah, DSCR memakai laba bukan kas","1,45× — masih di atas covenant DSCR ≥ 1,25×, headroom tinggal 0,20","1,18× — breach covenant (hitungan lama tanpa koreksi bunga)","1,21× — breach covenant DSCR ≥ 1,25×"],
+     opts:["1,84× (sebelum capex maintenance) — tidak berubah, DSCR memakai laba bukan kas","1,45× — masih di atas covenant DSCR ≥ 1,25×, headroom tinggal 0,20","1,18× — breach covenant (hitungan lama tanpa koreksi bunga)","1,21× — breach covenant DSCR ≥ 1,25×"],
      ans:1,
      why:"CFO baru = 4,5 × 0,75 = Rp3,375 miliar; numerator terkoreksi = 3,375 + bunga kas 0,77 = 4,145; 4,145 ÷ 2,86 = 1,45× > 1,25× → belum breach. 1,18× adalah hitungan lama (3,375 ÷ 2,86) yang menghitung bunga dua kali. Baru pada CFO −40% DSCR jatuh ke 1,21× (breach), dan pada −53,6% ke 1,0×."},
     {q:"Dua red flag Character yang independen dan belum terjawab pada satu borrower. Respons yang tepat menurut kerangka K7?",

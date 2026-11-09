@@ -28,7 +28,7 @@
     <h3>Prasyarat &amp; rujukan (tidak diulang di sini)</h3>
     <ul>
       <li><strong>Kerangka 5C+1 &amp; kasus PT Sinar Kemas:</strong> <a href="/k1/">K1</a> — semua contoh di modul ini memakai borrower fiktif yang sama.</li>
-      <li><strong>DSCR &amp; debt capacity:</strong> <a href="/k2/">K2</a> — angka DSCR 1,84× (rumus terkoreksi K2 §1) dan anuitas Rp2,86 miliar/tahun (≈Rp2,9 miliar) dipakai lagi di §1 dan §4.</li>
+      <li><strong>DSCR &amp; debt capacity:</strong> <a href="/k2/">K2</a> — angka DSCR 1,84× (sebelum capex maintenance; rumus terkoreksi K2 §1) dan anuitas Rp2,86 miliar/tahun (≈Rp2,9 miliar) dipakai lagi di §1 dan §4.</li>
       <li><strong>Covenant &amp; headroom:</strong> <a href="/k3/">K3</a> — threshold DSCR ≥ 1,25×, D/E ≤ 1,8×, CR ≥ 1,4×.</li>
       <li><strong>Staging PSAK 109 (IFRS 9, dahulu PSAK 71) &amp; monitoring:</strong> <a href="/k4/">K4</a> — update Q1 Sinar Kemas (DSCR 1,57×) menjadi bahan §1 dan Keputusan K7.</li>
       <li><strong>PD, LGD, EAD &amp; pricing:</strong> <a href="/k6/">K6</a> Q5 &amp; Q8 — rumus expected loss dan komponen harga pinjaman.</li>
@@ -72,7 +72,7 @@
   <div class="tblwrap"><table class="stmt">
     <thead><tr><th>Faktor</th><th>Data (K1)</th><th>Skor</th></tr></thead>
     <tbody>
-      <tr><td>DSCR proyeksi</td><td>1,84×</td><td class="num">3</td></tr>
+      <tr><td>DSCR proyeksi</td><td>1,84× (sebelum capex maintenance)</td><td class="num">3</td></tr>
       <tr><td>Leverage (D/E)</td><td>1,5×</td><td class="num">3</td></tr>
       <tr><td>Likuiditas (current ratio)</td><td>1,8×</td><td class="num">3</td></tr>
       <tr><td>Konsentrasi pelanggan</td><td>70% ke 3 buyer</td><td class="num">1</td></tr>
@@ -172,11 +172,11 @@
   <h2>4 · Stress testing portofolio</h2>
   <p>Proyeksi base case menjawab "apa yang kami harapkan". Stress test menjawab <strong>"apa yang membunuh kami, dan seberapa jauh kami dari sana"</strong>. Kerangkanya sederhana: tentukan skenario → terapkan shock ke PD, LGD, dan EAD → hitung expected loss baru → putuskan aksi. Tiga skenario sudah cukup untuk latihan; bank besar memakai puluhan.</p>
   <h3>4a · Stress satu nama — PT Sinar Kemas (FIKTIF)</h3>
-  <p>Base: CFO Rp4,5 miliar, anuitas Rp2,86 miliar/tahun (≈Rp2,9 miliar), DSCR 1,84× (terkoreksi K2 §1: (4,5 + bunga kas 0,77) ÷ 2,86; pajak kas &amp; capex maintenance tidak diberikan dalam kasus ini), covenant DSCR ≥ 1,25× (K3).</p>
+  <p>Base: CFO Rp4,5 miliar, anuitas Rp2,86 miliar/tahun (≈Rp2,9 miliar), DSCR 1,84× (sebelum capex maintenance; terkoreksi K2 §1: (4,5 + bunga kas 0,77) ÷ 2,86; pajak kas &amp; capex maintenance tidak diberikan dalam kasus ini), covenant DSCR ≥ 1,25× (K3).</p>
   <div class="tblwrap"><table class="stmt">
     <thead><tr><th>Skenario</th><th>CFO</th><th>DSCR</th><th>Bacaan</th></tr></thead>
     <tbody>
-      <tr><td><strong>Base</strong></td><td class="num">Rp4,5 miliar</td><td class="num">1,84×</td><td>Sehat; headroom 0,59 di atas covenant</td></tr>
+      <tr><td><strong>Base</strong></td><td class="num">Rp4,5 miliar</td><td class="num">1,84× (sebelum capex maintenance)</td><td>Sehat; headroom 0,59 di atas covenant</td></tr>
       <tr><td><strong>CFO −25%</strong> (pelanggan besar menunda bayar)</td><td class="num">Rp3,375 miliar</td><td class="num">1,45×</td><td><strong>Masih di atas covenant 1,25×</strong> — headroom tinggal 0,20; waspada, tambah monitoring</td></tr>
       <tr><td><strong>CFO −40%</strong> (dua pelanggan menunda + margin turun)</td><td class="num">Rp2,7 miliar</td><td class="num">1,21×</td><td><strong>Breach covenant 1,25×</strong> — waiver / renegosiasi (tapi masih di atas 1,0×: arus kas masih menutup cicilan)</td></tr>
     </tbody>
@@ -236,7 +236,7 @@
     <label>Memo minimu:</label>
     <textarea id="k7-memo" placeholder="Rekomendasi + grade baru + red flag + struktur yang diminta…"></textarea>
     <div class="btnrow"><button class="btn" id="k7-save">Simpan memo mini →</button><span class="okmsg" id="k7-ok"></span></div>
-    <p style="font-size:.85rem;color:#B9C2D6;margin-top:.8rem">Kunci: <strong>REJECT, atau APPROVE DENGAN STRUKTUR keras</strong>. Scorecard pasca-K4: DSCR 1,57× → skor 2 (turun dari skor 3 di base 1,84×); Character turun ke 3 (direktur keuangan resign + transparansi dipertanyakan); total 12 → <strong>Grade 4</strong> (PD ilustratif 1,00%) → expected loss baru = 1,00% × 10% × Rp7 miliar = <strong>Rp7 juta</strong> (dua kali lipat dari Rp3,5 juta) — itu EL fasilitas <em>lama</em> (EAD Rp7 miliar). Bila revolving tambahan Rp2 miliar ditarik penuh, EAD menjadi Rp9 miliar → EL = 1,00% × 10% × Rp9 miliar = <strong>Rp9 juta</strong> (+Rp2 juta) — kunci di atas memakai EAD lama saja; bedakan EL fasilitas lama dari EL setelah fasilitas tambahan. Approve polos = analis yang tidur: DSCR 1,57× hanya 0,32 di atas covenant 1,25× dan sudah turun 0,27 dari base 1,84×, lima gejala K4 serentak, konsentrasi 70%. Bila approve dengan struktur: agunan first-ranking terverifikasi + covenant DSCR dengan reporting bulanan + pricing mencerminkan Grade 4 + revolving tambahan DITAHAN sampai DSCR ≥ <strong>1,75× selama dua kuartal berturut-turut</strong> — syarat ini memang belum terpenuhi (DSCR saat ini 1,57×). Syarat lama "ditahan sampai DSCR kembali ≥ 1,5×" tidak menahan apa pun: 1,57× sudah di atas 1,5× saat ditulis, dan "kembali" menyiratkan DSCR pernah di bawah 1,5×, padahal tidak.</p>
+    <p style="font-size:.85rem;color:#B9C2D6;margin-top:.8rem">Kunci: <strong>REJECT, atau APPROVE DENGAN STRUKTUR keras</strong>. Scorecard pasca-K4: DSCR 1,57× → skor 2 (turun dari skor 3 di base 1,84× (sebelum capex maintenance)); Character turun ke 3 (direktur keuangan resign + transparansi dipertanyakan); total 12 → <strong>Grade 4</strong> (PD ilustratif 1,00%) → expected loss baru = 1,00% × 10% × Rp7 miliar = <strong>Rp7 juta</strong> (dua kali lipat dari Rp3,5 juta) — itu EL fasilitas <em>lama</em> (EAD Rp7 miliar). Bila revolving tambahan Rp2 miliar ditarik penuh, EAD menjadi Rp9 miliar → EL = 1,00% × 10% × Rp9 miliar = <strong>Rp9 juta</strong> (+Rp2 juta) — kunci di atas memakai EAD lama saja; bedakan EL fasilitas lama dari EL setelah fasilitas tambahan. Approve polos = analis yang tidur: DSCR 1,57× hanya 0,32 di atas covenant 1,25× dan sudah turun 0,27 dari base 1,84× (sebelum capex maintenance), lima gejala K4 serentak, konsentrasi 70%. Bila approve dengan struktur: agunan first-ranking terverifikasi + covenant DSCR dengan reporting bulanan + pricing mencerminkan Grade 4 + revolving tambahan DITAHAN sampai DSCR ≥ <strong>1,75× selama dua kuartal berturut-turut</strong> — syarat ini memang belum terpenuhi (DSCR saat ini 1,57×). Syarat lama "ditahan sampai DSCR kembali ≥ 1,5×" tidak menahan apa pun: 1,57× sudah di atas 1,5× saat ditulis, dan "kembali" menyiratkan DSCR pernah di bawah 1,5×, padahal tidak.</p>
   </div>
 </section>
 

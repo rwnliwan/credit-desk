@@ -9,7 +9,7 @@
     {q:"Threshold covenant yang BENAR ditetapkan dengan cara:",
      opts:["Proyeksi wajar − headroom untuk semua covenant","Proyeksi wajar + headroom untuk semua covenant","Covenant minimum: proyeksi − headroom; covenant maksimum: proyeksi + headroom (threshold digeser ke arah bahaya sejauh headroom)","Menyalin threshold bank kompetitor"],
      ans:2,
-     why:"DSCR 1,25 dari proyeksi 1,84 = headroom 32% ke bawah; D/E 1,8 dari proyeksi 1,5 = +20% ke atas; current ratio 1,4 dari 1,8 = 22% ke bawah. Aturan lama 'proyeksi − headroom' hanya benar untuk covenant minimum — untuk covenant maksimum arahnya terbalik."},
+     why:"DSCR 1,25 dari proyeksi 1,84 (sebelum capex maintenance) = headroom 32% ke bawah; D/E 1,8 dari proyeksi 1,5 = +20% ke atas; current ratio 1,4 dari 1,8 = 22% ke bawah. Aturan lama 'proyeksi − headroom' hanya benar untuk covenant minimum — untuk covenant maksimum arahnya terbalik."},
     {q:"Perbedaan technical breach vs payment default:",
      opts:["Tidak ada bedanya — keduanya sama bahayanya","Technical breach = melanggar angka tapi masih bayar (meja perundingan); payment default = tidak bayar (meja krisis)","Technical breach lebih berbahaya dari payment default","Payment default bisa di-waiver, technical breach tidak"],
      ans:1,
